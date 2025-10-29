@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LibroDiario;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
@@ -13,5 +14,7 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('registrarLibroDiario', [LibroDiario::class, 'view'])->middleware(['auth', 'verified']);;
 
 require __DIR__.'/settings.php';
