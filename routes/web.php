@@ -15,6 +15,14 @@ Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('registrarLibroDiario', [LibroDiario::class, 'view'])->middleware(['auth', 'verified']);;
+Route::get('registroLibroDiario', function () {
+    return Inertia::render('RegistroLibroDiario');
+})->middleware(['auth', 'verified'])->name('registroLibroDiario');
+
+Route::get('reporteLibroDiario', function () {
+    return Inertia::render('ReporteLibroDiario');
+})->middleware(['auth', 'verified'])->name('reporteLibroDiario');
+
+//Route::get('registrarLibroDiario', [LibroDiario::class, 'view'])->middleware(['auth', 'verified']);
 
 require __DIR__.'/settings.php';
