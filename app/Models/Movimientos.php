@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Movimientos extends Model
+{
+    protected $fillable = [
+        'cliente_id',
+        'libro_movimientos_id',
+        'fecha',
+        'tipo_documento',
+        'maquina_fiscal',
+        'primera_factura',
+        'ultima_factura',
+        'numero_factura',
+        'factura_afectada',
+        'total_ventas',
+        'total_ventas_no_gravadas',
+        'base_imponible_alic_contribuyente',
+        'base_imponible_alic_no_contribuyente',
+        'porcentaje_iva',
+
+    ];
+}
