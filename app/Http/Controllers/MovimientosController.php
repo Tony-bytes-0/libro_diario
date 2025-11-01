@@ -6,6 +6,7 @@ use App\Models\LibroMovimiento;
 use App\Models\Movimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MovimientosController extends Controller
 {
@@ -44,13 +45,19 @@ class MovimientosController extends Controller
             $LibroMovimiento = LibroMovimiento::create($validated['libro_movimiento']);
             $libro_movimiento_id = $LibroMovimiento->toArray()['id'];
             $queryStatus['libro_movimiento'] = 201;
-
+            
             foreach($validated['movimientos'] as $movimiento){
                 $movimiento['libro_movimiento_id'] = $libro_movimiento_id;
                 Movimiento::create($movimiento);
             }
             $queryStatus['movimientos'] = 201;
             $queryStatus['movimientos_creados'] = count($validated['movimientos']);
+
+            Log::info('Creacion de libro_movimiento: ', 
+            [
+                'libro_movimiento: ' => $LibroMovimiento, 
+                'movimientos: ' => $validated['movimientos']
+            ]);
             return $queryStatus;
         });
 
