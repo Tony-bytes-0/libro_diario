@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\LibroMovimiento;
 
-class Movimientos extends Model
+class Movimiento extends Model
 {
     protected $fillable = [
         'cliente_id',
@@ -25,4 +26,17 @@ class Movimientos extends Model
         'impuesto_iva',
         'retencion_iva_soportada'
     ];
+
+    public function libroMovimiento()
+    {
+        return $this->belongsTo(libroMovimiento::class);
+        //return $this->belongsTo(libroMovimiento::class, 'libro_movimiento_id', 'id');
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+
+
 }

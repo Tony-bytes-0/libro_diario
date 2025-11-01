@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Libro_movimientos extends Model
+class LibroMovimiento extends Model
 {
     protected $fillable = [
         'descripcion',
@@ -12,4 +12,9 @@ class Libro_movimientos extends Model
         'tipo_documento',
         'periodo'
     ];
+
+        public function movimientos()
+    {
+        return $this->hasMany(Movimiento::class);
+    }
 }
