@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LibroMovimiento;
+use App\Models\Movimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MovimientosController extends Controller
 {
-    public function new(Request $request){
+    public function insert(Request $request){
         $validated = $request->validate([
             'libro_movimiento' => 'required|array',
             'libro_movimiento.periodo' => 'required|date',
@@ -31,9 +34,31 @@ class MovimientosController extends Controller
             'movimientos.*.impuesto_iva' => 'nullable|numeric',
             'movimientos.*.retencion_iva_soportada' => 'nullable|numeric',
             //'movimientos.*.' => 'nullable',
-
-
         ]);
-        return response()->json(['msg' => 'registro de movimientos exitoso']);
+        $transactionResult = DB::transaction(function () use ($validated){
+            $LibroMovimiento = LibroMovimiento::create($validated['libro_movimiento']);
+            $libro_movimiento_id = $LibroMovimiento->toArray()['id'];
+
+            foreach($validated['movimientos'] as $movimiento){
+                $movimiento['libro_movimiento_id'] = $libro_movimiento_id;
+                //echo(gettype($movimiento));
+                Movimiento::create($movimiento);
+            }
+            return [
+                'creacion de libro_movimiento' => 201,
+                'creacion de movimientos' => 201
+            ];
+            //dd('datos de libro movimiento creado: ', $printScreen);
+        });
+
+        //dd($insertedLibroMoimiento);
+
+
+        
+
+        return response()->json([
+        'msg' => 'registro de movimientos exitoso',
+        'estados' => $transactionResult
+    ]);
     }
 }

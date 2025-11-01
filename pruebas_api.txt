@@ -1,0 +1,26 @@
+http://localhost:8000/api/crear/movimientos metodo POST
+{
+  "movimientos": [
+    {
+      "fecha": "",
+      "cliente_id": "13",
+      "tipo_documento": "",
+      "maquina_fiscal": "",
+      "primera_factura": "",
+      "ultima_factura": "",
+      "numero_factura": "",
+      "factura_afectada": "",
+      "total_ventas": "",
+      "total_ventas_no_gravadas": "",
+      "base_imponible_alic_contribuyente": "",
+      "base_imponible_alic_no_contribuyente": "",
+      "impuesto_iva": "",
+      "retencion_iva_soportada": ""
+    }
+  ],
+  "libro_movimiento": {
+    "tipo_documento": "Libro de ventas",
+    "rif": "V27080311",
+    "periodo": "2025-05-05"
+  }
+}

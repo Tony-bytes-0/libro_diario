@@ -7,6 +7,8 @@ use App\Models\LibroMovimiento;
 
 class Movimiento extends Model
 {
+    public $timestamps = false;
+     
     protected $fillable = [
         'cliente_id',
         'libro_movimientos_id',
