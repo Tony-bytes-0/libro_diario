@@ -2,20 +2,20 @@ http://localhost:8000/api/crear/movimientos metodo POST
 {
   "movimientos": [
     {
-      "fecha": "",
+      "fecha": "2025-11-01",
       "cliente_id": "13",
-      "tipo_documento": "",
-      "maquina_fiscal": "",
-      "primera_factura": "",
-      "ultima_factura": "",
-      "numero_factura": "",
-      "factura_afectada": "",
-      "total_ventas": "",
-      "total_ventas_no_gravadas": "",
-      "base_imponible_alic_contribuyente": "",
-      "base_imponible_alic_no_contribuyente": "",
-      "impuesto_iva": "",
-      "retencion_iva_soportada": ""
+      "tipo_documento": "Factura",
+      "maquina_fiscal": "Z000056548",
+      "primera_factura": "51000000",
+      "ultima_factura": "51000008",
+      "numero_factura": "5100005",
+      "factura_afectada": "null",
+      "total_ventas": "23000563250",
+      "total_ventas_no_gravadas": "562",
+      "base_imponible_alic_contribuyente": "600",
+      "base_imponible_alic_no_contribuyente": "0",
+      "impuesto_iva": "16.98",
+      "retencion_iva_soportada": "23.5"
     }
   ],
   "libro_movimiento": {

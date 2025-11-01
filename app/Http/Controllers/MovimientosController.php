@@ -63,9 +63,6 @@ class MovimientosController extends Controller
 
         //dd($insertedLibroMoimiento);
 
-
-        
-
         return response()->json([
         'msg' => 'registro de movimientos exitoso',
         'estados' => $transactionResult
