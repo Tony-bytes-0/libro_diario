@@ -36,19 +36,22 @@ class MovimientosController extends Controller
             //'movimientos.*.' => 'nullable',
         ]);
         $transactionResult = DB::transaction(function () use ($validated){
+            $queryStatus = [//saber el estado de cada query al final
+                'libro_movimiento' => null,
+                'movimientos' => null,
+                'movimientos_creados' => 0
+            ];
             $LibroMovimiento = LibroMovimiento::create($validated['libro_movimiento']);
             $libro_movimiento_id = $LibroMovimiento->toArray()['id'];
+            $queryStatus['libro_movimiento'] = 201;
 
             foreach($validated['movimientos'] as $movimiento){
                 $movimiento['libro_movimiento_id'] = $libro_movimiento_id;
-                //echo(gettype($movimiento));
                 Movimiento::create($movimiento);
             }
-            return [
-                'creacion de libro_movimiento' => 201,
-                'creacion de movimientos' => 201
-            ];
-            //dd('datos de libro movimiento creado: ', $printScreen);
+            $queryStatus['movimientos'] = 201;
+            $queryStatus['movimientos_creados'] = count($validated['movimientos']);
+            return $queryStatus;
         });
 
         //dd($insertedLibroMoimiento);
