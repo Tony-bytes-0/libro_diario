@@ -13,7 +13,9 @@
                 <v-col cols="8">
                     <v-autocomplete
                     label="Nombre o Razon Social"
-                    :items="clients"
+                    :items="clientsList"
+                    item-title="descripcion"
+                    return-object
                     v-model="dataClient"
                     ></v-autocomplete>
                 </v-col>
@@ -79,11 +81,19 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { registroLibroDiario } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
-import { shallowRef, computed, ref } from 'vue'
+import axios from 'axios';
+import { shallowRef, computed, ref, onMounted } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
 //import { useDate } from 'vuetify'
 
   const registerDate = shallowRef(null);
+
+  const formData = ref({
+    registerDate: null,
+    clients: null
+  })
+
+  const clientsList = ref([]);
 
   const clients = [
     'AKERMED C.A.',
@@ -142,4 +152,11 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: registroLibroDiario().url,
     },
 ];
+
+onMounted( async () => {
+    //consultar clientes
+    const urlClients = '/api/clientes';
+    const clientsResponse = await axios.get(urlClients);
+    clientsList.value = clientsResponse.data.clientes;
+})
 </script>
