@@ -5,16 +5,14 @@
         <div class="d-flex">
             <v-row class="py-4 px-6">
                 <v-col cols="4">
-                    <v-date-input v-model="formData.registerDate" label="Fecha"></v-date-input>
+                    <v-date-input v-model="registerDate" :display-format="format" label="Fecha"></v-date-input>
                 </v-col>
                 <v-col cols="8">
                     <v-autocomplete label="Nombre o Razon Social del cliente" :items="clientsList" item-title="descripcion"
                         return-object v-model="formData.client"></v-autocomplete>
                 </v-col>
-
-
                 <v-col cols="2">
-                    <v-text-field label="RIF" :disabled="rifDisable" v-model="formData.client" ></v-text-field>
+                    <v-text-field label="RIF" :disabled="formData.client.rif ? true : false" v-model="formData.client.rif" ></v-text-field>
                 </v-col>
                 <v-col cols="3" >
                     <v-autocomplete label="Tipo de Documento"
@@ -79,14 +77,19 @@ import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { shallowRef, computed, ref, onMounted } from 'vue'
 import { VDateInput } from 'vuetify/labs/VDateInput'
-//import { useDate } from 'vuetify'
+import { useDate } from 'vuetify'
 
-    const registerDate = shallowRef(null);
+    const adapter = useDate()
+    const registerDate = shallowRef(adapter.parseISO('2025-02-25'))
+
+  function format (date) {
+    return adapter.toISO(date)
+  }
 
     const formData = ref({
-        registerDate: null,
-        client: null,
-        documentType: null,
+        registerDate: '',
+        client:[],
+        documentType: '',
     })
 
     const clientsList = ref([]);
@@ -108,20 +111,6 @@ import { VDateInput } from 'vuetify/labs/VDateInput'
             synonym: 'NCD',
             name: 'Nota de crédito'
         }]);
-
-    const rifDisable = clientsList.value.rif != null ? true : false;
-
-
-    const console = computed(()=>{
-        console.log
-    })
-//const values = ref('');
-
-  const date = computed(() => {
-    console.log(registerDate.value);
-    return registerDate.value;
-  });
-
 
 
 const breadcrumbs: BreadcrumbItem[] = [
