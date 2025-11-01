@@ -20,7 +20,9 @@ class Movimientos extends Model
         'total_ventas_no_gravadas',
         'base_imponible_alic_contribuyente',
         'base_imponible_alic_no_contribuyente',
-        'porcentaje_iva',
-
+        'porcentaje_iva_contribuyente',
+        'porcentaje_iva_no_contribuyente',
+        'impuesto_iva',
+        'retencion_iva_soportada'
     ];
 }
