@@ -1,4 +1,5 @@
 import '../css/app.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -7,6 +8,7 @@ import { createApp, h } from 'vue';
 import { initializeTheme } from './composables/useAppearance';
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import { aliases, md } from 'vuetify/iconsets/md'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
@@ -15,6 +17,13 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 const vuetify = createVuetify({
   components,
   directives,
+  icons: {
+    defaultSet: 'md',
+    aliases,
+    sets: {
+      md,
+    },
+  },
 })
 
 
