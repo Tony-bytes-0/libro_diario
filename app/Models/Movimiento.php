@@ -11,7 +11,7 @@ class Movimiento extends Model
      
     protected $fillable = [
         'cliente_id',
-        'libro_movimientos_id',
+        'libro_movimiento_id',
         'fecha',
         'tipo_documento',
         'maquina_fiscal',
