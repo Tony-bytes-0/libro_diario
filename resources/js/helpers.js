@@ -1,0 +1,17 @@
+export function notNullString(item){
+    if(item == null || item == ''){
+        console.log('devolviendo null')
+        return ' - '
+    }
+    else{
+        return item
+    }
+}
+
+export const formatedNumber = (number) => {
+    return new Intl.NumberFormat("es-VE", {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 2,
+    }).format(number);
+};
+

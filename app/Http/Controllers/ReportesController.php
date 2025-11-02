@@ -15,8 +15,8 @@ class ReportesController extends Controller
     public function libroVentas(Request $request){
         $validated = $request->validate(
             [
-                'mes' => 'nullable',
-                'anio' => 'nullable'
+                'mes' => 'nullable|required',
+                'anio' => 'nullable|required'
             ]
         );
 
@@ -27,52 +27,45 @@ class ReportesController extends Controller
             ->whereMonth('libro.periodo', '=', $validated['mes'])
             ->get();
 
+        if ($libro_movimientos->count() === 0) {
+            return response()->json([
+                'message' => 'No se encontraron libros de ventas para el período seleccionado',
+                'result' => []
+            ], 204);
+        }
+
         $libroIds = $libro_movimientos->pluck('id');
-
-        $movimientos = DB::table('movimientos')
-        ->whereIn('libro_movimiento_id', $libroIds)
-        ->get()->groupBy('libro_movimiento_id');
-
-        $result = $libro_movimientos->map(function ($libro) use ($movimientos) {
-            $libro->movimientos = $movimientos->get($libro->id, []);
-            return $libro;
-        });
-        /*
-        $result = DB::table('libro_movimientos as libro')
-        ->leftJoin('movimientos as movimiento', 'movimiento.libro_movimiento_id', '=', 'libro.id')
+        
+        $movimientos = DB::table('movimientos as movimiento')
+        ->leftJoin('clientes as cliente', 'cliente.id', '=', 'movimiento.cliente_id')
         ->select([
-            'libro.id as libro_id',
-            'libro.periodo as libro_periodo', 
-            'libro.rif as libro_rif', 
-            'libro.tipo_documento as libro_tipo_documento',
-            'movimiento.fecha as movimiento_fecha',
-            'movimiento.tipo_documento as movimiento_tipo_documento',
-            'movimiento.maquina_fiscal as maquina_fiscal',
+            'movimiento.id as entry_id',
+            'cliente.descripcion as cliente_descripcion',
+            'cliente.rif as cliente_rif',
+            'movimiento.libro_movimiento_id as libro_id',
+            'movimiento.fecha', 
+            'movimiento.tipo_documento',
+            'movimiento.maquina_fiscal',
             'movimiento.primera_factura',
             'movimiento.ultima_factura',
             'movimiento.numero_factura',
-            'movimiento.factura_afectada',
             'movimiento.total_ventas',
+            'movimiento.total_ventas_no_gravadas',
             'movimiento.base_imponible_alic_contribuyente',
-            'movimiento.base_imponible_alic_no_contribuyente',
-            'movimiento.porcentaje_iva_contribuyente',
             'movimiento.porcentaje_iva_no_contribuyente',
             'movimiento.impuesto_iva',
+            'movimiento.porcentaje_iva_contribuyente',
             'movimiento.retencion_iva_soportada',
-            //'movimiento. as ',
-        ])
-        //->select('libro.rif as libro_rif', 'libro.documento as libro_tipo_documento', 'libro.periodo as libro_periodo')
-        ->where('libro.tipo_documento', '=', 'libro de ventas')
-        ->whereYear('libro.periodo', '=', $validated['anio'])
-        ->whereMonth('libro.periodo', '=', $validated['mes'])
+            ])
+        ->whereIn('movimiento.libro_movimiento_id', $libroIds)
         ->get();
-        */
-
 
 
         return response()->json([
-            'msg' => 'consulta exitosa', 
-            'result' => $result
+            'message' => 'consulta exitosa', 
+            'movimientos' => $movimientos,
+            'libro_movimientos' => $libro_movimientos,
+            'new' => ''
         ], 200);
     }
 }
