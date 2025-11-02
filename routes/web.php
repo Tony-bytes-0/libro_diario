@@ -24,7 +24,7 @@ Route::get('reporteLibroDiario', function () {
     return Inertia::render('ReporteLibroDiario');
 })->middleware(['auth', 'verified'])->name('reporteLibroDiario');
 //reportes
-Route::get('reportes/libro/ventas', [ReportesController::class, 'libroVentas'] );
+Route::get('reportes/libro/ventas', [ReportesController::class, 'viewLibroVentas'] );
 
 //Route::get('registrarLibroDiario', [LibroDiario::class, 'view'])->middleware(['auth', 'verified']);
 

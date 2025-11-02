@@ -24,3 +24,12 @@ http://localhost:8000/api/crear/movimientos metodo POST
     "periodo": "2025-05-05"
   }
 }
+
+consulta de libro de ventas 
+
+url: api/reporte/libro/ventas
+parametros: 
+{
+  "anio": "2025",
+  "mes": "05"
+}
