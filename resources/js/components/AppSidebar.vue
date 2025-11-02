@@ -33,6 +33,11 @@ const mainNavItems: NavItem[] = [
         href: reporteLibroDiario(),
         icon: BookOpenCheck,
     },
+    {
+        title:'Reporte libro ventas',
+        href:'reportes/libro/ventas',
+        icon: BookOpenCheck,
+    }
 ];
 
 /*const footerNavItems: NavItem[] = [

@@ -1,8 +1,11 @@
 <template>
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <h1>reporteVentas</h1>
+        
     </AppLayout>
 </template>
 
-<script setup></script>
+<script setup>
+import AppLayout from '@/layouts/AppLayout.vue';
+const breadcrumbs = ['Reporte libro de ventas']
+</script>
