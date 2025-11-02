@@ -93,7 +93,10 @@ const clientsList = ref([]);
 
 const formData = ref({
     registerDate: '',
-    client:[],
+    client:{
+        rif:'',
+        id:''
+    },
     documentType: '',
 });
 
