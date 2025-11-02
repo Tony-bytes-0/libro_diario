@@ -8,8 +8,11 @@
                     <v-date-input v-model="registerDate" :display-format="format" label="Fecha"></v-date-input>
                 </v-col>
                 <v-col cols="8">
-                    <v-autocomplete label="Nombre o Razon Social del cliente" :items="clientsList" item-title="descripcion"
-                        return-object v-model="formData.client"></v-autocomplete>
+                    <v-autocomplete label="Nombre o Razon Social del cliente" 
+                        :items="clientsList" 
+                        item-title="descripcion"
+                        return-object 
+                        v-model="formData.client"></v-autocomplete>
                 </v-col>
                 <v-col cols="2">
                     <v-text-field label="RIF" disabled v-model="formData.client.rif" ></v-text-field>
@@ -73,10 +76,10 @@
     </AppLayout>
 </template>
 
-<script setup lang="ts">
+<script setup >
 import AppLayout from '@/layouts/AppLayout.vue';
 import { registroLibroDiario } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
+//import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { shallowRef, computed, ref, onMounted } from 'vue';
@@ -95,7 +98,8 @@ const formData = ref({
     registerDate: '',
     client:{
         rif:'',
-        id:''
+        id:'',
+        descripcion: ''
     },
     documentType: '',
 });
@@ -141,7 +145,7 @@ const retencion_iva_soportada = ref('');
     return adapter.toISO(date)
   }
 
-const breadcrumbs: BreadcrumbItem[] = [
+const breadcrumbs = [
     {
         title: 'Registrar',
         href: registroLibroDiario().url,
