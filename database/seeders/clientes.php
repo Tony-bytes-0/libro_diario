@@ -106,5 +106,13 @@ class clientes extends Seeder
             'telefono' => '',
             'correo' => '',
         ]);
+        Cliente::create([
+            'rif' => 'N/A',
+            'nombre' => '',
+            'apellido' => '',
+            'descripcion' => 'RESUMEN DIARIO DE VENTAS',
+            'telefono' => '',
+            'correo' => '',
+        ]);
     }
 }

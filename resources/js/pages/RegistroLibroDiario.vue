@@ -3,7 +3,15 @@
     <Head title="Registrar" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="d-flex">
-            <v-row class="py-4 px-6" v-for="(item, index) in registros" :key="index">
+            <v-row class="py-4 px-8">
+                <v-col cols="12" >
+                    <v-autocomplete label="Libro"
+                    :items="bookTypes"
+                    v-model="bookType"
+                    return-object
+                    item-title="name"
+                    ></v-autocomplete>
+                </v-col>
                 <v-col cols="4">
                     <v-date-input v-model="registerDate" :display-format="format" label="Fecha"></v-date-input>
                 </v-col>
@@ -46,26 +54,49 @@
                 <v-col cols="3">
                     <v-text-field label="Ventas Internas no Agravadas" v-model="total_ventas_no_gravadas"></v-text-field>
                 </v-col>
-                <v-col cols="4">
-                    <v-text-field label="Base Imponible Alic (Gen - Contrib.)" v-model="base_imponible_alic_contribuyente"></v-text-field>
-                </v-col>
-                <v-col cols="2">
-                    <v-text-field label="% I.V.A." disabled></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                    <v-text-field label="Impuesto I.V.A. (Contrib.)" disabled></v-text-field>
-                </v-col>
-                <v-col cols="4">
-                    <v-text-field label="Base Imponible Alic (Gen - No Contrib.)" v-model="base_imponible_alic_no_contribuyente"></v-text-field>
-                </v-col>
-                <v-col cols="2">
-                    <v-text-field label="% I.V.A." disabled></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                    <v-text-field label="Impuesto I.V.A. (No Contrib.)" disabled></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                    <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
+                <v-col cols="12">
+                    <v-radio-group inline>
+                    <v-radio label="Contribuyente" value="one" @click="(expandContribuyentes = true) && (expandNoContribuyentes = false)" @focus="base_imponible_alic_no_contribuyente = null"></v-radio>
+                    <v-radio label="No Contribuyente" value="two" @click="(expandNoContribuyentes = true) && (expandContribuyentes = false)" @focus="base_imponible_alic_contribuyente = null"></v-radio>
+                    <v-radio label="No Aplica" value="three" @click="(expandNoContribuyentes = false) && (expandContribuyentes = false)" @focus="(base_imponible_alic_no_contribuyente = null) && (base_imponible_alic_contribuyente = null)"></v-radio>
+                    </v-radio-group>
+
+                    <div>
+                    <v-expand-transition>
+                        <v-row v-show="expandContribuyentes">
+                            <v-col cols="4">
+                                <v-text-field label="Base Imponible Alic (Gen - Contrib.)" v-model="base_imponible_alic_contribuyente"></v-text-field>
+                            </v-col>
+                            <v-col cols="2">
+                                <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                                <v-text-field label="Impuesto I.V.A. (Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                            <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-expand-transition>
+                    </div>
+                    <div>
+                    <v-expand-transition>
+                        <v-row v-show="expandNoContribuyentes">
+                            <v-col cols="4">
+                            <v-text-field label="Base Imponible Alic (Gen - No Contrib.)" v-model="base_imponible_alic_no_contribuyente"></v-text-field>
+                            </v-col>
+                            <v-col cols="2">
+                                <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                                <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                            <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
+                            </v-col>
+                        </v-row>
+                    </v-expand-transition>
+                    </div>
                 </v-col>
                 <v-col cols="2" offset="10" @click="submit">
                     <v-btn>Registrar</v-btn>
@@ -76,7 +107,7 @@
     </AppLayout>
 </template>
 
-<script setup >
+<script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
 import { registroLibroDiario } from '@/routes';
 //import { type BreadcrumbItem } from '@/types';
@@ -86,13 +117,11 @@ import { shallowRef, computed, ref, onMounted } from 'vue';
 import { VDateInput } from 'vuetify/labs/VDateInput';
 import { useDate } from 'vuetify';
 
-const registros = ref([
-    {
-
-    },
-]);
-
 const clientsList = ref([]);
+//const expand = ref(false)
+
+const expandContribuyentes = ref(false);
+const expandNoContribuyentes = ref(false);
 
 const formData = ref({
     registerDate: '',
@@ -103,6 +132,13 @@ const formData = ref({
     },
     documentType: '',
 });
+
+const bookTypes = ref([
+    "Libro de Compras",
+    "Libro de Ventas",
+    "Libro de Inventario"
+]
+);
 
 const documentTypeList = ref([
     {
@@ -132,9 +168,19 @@ const total_ventas = ref('');
 const total_ventas_no_gravadas = ref('');
 const base_imponible_alic_contribuyente = ref('');
 const base_imponible_alic_no_contribuyente = ref('');
+const ivaPercent = ref('16%');
+const bookType = ref('');
 //tienen que haber dos variables
 //una para impuesto iva de contribuyentes, y otra para no contribuyentes
-const impuesto_iva = ref('');
+const impuesto_iva = computed (() => {
+    if (base_imponible_alic_contribuyente.value > 0){
+      return (0.16 * base_imponible_alic_contribuyente.value).toFixed(2);
+    } else if (base_imponible_alic_no_contribuyente.value > 0){
+        return (0.16 * base_imponible_alic_no_contribuyente.value).toFixed(2);
+    } else {
+        return null;
+    }
+});
 ///////////////////////////////////////////////////////////////////
 const retencion_iva_soportada = ref('');
 
@@ -154,40 +200,39 @@ const breadcrumbs = [
 
 async function submit() {
     const urlmovimientos = '/api/crear/movimientos';
-    await axios.post(urlmovimientos, [
+    await axios.post(urlmovimientos, {
+    "movimientos":[
         {
-        fecha: registerDate.value,
-        cliente_id: formData.value.client.id,
-        tipo_documento: formData.value.documentType,
-        maquina_fiscal: maquina_fiscal.value,
-        primera_factura: primera_factura.value,
-        ultima_factura: ultima_factura.value,
-        numero_factura: numero_factura.value,
-        factura_afectada: factura_afectada.value,
-        total_ventas: total_ventas.value,
-        total_ventas_no_gravadas: total_ventas_no_gravadas.value,
-        base_imponible_alic_contribuyente: base_imponible_alic_contribuyente.value,
-        base_imponible_alic_no_contribuyente: base_imponible_alic_no_contribuyente.value,
-        impuesto_iva: impuesto_iva.value,
-        retencion_iva_soportada: retencion_iva_soportada.value
-    },
-    {
-        tipo_documento: "Libro de ventas",
-        rif: formData.value.client.rif,
-        descripcion: formData.value.client.descripcion,
-        periodo: registerDate.value,
-
+        "fecha": registerDate.value.toISOString().slice(0,10),
+        "cliente_id": formData.value.client.id,
+        "tipo_documento": formData.value.documentType.name,
+        "maquina_fiscal": maquina_fiscal.value,
+        "primera_factura": primera_factura.value,
+        "ultima_factura": ultima_factura.value,
+        "numero_factura": numero_factura.value,
+        "factura_afectada": factura_afectada.value,
+        "total_ventas": total_ventas.value,
+        "total_ventas_no_gravadas": total_ventas_no_gravadas.value,
+        "base_imponible_alic_contribuyente": base_imponible_alic_contribuyente.value,
+        "base_imponible_alic_no_contribuyente": base_imponible_alic_no_contribuyente.value,
+        "impuesto_iva": impuesto_iva.value,
+        "retencion_iva_soportada": retencion_iva_soportada.value
+    }],
+    "libro_movimiento": {
+        "tipo_documento": bookType.value,
+        "rif": formData.value.client.rif,
+        "descripcion": formData.value.client.descripcion,
+        "periodo": registerDate.value.toISOString().slice(0,10),
     }
-]).then(
-        (response) => {
-            console.log(response, "movimientos creado" );
-        },
-        ).catch(
-            (error) => {
-                console.log(error, "error al crear movimientos");
-            }
-        );
-    await
+}).then(
+    (response) => {
+        console.log(response, "movimientos creado" );
+    },
+    ).catch(
+        (error) => {
+            console.log(error, "error al crear movimientos");
+        }
+    );
 };
 
 function prueba() {
@@ -195,13 +240,7 @@ function prueba() {
         const element = documentTypeList.value[index].name;
         console.log(element);
     }*/
-    console.log(formData.value.client.id);
-    console.log(formData.value.client.rif);
-    console.log(formData.value.client.descripcion);
-    console.log(formData.value.documentType);
-
-    console.log(registerDate.value.toLocaleString());
-    console.log(adapter)
+    console.log (expandContribuyentes.value)
 };
 
 
@@ -210,6 +249,5 @@ onMounted( async () => {
     const urlClients = '/api/clientes';
     const clientsResponse = await axios.get(urlClients);
     clientsList.value = clientsResponse.data.clientes;
-    console.log(clientsList.value)
 })
 </script>

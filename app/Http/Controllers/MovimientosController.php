@@ -14,7 +14,7 @@ class MovimientosController extends Controller
         $validated = $request->validate([
             'libro_movimiento' => 'required|array',
             'libro_movimiento.periodo' => 'required|date',
-            'libro_movimiento.rif' => 'required|string',
+            'libro_movimiento.rif' => 'nullable|string', /////// esto estaba required, y si es un "resumen diario de ventas" no posee rif, cambie a nullable, en todo caso, habria que relacionarlo con el id del cliente aqui, y no en movimientos
             'libro_movimiento.tipo_documento' => 'required|string',
             'libro_movimiento.descripcion' => 'nullable|string',
             //movimientos array
@@ -29,7 +29,6 @@ class MovimientosController extends Controller
             'movimientos.*.factura_afectada' => 'nullable|string',
             'movimientos.*.total_ventas' => 'nullable|numeric',
             'movimientos.*.total_ventas_no_gravadas' => 'nullable|numeric',
-            //'movimientos.*.total_ventas_no_gravadas' => 'nullable|numeric',
             'movimientos.*.base_imponible_alic_contribuyente' => 'nullable|numeric',
             'movimientos.*.base_imponible_alic_no_contribuyente' => 'nullable|numeric',
             'movimientos.*.impuesto_iva' => 'nullable|numeric',
@@ -45,7 +44,7 @@ class MovimientosController extends Controller
             $LibroMovimiento = LibroMovimiento::create($validated['libro_movimiento']);
             $libro_movimiento_id = $LibroMovimiento->toArray()['id'];
             $queryStatus['libro_movimiento'] = 201;
-            
+
             foreach($validated['movimientos'] as $movimiento){
                 $movimiento['libro_movimiento_id'] = $libro_movimiento_id;
                 Movimiento::create($movimiento);
@@ -53,9 +52,9 @@ class MovimientosController extends Controller
             $queryStatus['movimientos'] = 201;
             $queryStatus['movimientos_creados'] = count($validated['movimientos']);
 
-            Log::info('Creacion de libro_movimiento: ', 
+            Log::info('Creacion de libro_movimiento: ',
             [
-                'libro_movimiento: ' => $LibroMovimiento, 
+                'libro_movimiento: ' => $LibroMovimiento,
                 'movimientos: ' => $validated['movimientos']
             ]);
             return $queryStatus;

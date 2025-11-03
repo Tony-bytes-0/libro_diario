@@ -10,7 +10,7 @@ class LibroMovimiento extends Model
         'descripcion',
         'rif',
         'tipo_documento',
-        'periodo'
+        'periodo',
     ];
 
         public function movimientos()
