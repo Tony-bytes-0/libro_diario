@@ -8,10 +8,10 @@
                     <v-date-input v-model="registerDate" :display-format="format" label="Fecha"></v-date-input>
                 </v-col>
                 <v-col cols="8">
-                    <v-autocomplete label="Nombre o Razon Social del cliente" 
-                        :items="clientsList" 
+                    <v-autocomplete label="Nombre o Razon Social del cliente"
+                        :items="clientsList"
                         item-title="descripcion"
-                        return-object 
+                        return-object
                         v-model="formData.client"></v-autocomplete>
                 </v-col>
                 <v-col cols="2">
@@ -153,8 +153,9 @@ const breadcrumbs = [
 ];
 
 async function submit() {
-    const urlmovimientos = '/api/movimientos';
-    await axios.post(urlmovimientos, {
+    const urlmovimientos = '/api/crear/movimientos';
+    await axios.post(urlmovimientos, [
+        {
         fecha: registerDate.value,
         cliente_id: formData.value.client.id,
         tipo_documento: formData.value.documentType,
@@ -169,15 +170,24 @@ async function submit() {
         base_imponible_alic_no_contribuyente: base_imponible_alic_no_contribuyente.value,
         impuesto_iva: impuesto_iva.value,
         retencion_iva_soportada: retencion_iva_soportada.value
-    }).then(
-        (response) => {
-            console.log(response);
-        },
-        (error) => {
-            console.log(error);
-        }
+    },
+    {
+        tipo_documento: "Libro de ventas",
+        rif: formData.value.client.rif,
+        descripcion: formData.value.client.descripcion,
+        periodo: registerDate.value,
 
-    )
+    }
+]).then(
+        (response) => {
+            console.log(response, "movimientos creado" );
+        },
+        ).catch(
+            (error) => {
+                console.log(error, "error al crear movimientos");
+            }
+        );
+    await
 };
 
 function prueba() {
