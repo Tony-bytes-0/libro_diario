@@ -115,6 +115,7 @@ import axios from 'axios';
 import { shallowRef, computed, ref, onMounted } from 'vue';
 import { VDateInput } from 'vuetify/labs/VDateInput';
 import { useDate } from 'vuetify';
+import Swal from "sweetalert2";
 
 const clientsList = ref([]);
 //const expand = ref(false)
@@ -226,12 +227,30 @@ async function submit() {
 }).then(
     (response) => {
         console.log(response, "movimientos creado" );
-    },
-    ).catch(
-        (error) => {
-            console.log(error, "error al crear movimientos");
-        }
-    );
+        Swal.fire({
+              icon: "success",
+              title: `¡Registro Exitoso!`,
+              text: "Los registros han sido creados con exito",
+              confirmButton: "#3085d6",
+              showConfirmButton: true,
+              confirmButtonText: "Confirmar",
+              allowOutsideClick: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "http://localhost:8000/reportes/libro/ventas"
+              }
+            });
+          })
+          .catch(function (error) {
+            console.log(error, "error al regustrar");
+            Swal.fire({
+              icon: "error",
+              title: `Ha ocurrido un error a crear los registros`,
+              showConfirmButton: false,
+              toast: true,
+              showCloseButton: true,
+            });
+          })
 };
 
 onMounted( async () => {
