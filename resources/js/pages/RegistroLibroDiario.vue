@@ -3,7 +3,7 @@
     <Head title="Registrar" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="d-flex">
-            <v-row class="py-4 px-8">
+            <v-row class="pt-6 px-8 align-center">
                 <v-col cols="12" >
                     <v-autocomplete label="Libro"
                     :items="bookTypes"
@@ -101,7 +101,6 @@
                 <v-col cols="2" offset="10" @click="submit">
                     <v-btn>Registrar</v-btn>
                 </v-col>
-                <v-btn @click="prueba">probar</v-btn>
             </v-row>
         </div>
     </AppLayout>
@@ -234,15 +233,6 @@ async function submit() {
         }
     );
 };
-
-function prueba() {
-    /*for (let index = 0; index < documentTypeList.value.length; index++) {
-        const element = documentTypeList.value[index].name;
-        console.log(element);
-    }*/
-    console.log (expandContribuyentes.value)
-};
-
 
 onMounted( async () => {
     //consultar clientes
