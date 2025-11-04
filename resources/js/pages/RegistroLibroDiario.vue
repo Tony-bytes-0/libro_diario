@@ -2,25 +2,29 @@
 
     <Head title="Registrar" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="d-flex">
+        <v-form class="d-flex">
             <v-row class="pt-6 px-8 align-center ma-1">
-                <v-col cols="12" >
+                <v-col cols="12">
                     <v-autocomplete label="Libro"
                     :items="bookTypes"
                     v-model="bookType"
                     return-object
                     item-title="name"
+                    :rules="[rules.required('Este campo es requerido')]"
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="4">
-                    <v-date-input v-model="registerDate" :display-format="format" label="Fecha"></v-date-input>
+                    <v-date-input v-model="registerDate" :display-format="format" label="Fecha"
+                    :rules="[rules.required('Este campo es requerido')]"></v-date-input>
                 </v-col>
                 <v-col cols="8">
                     <v-autocomplete label="Nombre o Razon Social del cliente"
                         :items="clientsList"
                         item-title="descripcion"
                         return-object
-                        v-model="formData.client"></v-autocomplete>
+                        v-model="formData.client"
+                        :rules="[rules.required('Este campo es requerido')]"
+                        ></v-autocomplete>
                 </v-col>
                 <v-col cols="2">
                     <v-text-field label="RIF" disabled v-model="formData.client.rif" ></v-text-field>
@@ -31,28 +35,29 @@
                     v-model="formData.documentType"
                     return-object
                     item-title="name"
+                    :rules="[rules.required('Este campo es requerido')]"
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
                     <v-text-field label="Registro Maquina Fiscal" v-model="maquina_fiscal"></v-text-field>
                 </v-col>
                 <v-col cols="2">
-                    <v-text-field label="Primera Factura" v-model="primera_factura"></v-text-field>
+                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number" label="Primera Factura" v-model="primera_factura"></v-text-field>
                 </v-col>
                 <v-col cols="2">
-                    <v-text-field label="Ultima Factura" v-model="ultima_factura"></v-text-field>
+                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number" label="Ultima Factura" v-model="ultima_factura"></v-text-field>
                 </v-col>
                 <v-col cols="3">
-                    <v-text-field label="N° Factura (Compra, NC, ND)" v-model="numero_factura"></v-text-field>
+                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number" label="N° Factura (Compra, NC, ND)" v-model="numero_factura"></v-text-field>
                 </v-col>
                 <v-col cols="2">
-                    <v-text-field label="Factura Afectada" v-model="factura_afectada"></v-text-field>
+                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number" label="Factura Afectada" v-model="factura_afectada"></v-text-field>
                 </v-col>
                 <v-col cols="3">
-                    <v-text-field label="Total Ventas (con I.V.A)" v-model="total_ventas"></v-text-field>
+                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number" label="Total Ventas (con I.V.A)" v-model="total_ventas"></v-text-field>
                 </v-col>
                 <v-col cols="3">
-                    <v-text-field label="Ventas Internas no Agravadas" v-model="total_ventas_no_gravadas"></v-text-field>
+                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number" label="Ventas Internas no Agravadas" v-model="total_ventas_no_gravadas"></v-text-field>
                 </v-col>
                 <v-col cols="12">
                     <v-radio-group inline>
@@ -60,12 +65,10 @@
                     <v-radio label="No Contribuyente" value="two" @click="(expandNoContribuyentes = true) && (expandContribuyentes = false)" @focus="base_imponible_alic_contribuyente = null"></v-radio>
                     <v-radio label="No Aplica" value="three" @click="(expandNoContribuyentes = false) && (expandContribuyentes = false)" @focus="(base_imponible_alic_no_contribuyente = null) && (base_imponible_alic_contribuyente = null)"></v-radio>
                     </v-radio-group>
-
-
                         <v-expand-transition>
                             <v-row v-show="expandContribuyentes">
                                 <v-col cols="4">
-                                    <v-text-field label="Base Imponible Alic (Gen - Contrib.)" v-model="base_imponible_alic_contribuyente"></v-text-field>
+                                    <v-text-field label="Base Imponible Alic (Gen - Contrib.)" :rules="[rules.number('Este campo utiliza numeros')]" type="number" v-model="base_imponible_alic_contribuyente"></v-text-field>
                                 </v-col>
                                 <v-col cols="2">
                                     <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
@@ -74,7 +77,7 @@
                                     <v-text-field label="Impuesto I.V.A. (Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
                                 </v-col>
                                 <v-col cols="3">
-                                <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
+                                <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada" :disabled="retencionIvaComputed"></v-text-field>
                                 </v-col>
                             </v-row>
                         </v-expand-transition>
@@ -99,10 +102,11 @@
 
                 </v-col>
                 <v-col cols="2" offset="10" @click="submit" class="mb-5">
-                    <v-btn>Registrar</v-btn>
+                    <v-btn :disabled="registerDisabled">Registrar</v-btn>
                 </v-col>
             </v-row>
-        </div>
+        </v-form>
+        <v-btn @click="prueba">prueba</v-btn>
     </AppLayout>
 </template>
 
@@ -116,15 +120,16 @@ import { shallowRef, computed, ref, onMounted } from 'vue';
 import { VDateInput } from 'vuetify/labs/VDateInput';
 import { useDate } from 'vuetify';
 import Swal from "sweetalert2";
+import { useRules } from 'vuetify/labs/rules'
+
+const rules = useRules();
 
 const clientsList = ref([]);
-//const expand = ref(false)
 
 const expandContribuyentes = ref(false);
 const expandNoContribuyentes = ref(false);
 
 const formData = ref({
-    registerDate: '',
     client:{
         rif:'',
         id:'',
@@ -134,9 +139,9 @@ const formData = ref({
 });
 
 const bookTypes = ref([
-    "Libro de Compras",
-    "Libro de Ventas",
-    "Libro de Inventario"
+    "libro de compras",
+    "libro de ventas",
+    "libro de inventario"
 ]
 );
 
@@ -159,21 +164,21 @@ const documentTypeList = ref([
     }
 ]);
 
-const maquina_fiscal = ref('');
-const primera_factura = ref('');
-const ultima_factura = ref('');
-const numero_factura = ref('');
-const factura_afectada = ref('');
-const total_ventas = ref('');
-const total_ventas_no_gravadas = ref('');
-const base_imponible_alic_contribuyente = ref('');
-const base_imponible_alic_no_contribuyente = ref('');
+const maquina_fiscal = ref(null);
+const primera_factura = ref(null);
+const ultima_factura = ref(null);
+const numero_factura = ref(null);
+const factura_afectada = ref(null);
+const total_ventas = ref(null);
+const total_ventas_no_gravadas = ref(null);
+const base_imponible_alic_contribuyente = ref(null);
+const base_imponible_alic_no_contribuyente = ref(null);
 const ivaPercent = ref('16%');
-const bookType = ref('');
+const bookType = ref(null);
 //tienen que haber dos variables
 //una para impuesto iva de contribuyentes, y otra para no contribuyentes
 const impuesto_iva = computed (() => {
-    if (base_imponible_alic_contribuyente.value > 0){
+    if (base_imponible_alic_contribuyente.value > 0 || base_imponible_alic_contribuyente.value < 0 ){
       return (0.16 * base_imponible_alic_contribuyente.value).toFixed(2);
     } else if (base_imponible_alic_no_contribuyente.value > 0){
         return (0.16 * base_imponible_alic_no_contribuyente.value).toFixed(2);
@@ -181,15 +186,27 @@ const impuesto_iva = computed (() => {
         return null;
     }
 });
+
+const retencionIvaComputed = computed(() => {
+    if (base_imponible_alic_contribuyente.value !== null || base_imponible_alic_no_contribuyente.value !== null){
+        return true;
+    } else if (base_imponible_alic_contribuyente.value > 0 || base_imponible_alic_no_contribuyente.value < 0){
+        return true;
+    } else {
+        return false;
+    }
+});
+
+
 ///////////////////////////////////////////////////////////////////
 const retencion_iva_soportada = ref('');
 
-    const adapter = useDate()
-    const registerDate = shallowRef(adapter);
+    const adapter = useDate();
+    const registerDate = shallowRef(null);
 
   function format (date) {
     return adapter.toISO(date)
-  }
+  };
 
 const breadcrumbs = [
     {
@@ -228,6 +245,7 @@ async function submit() {
     (response) => {
         console.log(response, "movimientos creado" );
         Swal.fire({
+              theme: 'auto',
               icon: "success",
               title: `¡Registro Exitoso!`,
               text: "Los registros han sido creados con exito",
@@ -252,6 +270,52 @@ async function submit() {
             });
           })
 };
+
+const registerDisabled = computed(() => {
+    if (registerDate.value === null && bookType.value === null && formData.value.client.id === null && formData.value.documentType.name === null) {
+        return true;
+    } else {
+        return false;
+    }
+});
+
+
+function prueba() {
+    console.log(registerDate.value.toISOString().slice(0,10));
+    console.log(bookType.value);
+    console.log(formData.value.client.id);
+    console.log(formData.value.documentType.name);
+
+    Swal.fire({
+              theme: 'auto',
+              icon: "question",
+              title: `¿Esta seguro de guardar estos registros?`,
+              text: "Asegurese antes de guardar",
+              showCancelButton: true,
+              cancelButtonText: "Verificar",
+              showConfirmButton: true,
+              confirmButtonText: "Confirmar",
+              confirmButtonColor: "#00A603",
+              allowOutsideClick: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire({
+                    theme: 'auto',
+                    icon: "success",
+                    title: `¡Registro Exitoso!`,
+                    text: "¡Los registros han sido creados con exito!",
+                    showConfirmButton: true,
+                    confirmButtonText: "Confirmar",
+                    confirmButtonColor: "#00A603",
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    window.location.href = "http://localhost:8000/reportes/libro/ventas";
+                    }
+                });
+            }
+        });
+    };
 
 onMounted( async () => {
     //consultar clientes

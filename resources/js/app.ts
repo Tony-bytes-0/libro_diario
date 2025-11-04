@@ -6,11 +6,12 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import type { DefineComponent } from 'vue';
 import { createApp, h } from 'vue';
 import { initializeTheme } from './composables/useAppearance';
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import { aliases, md } from 'vuetify/iconsets/md'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import { aliases, md } from 'vuetify/iconsets/md';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import { createRulesPlugin } from 'vuetify/labs/rules'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -38,6 +39,9 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(vuetify)
+            .use(createRulesPlugin({
+                
+            }, vuetify.locale))
             .mount(el);
     },
     progress: {
