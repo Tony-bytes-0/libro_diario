@@ -47,7 +47,7 @@ const currentPath = typeof window !== undefined ? window.location.pathname : '';
                         :key="toUrl(item.href)"
                         variant="ghost"
                         :class="[
-                            'w-full justify-start',
+                            'w-full justify-start my-1',
                             { 'bg-muted': urlIsActive(item.href, currentPath) },
                         ]"
                         as-child

@@ -55,8 +55,8 @@ const mainNavItems: NavItem[] = [
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset">
-        <SidebarHeader class="pa-3">
+    <Sidebar collapsible="icon" variant="inset" class="pa-2">
+        <SidebarHeader class="pa-4">
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>

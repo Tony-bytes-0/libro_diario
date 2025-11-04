@@ -3,7 +3,7 @@
     <Head title="Registrar" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="d-flex">
-            <v-row class="pt-6 px-8 align-center">
+            <v-row class="pt-6 px-8 align-center ma-1">
                 <v-col cols="12" >
                     <v-autocomplete label="Libro"
                     :items="bookTypes"
@@ -61,44 +61,44 @@
                     <v-radio label="No Aplica" value="three" @click="(expandNoContribuyentes = false) && (expandContribuyentes = false)" @focus="(base_imponible_alic_no_contribuyente = null) && (base_imponible_alic_contribuyente = null)"></v-radio>
                     </v-radio-group>
 
-                    <div>
-                    <v-expand-transition>
-                        <v-row v-show="expandContribuyentes">
-                            <v-col cols="4">
-                                <v-text-field label="Base Imponible Alic (Gen - Contrib.)" v-model="base_imponible_alic_contribuyente"></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="Impuesto I.V.A. (Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                            <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-expand-transition>
-                    </div>
-                    <div>
-                    <v-expand-transition>
-                        <v-row v-show="expandNoContribuyentes">
-                            <v-col cols="4">
-                            <v-text-field label="Base Imponible Alic (Gen - No Contrib.)" v-model="base_imponible_alic_no_contribuyente"></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                            <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-expand-transition>
-                    </div>
+
+                        <v-expand-transition>
+                            <v-row v-show="expandContribuyentes">
+                                <v-col cols="4">
+                                    <v-text-field label="Base Imponible Alic (Gen - Contrib.)" v-model="base_imponible_alic_contribuyente"></v-text-field>
+                                </v-col>
+                                <v-col cols="2">
+                                    <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field label="Impuesto I.V.A. (Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-expand-transition>
+
+
+                        <v-expand-transition>
+                            <v-row v-show="expandNoContribuyentes">
+                                <v-col cols="4">
+                                <v-text-field label="Base Imponible Alic (Gen - No Contrib.)" v-model="base_imponible_alic_no_contribuyente"></v-text-field>
+                                </v-col>
+                                <v-col cols="2">
+                                    <v-text-field label="% I.V.A." v-model="ivaPercent" disabled></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                    <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva" disabled></v-text-field>
+                                </v-col>
+                                <v-col cols="3">
+                                <v-text-field label="Retencion I.V.A. Soportada" v-model="retencion_iva_soportada"></v-text-field>
+                                </v-col>
+                            </v-row>
+                        </v-expand-transition>
+
                 </v-col>
-                <v-col cols="2" offset="10" @click="submit">
+                <v-col cols="2" offset="10" @click="submit" class="mb-5">
                     <v-btn>Registrar</v-btn>
                 </v-col>
             </v-row>
