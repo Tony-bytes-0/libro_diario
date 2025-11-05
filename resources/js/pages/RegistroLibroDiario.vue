@@ -2,7 +2,7 @@
 
     <Head title="Registrar" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <v-form class="d-flex">
+        <v-form class="d-flex" @submit.prevent="default" >
             <v-row class="pt-6 px-8 align-center ma-1">
                 <v-col cols="12">
                     <v-autocomplete label="Libro"
@@ -32,7 +32,7 @@
                 <v-col cols="3" >
                     <v-autocomplete label="Tipo de Documento"
                     :items="documentTypeList"
-                    v-model="documentType"
+                    v-model="formData.documentType"
                     return-object
                     item-title="name"
                     :rules="[rules.required('Este campo es requerido')]"
@@ -102,7 +102,7 @@
 
                 </v-col>
                 <v-col cols="2" offset="10" @click="submit" class="mb-5">
-                    <v-btn :disabled="registerDisabled">Registrar</v-btn>
+                    <v-btn :disabled="registerDisabled" type="submit" >Registrar</v-btn>
                 </v-col>
             </v-row>
         </v-form>
@@ -214,8 +214,20 @@ const breadcrumbs = [
     },
 ];
 
+const resetFormData = () => {//limpiar formulario
+    formData.value = {
+        client: {
+            rif: null,
+            id: null,
+            descripcion: null
+        },
+        documentType: "",
+    }
+}
+
 async function submit() {
     const urlmovimientos = '/api/crear/movimientos';
+    console.log('al hacer submit, formdata: ', formData.value)
     await axios.post(urlmovimientos, {
         "movimientos":[{
             "fecha": registerDate.value.toISOString().slice(0,10),
@@ -264,9 +276,13 @@ async function submit() {
                     confirmButtonColor: "#00A603",
                     allowOutsideClick: false
                 }).then((result) => {
+                    resetFormData()
+                    //no recargar la pagina
+                    /*
                     if (result.isConfirmed) {
                         window.location.href = "http://localhost:8000/reportes/libro/ventas";
                     }
+                    */
                 });
             }
         });
