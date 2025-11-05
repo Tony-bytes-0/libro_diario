@@ -124,7 +124,7 @@ const allowedDates = ref({
 });
 
 const submit = async () => {
-    const url = '/api/reporte/libro/ventas'
+    const url = '/api/reporte/libro/compras'
     try{
     queryData.value.loading = true
 

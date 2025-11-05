@@ -13,3 +13,4 @@ Route::post('crear/movimientos', [MovimientosController::class, 'insert']);
 
 //reportes
 Route::post('reporte/libro/ventas', [ReportesController::class, 'libroVentas']);
+Route::post('reporte/libro/compras', [ReportesController::class, 'libroCompras']);
