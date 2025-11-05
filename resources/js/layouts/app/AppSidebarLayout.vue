@@ -17,7 +17,7 @@ withDefaults(defineProps<Props>(), {
 <template>
     <AppShell variant="sidebar" >
         <AppSidebar />
-        <AppContent variant="inset" class="ma-2 elevation-3" >
+        <AppContent variant="inset" class="my-2 elevation-4" >
             <AppSidebarHeader :breadcrumbs="breadcrumbs" />
             <slot />
         </AppContent>

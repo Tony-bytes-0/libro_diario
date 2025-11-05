@@ -2,7 +2,7 @@
 
     <Head title="Reporte Libro de Ventas" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <v-row style="margin-top: 1%; margin-left: auto; margin-right: auto;">
+        <v-row class="pt-6 px-8 ma-1">
             <v-col cols="5">
                 <v-select label="Mes" :items="allowedDates.months" v-model="filterData.month">
                     <template v-slot:item="{ props, item }">
@@ -17,7 +17,7 @@
             <v-col cols="4">
                 <v-select label="Año" :items="allowedDates.years" v-model="filterData.year"></v-select>
             </v-col>
-            <v-col cols="3" style="flex">
+            <v-col cols="3" style="">
                 <v-btn width="100%" height="70%" variant="outlined" :loading="queryData.loading" @click="submit()">
                     Buscar</v-btn>
             </v-col>
@@ -28,48 +28,42 @@
         <table>
             <thead>
                 <tr>
-                    <th class="text-center">
-                        Fecha
-                    </th>
-                    <th class="text-center text-sm cellTitle">Nombre o razón social</th>
-                    <th class="text-center text-sm cellTitle">Rif</th>
-                    <th class="text-center text-sm cellTitle">Tipo documento</th>
-                    <th class="text-center text-sm cellTitle">Maquina fiscal</th>
-                    <th class="text-center text-sm cellTitle">Primera y ultima factura</th>
-                    <th class="text-center text-sm cellTitle">Factura afectada</th>
-                    <th class="text-center text-sm cellTitle">Total ventas</th>
-                    <th class="text-center text-sm cellTitle">Ventas internas no gravadas</th>
-                    <th class="text-center text-sm cellTitle">Base imponible ALIC GEN contribuyente</th>
-                    <th class="text-center text-sm cellTitle">% IVA</th>
-                    <th class="text-center text-sm cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-sm cellTitle">Base imponible ALIC GEN NO contribuyente</th>
-                    <th class="text-center text-sm cellTitle">% IVA</th>
-                    <th class="text-center text-sm cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-sm cellTitle">Retencion IVA soportada</th>
+                    <th class="text-center text-xs pa-2">Fecha</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Nombre o razón social</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Rif</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Tipo documento</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Maquina fiscal</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Primera y ultima factura</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Factura afectada</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Total ventas</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Ventas internas no gravadas</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Base imponible ALIC GEN contribuyente</th>
+                    <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Base imponible ALIC GEN NO contribuyente</th>
+                    <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Retencion IVA soportada</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow">
-                    <td class="text-center cellInnerField">{{ item.fecha }}</td>
-                    <td class="text-center cellInnerField">{{ item.cliente_descripcion }}</td>
-                    <td class="text-center cellInnerField">{{ item.cliente_rif }}</td>
-                    <td class="text-center cellInnerField">{{ item.tipo_documento }}</td>
-                    <td class="text-center cellInnerField">{{ item.maquina_fiscal }}</td>
-                    <td class="text-center cellInnerField">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
-                    <td class="text-center cellInnerField">{{ item.numero_factura }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber( item.total_ventas) }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}
-                    </td>
-                    <td class="text-center cellInnerField">{{ item.porcentaje_iva_contribuyente }}%</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)
-                        }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}
-                    </td>
-                    <td class="text-center cellInnerField">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField">{{ item.retencion_iva_soportada }}</td>
-
+                    <td class="text-center cellInnerField text-sm">{{ item.fecha }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.cliente_descripcion }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.cliente_rif }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.tipo_documento }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.maquina_fiscal }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.numero_factura }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.porcentaje_iva_contribuyente }}%</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.impuesto_iva) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.impuesto_iva) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.retencion_iva_soportada }}</td>
                 </tr>
             </tbody>
         </table>
@@ -81,9 +75,15 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref } from 'vue';
-import {formatedNumber, notNullString, staticError} from '@/helpers'
-import Swal from 'sweetalert2';
-const breadcrumbs = ['Reporte libro de ventas'];
+import {formatedNumber, staticError} from '@/helpers'
+import {viewLibroCompras} from '@/routes';
+
+const breadcrumbs = [
+    {
+        title: 'Libro de compras',
+        href: viewLibroCompras().url,
+    },
+];
 
 const queryData = ref({
     loading: false,
@@ -156,6 +156,6 @@ const submit = async () => {
 }
 .cellInnerField{
     padding:8px;
-    
+
 }
 </style>

@@ -2,7 +2,7 @@
 
     <Head title="Registrar" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <v-form class="d-flex" @submit.prevent="default" >
+        <v-form class="d-flex" @submit.prevent="submit" >
             <v-row class="pt-6 px-8 align-center ma-1">
                 <v-col cols="12">
                     <v-autocomplete label="Libro"
@@ -32,7 +32,7 @@
                 <v-col cols="3" >
                     <v-autocomplete label="Tipo de Documento"
                     :items="documentTypeList"
-                    v-model="formData.documentType"
+                    v-model="documentType"
                     return-object
                     item-title="name"
                     :rules="[rules.required('Este campo es requerido')]"
@@ -110,7 +110,7 @@
     </AppLayout>
 </template>
 
-<script setup >
+<script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
 import { registroLibroDiario } from '@/routes';
 //import { type BreadcrumbItem } from '@/types';
@@ -221,39 +221,29 @@ const resetFormData = () => {//limpiar formulario
             id: null,
             descripcion: null
         },
-        documentType: "",
+
     }
+    registerDate.value = null;
+    bookType.value = null;
+    documentType.value = null;
+    maquina_fiscal.value = null;
+    primera_factura.value = null;
+    ultima_factura.value = null;
+    numero_factura.value = null;
+    factura_afectada.value = null;
+    total_ventas.value = null;
+    total_ventas_no_gravadas.value = null;
+    base_imponible_alic_contribuyente.value = null;
+    base_imponible_alic_no_contribuyente.value = null;
+    retencion_iva_soportada.value = null;
+    expandContribuyentes.value = false;
+    expandNoContribuyentes.value = false;
 }
 
 async function submit() {
     const urlmovimientos = '/api/crear/movimientos';
     console.log('al hacer submit, formdata: ', formData.value)
-    await axios.post(urlmovimientos, {
-        "movimientos":[{
-            "fecha": registerDate.value.toISOString().slice(0,10),
-            "cliente_id": formData.value.client.id,
-            "tipo_documento": formData.value.documentType.name,
-            "maquina_fiscal": maquina_fiscal.value,
-            "primera_factura": primera_factura.value,
-            "ultima_factura": ultima_factura.value,
-            "numero_factura": numero_factura.value,
-            "factura_afectada": factura_afectada.value,
-            "total_ventas": total_ventas.value,
-            "total_ventas_no_gravadas": total_ventas_no_gravadas.value,
-            "base_imponible_alic_contribuyente": base_imponible_alic_contribuyente.value,
-            "base_imponible_alic_no_contribuyente": base_imponible_alic_no_contribuyente.value,
-            "impuesto_iva": impuesto_iva.value,
-            "retencion_iva_soportada": retencion_iva_soportada.value
-        }],
-        "libro_movimiento": {
-            "tipo_documento": bookType.value,
-            "rif": formData.value.client.rif,
-            "descripcion": formData.value.client.descripcion,
-            "periodo": registerDate.value.toISOString().slice(0,10),
-        }
-    }).then((response) => {
-        console.log(response, "movimientos creado" );
-        Swal.fire({
+    Swal.fire({
             theme: 'auto',
             icon: "question",
             title: `¿Esta seguro de guardar estos registros?`,
@@ -264,8 +254,35 @@ async function submit() {
             confirmButtonText: "Confirmar",
             confirmButtonColor: "#00A603",
             allowOutsideClick: false,
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
+                await axios.post(urlmovimientos, {
+                    "movimientos":[{
+                        "fecha": registerDate.value.toISOString().slice(0,10),
+                        "cliente_id": formData.value.client.id,
+                        "tipo_documento": documentType.value.name,
+                        "maquina_fiscal": maquina_fiscal.value,
+                        "primera_factura": primera_factura.value,
+                        "ultima_factura": ultima_factura.value,
+                        "numero_factura": numero_factura.value,
+                        "factura_afectada": factura_afectada.value,
+                        "total_ventas": total_ventas.value,
+                        "total_ventas_no_gravadas": total_ventas_no_gravadas.value,
+                        "base_imponible_alic_contribuyente": base_imponible_alic_contribuyente.value,
+                        "base_imponible_alic_no_contribuyente": base_imponible_alic_no_contribuyente.value,
+                        "impuesto_iva": impuesto_iva.value,
+                        "retencion_iva_soportada": retencion_iva_soportada.value
+                    }],
+                    "libro_movimiento": {
+                        "tipo_documento": bookType.value,
+                        "rif": formData.value.client.rif,
+                        "descripcion": formData.value.client.descripcion,
+                        "periodo": registerDate.value.toISOString().slice(0,10),
+                    }
+                }).then((response) => {
+                    console.log(response, "movimientos creado" );
+
+                });
                 Swal.fire({
                     theme: 'auto',
                     icon: "success",
@@ -275,7 +292,7 @@ async function submit() {
                     confirmButtonText: "Confirmar",
                     confirmButtonColor: "#00A603",
                     allowOutsideClick: false
-                }).then((result) => {
+                }).then(() => {
                     resetFormData()
                     //no recargar la pagina
                     /*
@@ -286,18 +303,6 @@ async function submit() {
                 });
             }
         });
-    }).catch(function (error) {
-        console.log(error, "error al registrar");
-        Swal.fire({
-        icon: "error",
-        title: `Ha ocurrido un error a crear los registros`,
-        showConfirmButton: false,
-        confirmButtonColor: "#d43",
-        allowOutsideClick: false,
-        toast: true,
-        showCloseButton: true,
-        });
-    });
 };
 
 const registerDisabled = computed(() => {
@@ -309,11 +314,9 @@ const registerDisabled = computed(() => {
 });
 
 
-function prueba() {
-    console.log(retencion_iva_soportada.value);
-    console.log(base_imponible_alic_contribuyente.value == '' ? true : false);
-    console.log(base_imponible_alic_no_contribuyente.value);
-    };
+/*function prueba() {
+    console.log(documentType.value.name); console.log(registerDate.value);  console.log(bookType.value); console.log(formData.value.client.id);
+    };*/
 
 onMounted( async () => {
     //consultar clientes
