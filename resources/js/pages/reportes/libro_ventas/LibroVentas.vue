@@ -1,5 +1,5 @@
 <template>
-
+    <Head title="Reporte Libro de Ventas" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <v-row style="margin-top: 1%; margin-left: auto; margin-right: auto;">
             <v-col cols="5">
@@ -74,10 +74,11 @@
 
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
+import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref } from 'vue';
 import {formatedNumber, notNullString} from '@/helpers'
-const breadcrumbs = ['Reporte libro de ventas']
+const breadcrumbs = ['Reporte libro de ventas'];
 
 const queryData = ref({
     loading: false,
@@ -96,7 +97,7 @@ const generateYears = () => {
 }
 
 const filterData = ref({
-    month: '', 
+    month: '',
     year: new Date().getFullYear()
 })
 const allowedDates = ref({

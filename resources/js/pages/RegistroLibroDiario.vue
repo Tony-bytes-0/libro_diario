@@ -14,7 +14,7 @@
                     ></v-autocomplete>
                 </v-col>
                 <v-col cols="4">
-                    <v-date-input v-model="registerDate" :display-format="format" label="Fecha"
+                    <v-date-input v-model="registerDate" :display-format="format" label="Fecha" prepend-icon=""
                     :rules="[rules.required('Este campo es requerido')]"></v-date-input>
                 </v-col>
                 <v-col cols="8">
@@ -32,7 +32,7 @@
                 <v-col cols="3" >
                     <v-autocomplete label="Tipo de Documento"
                     :items="documentTypeList"
-                    v-model="formData.documentType"
+                    v-model="documentType"
                     return-object
                     item-title="name"
                     :rules="[rules.required('Este campo es requerido')]"
@@ -106,11 +106,11 @@
                 </v-col>
             </v-row>
         </v-form>
-        <v-btn @click="prueba">prueba</v-btn>
+        <!--v-btn @click="prueba">prueba</v-btn-->
     </AppLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { registroLibroDiario } from '@/routes';
 //import { type BreadcrumbItem } from '@/types';
@@ -131,11 +131,10 @@ const expandNoContribuyentes = ref(false);
 
 const formData = ref({
     client:{
-        rif:'',
-        id:'',
-        descripcion: ''
+        rif:null,
+        id:null,
+        descripcion: null
     },
-    documentType: '',
 });
 
 const bookTypes = ref([
@@ -164,6 +163,7 @@ const documentTypeList = ref([
     }
 ]);
 
+const documentType = ref(null);
 const maquina_fiscal = ref(null);
 const primera_factura = ref(null);
 const ultima_factura = ref(null);
@@ -175,6 +175,7 @@ const base_imponible_alic_contribuyente = ref(null);
 const base_imponible_alic_no_contribuyente = ref(null);
 const ivaPercent = ref('16%');
 const bookType = ref(null);
+const retencion_iva_soportada = ref(null);
 //tienen que haber dos variables
 //una para impuesto iva de contribuyentes, y otra para no contribuyentes
 const impuesto_iva = computed (() => {
@@ -190,7 +191,7 @@ const impuesto_iva = computed (() => {
 const retencionIvaComputed = computed(() => {
     if (base_imponible_alic_contribuyente.value !== null || base_imponible_alic_no_contribuyente.value !== null){
         return true;
-    } else if (base_imponible_alic_contribuyente.value > 0 || base_imponible_alic_no_contribuyente.value < 0){
+    } else if (base_imponible_alic_contribuyente.value === '' || base_imponible_alic_no_contribuyente.value === ''){
         return true;
     } else {
         return false;
@@ -199,10 +200,8 @@ const retencionIvaComputed = computed(() => {
 
 
 ///////////////////////////////////////////////////////////////////
-const retencion_iva_soportada = ref('');
-
-    const adapter = useDate();
-    const registerDate = shallowRef(null);
+const adapter = useDate();
+const registerDate = shallowRef(null);
 
   function format (date) {
     return adapter.toISO(date)
@@ -218,87 +217,43 @@ const breadcrumbs = [
 async function submit() {
     const urlmovimientos = '/api/crear/movimientos';
     await axios.post(urlmovimientos, {
-    "movimientos":[
-        {
-        "fecha": registerDate.value.toISOString().slice(0,10),
-        "cliente_id": formData.value.client.id,
-        "tipo_documento": formData.value.documentType.name,
-        "maquina_fiscal": maquina_fiscal.value,
-        "primera_factura": primera_factura.value,
-        "ultima_factura": ultima_factura.value,
-        "numero_factura": numero_factura.value,
-        "factura_afectada": factura_afectada.value,
-        "total_ventas": total_ventas.value,
-        "total_ventas_no_gravadas": total_ventas_no_gravadas.value,
-        "base_imponible_alic_contribuyente": base_imponible_alic_contribuyente.value,
-        "base_imponible_alic_no_contribuyente": base_imponible_alic_no_contribuyente.value,
-        "impuesto_iva": impuesto_iva.value,
-        "retencion_iva_soportada": retencion_iva_soportada.value
-    }],
-    "libro_movimiento": {
-        "tipo_documento": bookType.value,
-        "rif": formData.value.client.rif,
-        "descripcion": formData.value.client.descripcion,
-        "periodo": registerDate.value.toISOString().slice(0,10),
-    }
-}).then(
-    (response) => {
+        "movimientos":[{
+            "fecha": registerDate.value.toISOString().slice(0,10),
+            "cliente_id": formData.value.client.id,
+            "tipo_documento": formData.value.documentType.name,
+            "maquina_fiscal": maquina_fiscal.value,
+            "primera_factura": primera_factura.value,
+            "ultima_factura": ultima_factura.value,
+            "numero_factura": numero_factura.value,
+            "factura_afectada": factura_afectada.value,
+            "total_ventas": total_ventas.value,
+            "total_ventas_no_gravadas": total_ventas_no_gravadas.value,
+            "base_imponible_alic_contribuyente": base_imponible_alic_contribuyente.value,
+            "base_imponible_alic_no_contribuyente": base_imponible_alic_no_contribuyente.value,
+            "impuesto_iva": impuesto_iva.value,
+            "retencion_iva_soportada": retencion_iva_soportada.value
+        }],
+        "libro_movimiento": {
+            "tipo_documento": bookType.value,
+            "rif": formData.value.client.rif,
+            "descripcion": formData.value.client.descripcion,
+            "periodo": registerDate.value.toISOString().slice(0,10),
+        }
+    }).then((response) => {
         console.log(response, "movimientos creado" );
         Swal.fire({
-              theme: 'auto',
-              icon: "success",
-              title: `¡Registro Exitoso!`,
-              text: "Los registros han sido creados con exito",
-              confirmButton: "#3085d6",
-              showConfirmButton: true,
-              confirmButtonText: "Confirmar",
-              allowOutsideClick: false,
-            }).then((result) => {
-              if (result.isConfirmed) {
-                window.location.href = "http://localhost:8000/reportes/libro/ventas"
-              }
-            });
-          })
-          .catch(function (error) {
-            console.log(error, "error al regustrar");
-            Swal.fire({
-              icon: "error",
-              title: `Ha ocurrido un error a crear los registros`,
-              showConfirmButton: false,
-              toast: true,
-              showCloseButton: true,
-            });
-          })
-};
-
-const registerDisabled = computed(() => {
-    if (registerDate.value === null && bookType.value === null && formData.value.client.id === null && formData.value.documentType.name === null) {
-        return true;
-    } else {
-        return false;
-    }
-});
-
-
-function prueba() {
-    console.log(registerDate.value.toISOString().slice(0,10));
-    console.log(bookType.value);
-    console.log(formData.value.client.id);
-    console.log(formData.value.documentType.name);
-
-    Swal.fire({
-              theme: 'auto',
-              icon: "question",
-              title: `¿Esta seguro de guardar estos registros?`,
-              text: "Asegurese antes de guardar",
-              showCancelButton: true,
-              cancelButtonText: "Verificar",
-              showConfirmButton: true,
-              confirmButtonText: "Confirmar",
-              confirmButtonColor: "#00A603",
-              allowOutsideClick: false,
-            }).then((result) => {
-              if (result.isConfirmed) {
+            theme: 'auto',
+            icon: "question",
+            title: `¿Esta seguro de guardar estos registros?`,
+            text: "Asegurese antes de guardar",
+            showCancelButton: true,
+            cancelButtonText: "Verificar",
+            showConfirmButton: true,
+            confirmButtonText: "Confirmar",
+            confirmButtonColor: "#00A603",
+            allowOutsideClick: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
                 Swal.fire({
                     theme: 'auto',
                     icon: "success",
@@ -310,11 +265,38 @@ function prueba() {
                     allowOutsideClick: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                    window.location.href = "http://localhost:8000/reportes/libro/ventas";
+                        window.location.href = "http://localhost:8000/reportes/libro/ventas";
                     }
                 });
             }
         });
+    }).catch(function (error) {
+        console.log(error, "error al registrar");
+        Swal.fire({
+        icon: "error",
+        title: `Ha ocurrido un error a crear los registros`,
+        showConfirmButton: false,
+        confirmButtonColor: "#d43",
+        allowOutsideClick: false,
+        toast: true,
+        showCloseButton: true,
+        });
+    });
+};
+
+const registerDisabled = computed(() => {
+    if ((documentType.value !== null) && (registerDate.value !== null) && (bookType.value !== null) && (formData.value.client.id !== null)) {
+        return false;
+    } else {
+        return true;
+    }
+});
+
+
+function prueba() {
+    console.log(retencion_iva_soportada.value);
+    console.log(base_imponible_alic_contribuyente.value == '' ? true : false);
+    console.log(base_imponible_alic_no_contribuyente.value);
     };
 
 onMounted( async () => {

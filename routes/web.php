@@ -20,9 +20,9 @@ Route::get('registroLibroDiario', function () {
     return Inertia::render('RegistroLibroDiario');
 })->middleware(['auth', 'verified'])->name('registroLibroDiario');
 
-Route::get('reporteLibroDiario', function () {
-    return Inertia::render('ReporteLibroDiario');
-})->middleware(['auth', 'verified'])->name('reporteLibroDiario');
+Route::get('reporteLibroVentas', function () {
+    return Inertia::render('ReporteLibroVentas');
+})->middleware(['auth', 'verified'])->name('reporteLibroVentas');
 //reportes
 Route::get('reportes/libro/ventas', [ReportesController::class, 'viewLibroVentas'] );
 
