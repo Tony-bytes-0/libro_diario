@@ -31,26 +31,26 @@
                     <th class="text-center">
                         Fecha
                     </th>
-                    <th class="text-center text-sm">Nombre o razón social</th>
-                    <th class="text-center text-sm">Rif</th>
-                    <th class="text-center text-sm">Tipo documento</th>
-                    <th class="text-center text-sm">Maquina fiscal</th>
-                    <th class="text-center text-sm">Primera y ultima factura</th>
-                    <th class="text-center text-sm">Factura afectada</th>
-                    <th class="text-center text-sm">Total ventas</th>
-                    <th class="text-center text-sm">Ventas internas no gravadas</th>
-                    <th class="text-center text-sm">Base imponible ALIC GEN contribuyente</th>
-                    <th class="text-center text-sm">% IVA</th>
-                    <th class="text-center text-sm">Impuesto IVA</th>
-                    <th class="text-center text-sm">Base imponible ALIC GEN NO contribuyente</th>
-                    <th class="text-center text-sm">% IVA</th>
-                    <th class="text-center text-sm">Impuesto IVA</th>
-                    <th class="text-center text-sm">Retencion IVA soportada</th>
+                    <th class="text-center text-sm cellTitle">Nombre o razón social</th>
+                    <th class="text-center text-sm cellTitle">Rif</th>
+                    <th class="text-center text-sm cellTitle">Tipo documento</th>
+                    <th class="text-center text-sm cellTitle">Maquina fiscal</th>
+                    <th class="text-center text-sm cellTitle">Primera y ultima factura</th>
+                    <th class="text-center text-sm cellTitle">Factura afectada</th>
+                    <th class="text-center text-sm cellTitle">Total ventas</th>
+                    <th class="text-center text-sm cellTitle">Ventas internas no gravadas</th>
+                    <th class="text-center text-sm cellTitle">Base imponible ALIC GEN contribuyente</th>
+                    <th class="text-center text-sm cellTitle">% IVA</th>
+                    <th class="text-center text-sm cellTitle">Impuesto IVA</th>
+                    <th class="text-center text-sm cellTitle">Base imponible ALIC GEN NO contribuyente</th>
+                    <th class="text-center text-sm cellTitle">% IVA</th>
+                    <th class="text-center text-sm cellTitle">Impuesto IVA</th>
+                    <th class="text-center text-sm cellTitle">Retencion IVA soportada</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow">
-                    <td class="text-center ">{{ item.fecha }}</td>
+                    <td class="text-center cellInnerField">{{ item.fecha }}</td>
                     <td class="text-center cellInnerField">{{ item.cliente_descripcion }}</td>
                     <td class="text-center cellInnerField">{{ item.cliente_rif }}</td>
                     <td class="text-center cellInnerField">{{ item.tipo_documento }}</td>
@@ -59,11 +59,14 @@
                     <td class="text-center cellInnerField">{{ item.numero_factura }}</td>
                     <td class="text-center cellInnerField">{{ formatedNumber( item.total_ventas) }}</td>
                     <td class="text-center cellInnerField">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}
+                    </td>
                     <td class="text-center cellInnerField">{{ item.porcentaje_iva_contribuyente }}%</td>
                     <td class="text-center cellInnerField">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber(item.base_imponible_alic_no_contribuyente) }}</td>
-                    <td class="text-center cellInnerField">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)
+                        }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}
+                    </td>
                     <td class="text-center cellInnerField">{{ formatedNumber(item.impuesto_iva) }}</td>
                     <td class="text-center cellInnerField">{{ item.retencion_iva_soportada }}</td>
 
@@ -142,11 +145,14 @@ const submit = async () => {
 
 </script>
 <style scoped>
+.cellTitle {
+    color: #e7e7e7;
+}
 .cellRow{
     border-style: solid;
-    border-color: #A6A6A6;
+    border-color: #616161;
     border-width: 3px;
-    
+
 }
 .cellInnerField{
     padding:8px;
