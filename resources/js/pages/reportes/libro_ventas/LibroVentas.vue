@@ -24,27 +24,27 @@
 
         <v-divider thickness="3"></v-divider>
 
-        <v-table>
+        <table>
             <thead>
                 <tr>
                     <th class="text-center">
                         Fecha
                     </th>
-                    <th class="text-center">Nombre o razón social</th>
-                    <th class="text-center">Rif</th>
-                    <th class="text-center">Tipo documento</th>
-                    <th class="text-center">Maquina fiscal</th>
-                    <th class="text-center">Primera y ultima factura</th>
-                    <th class="text-center">Factura afectada</th>
-                    <th class="text-center">Total ventas</th>
-                    <th class="text-center">Ventas internas no gravadas</th>
-                    <th class="text-center">Base imponible ALIC GEN contribuyente</th>
-                    <th class="text-center">% IVA</th>
-                    <th class="text-center">Impuesto IVA</th>
-                    <th class="text-center">Base imponible ALIC GEN NO contribuyente</th>
-                    <th class="text-center">% IVA</th>
-                    <th class="text-center">Impuesto IVA</th>
-                    <th class="text-center">Retencion IVA soportada</th>
+                    <th class="text-center text-sm">Nombre o razón social</th>
+                    <th class="text-center text-sm">Rif</th>
+                    <th class="text-center text-sm">Tipo documento</th>
+                    <th class="text-center text-sm">Maquina fiscal</th>
+                    <th class="text-center text-sm">Primera y ultima factura</th>
+                    <th class="text-center text-sm">Factura afectada</th>
+                    <th class="text-center text-sm">Total ventas</th>
+                    <th class="text-center text-sm">Ventas internas no gravadas</th>
+                    <th class="text-center text-sm">Base imponible ALIC GEN contribuyente</th>
+                    <th class="text-center text-sm">% IVA</th>
+                    <th class="text-center text-sm">Impuesto IVA</th>
+                    <th class="text-center text-sm">Base imponible ALIC GEN NO contribuyente</th>
+                    <th class="text-center text-sm">% IVA</th>
+                    <th class="text-center text-sm">Impuesto IVA</th>
+                    <th class="text-center text-sm">Retencion IVA soportada</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@
 
                 </tr>
             </tbody>
-        </v-table>
+        </table>
     </AppLayout>
 </template>
 

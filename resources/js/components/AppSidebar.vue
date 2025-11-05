@@ -28,11 +28,11 @@ const mainNavItems: NavItem[] = [
         href: registroLibroDiario(),
         icon: Pencil,
     },
-    {
+/*     {
         title: 'Reporte Libro Ventas',
         href: reporteLibroVentas(),
         icon: BookOpenCheck,
-    },
+    }, */
     {
         title:'Reporte libro ventas',
         href:'reportes/libro/ventas',
