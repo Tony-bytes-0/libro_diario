@@ -77,7 +77,8 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref } from 'vue';
-import {formatedNumber, notNullString} from '@/helpers'
+import {formatedNumber, notNullString, staticError} from '@/helpers'
+import Swal from 'sweetalert2';
 const breadcrumbs = ['Reporte libro de ventas'];
 
 const queryData = ref({
@@ -120,17 +121,18 @@ const allowedDates = ref({
 
 const submit = async () => {
     const url = '/api/reporte/libro/ventas'
+    try{
     queryData.value.loading = true
+
     const response = await axios.post(url, {
         anio: filterData.value.year,
         mes: filterData.value.month
     })
-    try{
         queryData.value.items = response.data.movimientos
         queryData.value.loaded = true
     }
     catch{
-        console.log('Error en busqueda');
+        staticError('Introduzca una fecha valida')
     }
     finally{
         queryData.value.loading = false

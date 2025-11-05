@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -19,6 +20,7 @@ class ReportesController extends Controller
                 'anio' => 'nullable|required'
             ]
         );
+
 
         $libro_movimientos = DB::table('libro_movimientos as libro')
             ->select('*')
