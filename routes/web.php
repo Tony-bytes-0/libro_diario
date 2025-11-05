@@ -25,6 +25,7 @@ Route::get('reporteLibroVentas', function () {
 })->middleware(['auth', 'verified'])->name('reporteLibroVentas');
 //reportes
 Route::get('reportes/libro/ventas', [ReportesController::class, 'viewLibroVentas'] );
+Route::get('reportes/libro/compras', [ReportesController::class, 'viewLibroCompras']);
 
 //Route::get('registrarLibroDiario', [LibroDiario::class, 'view'])->middleware(['auth', 'verified']);
 

@@ -12,6 +12,11 @@ class ReportesController extends Controller
     public function viewLibroVentas(Request $request){
         return Inertia::render('reportes/libro_ventas/LibroVentas');
     }
+    public function viewLibroCompras(Request $request)
+    {
+        return Inertia::render('reportes/libro_compras/LibroCompras');
+    }
+
 
     public function libroVentas(Request $request){
         $validated = $request->validate(

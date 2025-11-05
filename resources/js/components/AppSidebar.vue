@@ -35,7 +35,12 @@ const mainNavItems: NavItem[] = [
     }, */
     {
         title:'Reporte libro ventas',
-        href:'reportes/libro/ventas',
+        href:'/reportes/libro/ventas',
+        icon: BookOpenCheck,
+    },
+    {
+        title: 'Reporte libro compras',
+        href: '/reportes/libro/compras',
         icon: BookOpenCheck,
     }
 ];
