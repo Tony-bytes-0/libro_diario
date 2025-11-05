@@ -110,7 +110,7 @@
     </AppLayout>
 </template>
 
-<script setup lang="ts">
+<script setup >
 import AppLayout from '@/layouts/AppLayout.vue';
 import { registroLibroDiario } from '@/routes';
 //import { type BreadcrumbItem } from '@/types';
