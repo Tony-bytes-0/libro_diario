@@ -20,13 +20,13 @@ Route::get('registroLibroDiario', function () {
     return Inertia::render('RegistroLibroDiario');
 })->middleware(['auth', 'verified'])->name('registroLibroDiario');
 
-Route::get('reporteLibroVentas', function () {
-    return Inertia::render('ReporteLibroVentas');
-})->middleware(['auth', 'verified'])->name('reporteLibroVentas');
-//reportes
-Route::get('reportes/libro/ventas', [ReportesController::class, 'viewLibroVentas'] );
-Route::get('reportes/libro/compras', [ReportesController::class, 'viewLibroCompras']);
+Route::get('reportes/libro_ventas/LibroVentas', function () {
+    return Inertia::render('reportes/libro_ventas/LibroVentas');
+})->middleware(['auth', 'verified'])->name('viewLibroVentas');
 
-//Route::get('registrarLibroDiario', [LibroDiario::class, 'view'])->middleware(['auth', 'verified']);
+Route::get('reportes/libro_compras/LibroCompras', function () {
+    return Inertia::render('reportes/libro_compras/LibroCompras');
+})->middleware(['auth', 'verified'])->name('viewLibroCompras');
+//reportes
 
 require __DIR__.'/settings.php';

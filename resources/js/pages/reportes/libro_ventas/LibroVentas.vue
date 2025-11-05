@@ -28,24 +28,22 @@
         <table>
             <thead>
                 <tr>
-                    <th class="text-center">
-                        Fecha
-                    </th>
-                    <th class="text-center text-sm cellTitle">Nombre o razón social</th>
-                    <th class="text-center text-sm cellTitle">Rif</th>
-                    <th class="text-center text-sm cellTitle">Tipo documento</th>
-                    <th class="text-center text-sm cellTitle">Maquina fiscal</th>
-                    <th class="text-center text-sm cellTitle">Primera y ultima factura</th>
-                    <th class="text-center text-sm cellTitle">Factura afectada</th>
-                    <th class="text-center text-sm cellTitle">Total ventas</th>
-                    <th class="text-center text-sm cellTitle">Ventas internas no gravadas</th>
-                    <th class="text-center text-sm cellTitle">Base imponible ALIC GEN contribuyente</th>
-                    <th class="text-center text-sm cellTitle">% IVA</th>
-                    <th class="text-center text-sm cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-sm cellTitle">Base imponible ALIC GEN NO contribuyente</th>
-                    <th class="text-center text-sm cellTitle">% IVA</th>
-                    <th class="text-center text-sm cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-sm cellTitle">Retencion IVA soportada</th>
+                    <th class="text-center text-xs cellTitle pa-4">Fecha</th>
+                    <th class="text-center text-xs cellTitle pa-4">Nombre o razón social</th>
+                    <th class="text-center text-xs cellTitle pa-4">Rif</th>
+                    <th class="text-center text-xs cellTitle pa-4">Tipo documento</th>
+                    <th class="text-center text-xs cellTitle pa-4">Maquina fiscal</th>
+                    <th class="text-center text-xs cellTitle pa-4">Primera y ultima factura</th>
+                    <th class="text-center text-xs cellTitle pa-4">Factura afectada</th>
+                    <th class="text-center text-xs cellTitle pa-4">Total ventas</th>
+                    <th class="text-center text-xs cellTitle pa-4">Ventas internas no gravadas</th>
+                    <th class="text-center text-xs cellTitle pa-4">Base imponible ALIC GEN contribuyente</th>
+                    <th class="text-center text-xs cellTitle pa-4">% IVA</th>
+                    <th class="text-center text-xs cellTitle pa-4">Impuesto IVA</th>
+                    <th class="text-center text-xs cellTitle pa-4">Base imponible ALIC GEN NO contribuyente</th>
+                    <th class="text-center text-xs cellTitle pa-4">% IVA</th>
+                    <th class="text-center text-xs cellTitle pa-4">Impuesto IVA</th>
+                    <th class="text-center text-xs cellTitle pa-4">Retencion IVA soportada</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,7 +81,14 @@ import axios from 'axios';
 import { ref } from 'vue';
 import {formatedNumber, notNullString, staticError} from '@/helpers'
 import Swal from 'sweetalert2';
-const breadcrumbs = ['Reporte libro de ventas'];
+import {viewLibroVentas} from '@/routes';
+
+const breadcrumbs = [
+    {
+        title: 'Libro de ventas',
+        href: viewLibroVentas().url,
+    },
+];
 
 const queryData = ref({
     loading: false,
@@ -156,6 +161,6 @@ const submit = async () => {
 }
 .cellInnerField{
     padding:8px;
-    
+
 }
 </style>

@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, registroLibroDiario, reporteLibroVentas } from '@/routes';
+import { dashboard, registroLibroDiario, viewLibroCompras, viewLibroVentas } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck } from 'lucide-vue-next';
@@ -28,21 +28,16 @@ const mainNavItems: NavItem[] = [
         href: registroLibroDiario(),
         icon: Pencil,
     },
-/*     {
-        title: 'Reporte Libro Ventas',
-        href: reporteLibroVentas(),
-        icon: BookOpenCheck,
-    }, */
     {
-        title:'Reporte libro ventas',
-        href:'/reportes/libro/ventas',
+        title: 'Reporte Libro Ventas',
+        href: viewLibroVentas(),
         icon: BookOpenCheck,
     },
     {
-        title: 'Reporte libro compras',
-        href: '/reportes/libro/compras',
+        title: 'Reporte Libro Compras',
+        href: viewLibroCompras(),
         icon: BookOpenCheck,
-    }
+    },
 ];
 
 /*const footerNavItems: NavItem[] = [
