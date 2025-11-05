@@ -1,4 +1,5 @@
 <template>
+
     <Head title="Reporte Libro de Ventas" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <v-row style="margin-top: 1%; margin-left: auto; margin-right: auto;">
@@ -48,23 +49,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in queryData.items" :key="item.entry_id">
-                    <td class="text-center">{{ item.fecha }}</td>
-                    <td class="text-center">{{ item.cliente_descripcion }}</td>
-                    <td class="text-center">{{ item.cliente_rif }}</td>
-                    <td class="text-center">{{ item.tipo_documento }}</td>
-                    <td class="text-center">{{ item.maquina_fiscal }}</td>
-                    <td class="text-center">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
-                    <td class="text-center">{{ item.numero_factura }}</td>
-                    <td class="text-center">{{ formatedNumber( item.total_ventas) }}</td>
-                    <td class="text-center">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
-                    <td class="text-center">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}</td>
-                    <td class="text-center">{{ item.porcentaje_iva_contribuyente }}%</td>
-                    <td class="text-center">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center">{{ formatedNumber(item.base_imponible_alic_no_contribuyente) }}</td>
-                    <td class="text-center">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
-                    <td class="text-center">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center">{{ item.retencion_iva_soportada }}</td>
+                <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow">
+                    <td class="text-center ">{{ item.fecha }}</td>
+                    <td class="text-center cellInnerField">{{ item.cliente_descripcion }}</td>
+                    <td class="text-center cellInnerField">{{ item.cliente_rif }}</td>
+                    <td class="text-center cellInnerField">{{ item.tipo_documento }}</td>
+                    <td class="text-center cellInnerField">{{ item.maquina_fiscal }}</td>
+                    <td class="text-center cellInnerField">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
+                    <td class="text-center cellInnerField">{{ item.numero_factura }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber( item.total_ventas) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}</td>
+                    <td class="text-center cellInnerField">{{ item.porcentaje_iva_contribuyente }}%</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber(item.impuesto_iva) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber(item.base_imponible_alic_no_contribuyente) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
+                    <td class="text-center cellInnerField">{{ formatedNumber(item.impuesto_iva) }}</td>
+                    <td class="text-center cellInnerField">{{ item.retencion_iva_soportada }}</td>
 
                 </tr>
             </tbody>
@@ -140,4 +141,15 @@ const submit = async () => {
 }
 
 </script>
-<style scoped></style>
+<style scoped>
+.cellRow{
+    border-style: solid;
+    border-color: #A6A6A6;
+    border-width: 3px;
+    
+}
+.cellInnerField{
+    padding:8px;
+    
+}
+</style>

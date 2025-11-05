@@ -11,6 +11,9 @@ export function notNullString(item){
 }
 
 export const formatedNumber = (number) => {
+    if(number == undefined || number == null){
+        return 0
+    }
     return new Intl.NumberFormat("es-VE", {
         maximumFractionDigits: 2,
         minimumFractionDigits: 2,
