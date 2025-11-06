@@ -201,7 +201,7 @@ const impuesto_iva_contribuyente = computed(() => {
 });
 
 const impuesto_retencion_contribuyente = computed(() => {
-    if (impuesto_iva_contribuyente > 0 || 
+    if (impuesto_iva_contribuyente.value > 0 || 
     formData.value.porcentaje_retencion !== null ||
     formData.value.porcentaje_retencion !== ''
 ){
@@ -213,6 +213,14 @@ const impuesto_retencion_contribuyente = computed(() => {
         return 0;
     }
 });
+
+const impuesto_iva_no_contribuyente = computed(() => {
+    return 200;
+})
+
+const impuesto_retencion_no_contribuyente = computed(() => {
+    return 200;
+})
 
 
 ///////////////////////////////////////////////////////////////////
@@ -272,6 +280,16 @@ async function submit() {
         allowOutsideClick: false,
     }).then(async (result) => {
         if (result.isConfirmed) {
+            let impuesto_iva = 0
+            let impuesto_retencion = 0
+            if(expandContribuyentes.value){
+                //impuesto_iva = impuesto_iva_contribuyente;
+                //impuesto_retencion = impuesto_retencion_contribuyente
+            }
+            else if(expandNoContribuyentes.value){
+                //impuesto_iva = impuesto_iva_no_contribuyente;
+                //impuesto_retencion = impuesto_retencion_no_contribuyente;
+            }
             await axios.post(urlmovimientos, {
                 "movimientos": [{
                     "fecha": formData.value.registerDate.toISOString().slice(0, 10),
@@ -285,9 +303,17 @@ async function submit() {
                     "total_ventas": formData.value.total_ventas,
                     "total_ventas_no_gravadas": formData.value.total_ventas_no_gravadas,
                     "base_imponible_alic_contribuyente": formData.value.base_imponible_alic_contribuyente,
+                    "porcentaje_iva": formData.value.porcentaje_iva,
+                    "porcentaje_retencion": formData.value.porcentaje_retencion,
                     "base_imponible_alic_no_contribuyente": formData.value.base_imponible_alic_no_contribuyente,
-                    "impuesto_iva": formData.value.impuesto_iva,
-                    "retencion_iva_soportada": formData.value.retencion_iva_soportada
+                    //dependiendo si es contribuyente o no, pasar la variable correcpondiente
+                    //ver operadores condicionales ternarios
+                    "impuesto_iva": expandContribuyentes.value ? 
+                    impuesto_iva_contribuyente.value : 
+                    impuesto_iva_no_contribuyente.value,
+                    "retencion_iva_soportada": expandContribuyentes.value ? 
+                    impuesto_retencion_contribuyente.value : 
+                    impuesto_retencion_no_contribuyente.value
                 }],
                 "libro_movimiento": {
                     "tipo_documento": formData.value.bookType,
