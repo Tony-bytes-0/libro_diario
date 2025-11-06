@@ -26,8 +26,16 @@ class Movimiento extends Model
         'porcentaje_iva_contribuyente',
         'porcentaje_iva_no_contribuyente',
         'impuesto_iva',
-        'retencion_iva_soportada'
+        'retencion_iva_soportada',
+        'comprobante_retencion',
+        'porcentaje_iva_aplicado',
+        'porcentaje_retencion_aplicado'
     ];
+    /*
+                $table->string('comprobante_retencion')->nullable();
+            $table->string('porcentaje_iva_aplicado')->nullable();
+            $table->string('porcentaje_retencion_aplicado')->nullable();
+    */
 
     public function libroMovimiento()
     {
