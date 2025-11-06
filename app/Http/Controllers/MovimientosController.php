@@ -68,6 +68,7 @@ class MovimientosController extends Controller
                     //si no hay ninguno, iniciar en uno
                     $ultimoNumeroRetencion = 1;
                 }
+                //dd($movimiento);
                 $movimiento['comprobante_retencion'] = $ultimoNumeroRetencion;
                 Movimiento::create($movimiento);
             }
