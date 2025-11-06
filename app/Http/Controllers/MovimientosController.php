@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\LibroMovimiento;
 use App\Models\Movimiento;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -50,6 +51,24 @@ class MovimientosController extends Controller
 
             foreach($validated['movimientos'] as $movimiento){
                 $movimiento['libro_movimiento_id'] = $libro_movimiento_id;
+                //correlativa, numero retencion por factura y por mes.
+                $fechaCarbon = Carbon::parse($movimiento['fecha']);
+                $anio = $fechaCarbon->year;
+                $mes = $fechaCarbon->month;
+                $ultimoNumeroRetencion = DB::table('movimientos')
+                ->where('tipo_documento', '=', 'factura')
+                ->whereMonth('fecha', '=', $mes)
+                ->whereYear('fecha', '=', $anio)
+                ->max('comprobante_retencion');
+
+                if(gettype($ultimoNumeroRetencion) == 'string'){
+                    $ultimoNumeroRetencion += 1;
+                }
+                else{
+                    //si no hay ninguno, iniciar en uno
+                    $ultimoNumeroRetencion = 1;
+                }
+                $movimiento['comprobante_retencion'] = $ultimoNumeroRetencion;
                 Movimiento::create($movimiento);
             }
             $queryStatus['movimientos'] = 201;

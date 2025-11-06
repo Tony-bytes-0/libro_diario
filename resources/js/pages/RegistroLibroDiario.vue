@@ -169,19 +169,19 @@ const bookTypes = ref([
 const documentTypeList = ref([
     {
         synonym: 'FACT',
-        name: 'Factura'
+        name: 'factura'
     },
     {
         synonym: 'RIVA',
-        name: 'Retención de I.V.A.'
+        name: 'retención de iva'
     },
     {
         synonym: 'Z',
-        name: 'Reporte Z'
+        name: 'reporte z'
     },
     {
         synonym: 'NCD',
-        name: 'Nota de crédito'
+        name: 'nota de credito'
     }
 ]);
 
