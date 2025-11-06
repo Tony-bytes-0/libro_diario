@@ -109,6 +109,7 @@ watch(
 </script>
 
 <template>
+    <!--
     <Dialog :open="isOpen" @update:open="isOpen = $event">
         <DialogContent class="sm:max-w-md">
             <DialogHeader class="flex items-center justify-center">
@@ -296,4 +297,5 @@ watch(
             </div>
         </DialogContent>
     </Dialog>
+    -->
 </template>

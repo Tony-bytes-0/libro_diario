@@ -12,9 +12,10 @@ import { Link } from '@inertiajs/vue3';
 
 const sidebarNavItems: NavItem[] = [
     {
-        title: 'Profile',
+        title: 'Perfil',
         href: editProfile(),
     },
+    /*
     {
         title: 'Password',
         href: editPassword(),
@@ -23,8 +24,9 @@ const sidebarNavItems: NavItem[] = [
         title: 'Two-Factor Auth',
         href: show(),
     },
+    */
     {
-        title: 'Appearance',
+        title: 'Tema',
         href: editAppearance(),
     },
 ];
@@ -35,8 +37,8 @@ const currentPath = typeof window !== undefined ? window.location.pathname : '';
 <template>
     <div class="px-4 py-6">
         <Heading
-            title="Settings"
-            description="Manage your profile and account settings"
+            title="Configuración"
+            description=""
         />
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">

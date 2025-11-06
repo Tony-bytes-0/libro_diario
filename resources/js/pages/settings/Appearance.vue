@@ -11,7 +11,7 @@ import { edit } from '@/routes/appearance';
 
 const breadcrumbItems: BreadcrumbItem[] = [
     {
-        title: 'Appearance settings',
+        title: 'Tema',
         href: edit().url,
     },
 ];
@@ -25,7 +25,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
             <div class="space-y-6">
                 <HeadingSmall
                     title="Appearance settings"
-                    description="Update your account's appearance settings"
+                    description="Cambia el color del tema"
                 />
                 <AppearanceTabs />
             </div>
