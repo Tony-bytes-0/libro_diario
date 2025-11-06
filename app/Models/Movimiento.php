@@ -29,7 +29,8 @@ class Movimiento extends Model
         'retencion_iva_soportada',
         'comprobante_retencion',
         'porcentaje_iva_aplicado',
-        'porcentaje_retencion_aplicado'
+        'porcentaje_retencion_aplicado',
+        'contribuyente'
     ];
     /*
                 $table->string('comprobante_retencion')->nullable();
