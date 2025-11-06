@@ -303,8 +303,8 @@ async function submit() {
                     "total_ventas": formData.value.total_ventas,
                     "total_ventas_no_gravadas": formData.value.total_ventas_no_gravadas,
                     "base_imponible_alic_contribuyente": formData.value.base_imponible_alic_contribuyente,
-                    "porcentaje_iva": formData.value.porcentaje_iva,
-                    "porcentaje_retencion": formData.value.porcentaje_retencion,
+                    "porcentaje_iva_aplicado": formData.value.porcentaje_iva,
+                    "porcentaje_retencion_aplicado": formData.value.porcentaje_retencion,
                     "base_imponible_alic_no_contribuyente": formData.value.base_imponible_alic_no_contribuyente,
                     //dependiendo si es contribuyente o no, pasar la variable correcpondiente
                     //ver operadores condicionales ternarios
@@ -313,7 +313,8 @@ async function submit() {
                     impuesto_iva_no_contribuyente.value,
                     "retencion_iva_soportada": expandContribuyentes.value ? 
                     impuesto_retencion_contribuyente.value : 
-                    impuesto_retencion_no_contribuyente.value
+                    impuesto_retencion_no_contribuyente.value,
+                    "contribuyente": expandContribuyentes.value
                 }],
                 "libro_movimiento": {
                     "tipo_documento": formData.value.bookType,

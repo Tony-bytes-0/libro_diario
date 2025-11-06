@@ -31,6 +31,8 @@ class MovimientosController extends Controller
             'movimientos.*.total_ventas_no_gravadas' => 'nullable|numeric',
             'movimientos.*.base_imponible_alic_contribuyente' => 'nullable|numeric',
             'movimientos.*.base_imponible_alic_no_contribuyente' => 'nullable|numeric',
+            'movimientos.*.porcentaje_iva_aplicado' => 'nullable|numeric',
+            'movimientos.*.porcentaje_retencion_aplicado' => 'nullable|numeric',
             'movimientos.*.impuesto_iva' => 'nullable|numeric',
             'movimientos.*.retencion_iva_soportada' => 'nullable|numeric',
             //'movimientos.*.' => 'nullable',
