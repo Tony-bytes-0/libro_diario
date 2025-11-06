@@ -5,7 +5,7 @@
         <v-form class="d-flex" @submit.prevent="submit">
             <v-row class="pt-6 px-8 align-center ma-1">
                 <v-col cols="12">
-                    <v-autocomplete label="Libro" :items="bookTypes" v-model="bookType" return-object item-title="name"
+                    <v-autocomplete label="Libro" :items="bookTypes" v-model="formData.bookType" return-object item-title="name"
                         :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
                 <v-col cols="4">
@@ -141,7 +141,10 @@ const formData = ref({
     },
     registerDate: null,
     bookType: null,
-    documentType: null,
+    documentType: {
+      synonym:'',
+      name:''  
+    },
     maquina_fiscal: null,
     primera_factura: null,
     ultima_factura: null,
@@ -240,7 +243,10 @@ const resetFormData = () => {//limpiar formulario
         },
         registerDate: null,
         bookType: null,
-        documentType: null,
+        documentType: {
+            synonym: '',
+            name: ''
+        },
         maquina_fiscal: null,
         primera_factura: null,
         ultima_factura: null,
@@ -274,7 +280,7 @@ async function submit() {
         if (result.isConfirmed) {
             await axios.post(urlmovimientos, {
                 "movimientos": [{
-                    "fecha": formData.value.registerDate.value.toISOString().slice(0, 10),
+                    "fecha": formData.value.registerDate.toISOString().slice(0, 10),
                     "cliente_id": formData.value.client.id,
                     "tipo_documento": formData.value.documentType.name,
                     "maquina_fiscal": formData.value.maquina_fiscal,
@@ -287,13 +293,13 @@ async function submit() {
                     "base_imponible_alic_contribuyente": formData.value.base_imponible_alic_contribuyente,
                     "base_imponible_alic_no_contribuyente": formData.value.base_imponible_alic_no_contribuyente,
                     "impuesto_iva": formData.value.impuesto_iva,
-                    "retencion_iva_soportada": formData.value.retencion_iva_soportada.value
+                    "retencion_iva_soportada": formData.value.retencion_iva_soportada
                 }],
                 "libro_movimiento": {
                     "tipo_documento": formData.value.bookType,
                     "rif": formData.value.client.rif,
                     "descripcion": formData.value.client.descripcion,
-                    "periodo": formData.registerDate.value.toISOString().slice(0, 10),
+                    "periodo": formData.value.registerDate.toISOString().slice(0, 10),
                 }
             }).then((response) => {
                 console.log(response, "movimientos creado");
