@@ -4,20 +4,20 @@
     <AppLayout :breadcrumbs="breadcrumbs">
         <v-form class="d-flex" @submit.prevent="submit">
             <v-row class="pt-6 px-8 align-center ma-1">
-                <v-col cols="12">
+                <v-col cols="9">
                     <v-autocomplete label="Libro" :items="bookTypes" v-model="formData.bookType" return-object
                         item-title="name" :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
-                <v-col cols="4">
+                <v-col cols="3">
                     <v-date-input v-model="formData.registerDate" :display-format="format" label="Fecha" prepend-icon=""
                         :rules="[rules.required('Este campo es requerido')]"></v-date-input>
                 </v-col>
-                <v-col cols="8">
+                <v-col cols="6">
                     <v-autocomplete label="Nombre o Razon Social del cliente" :items="clientsList"
                         item-title="descripcion" return-object v-model="formData.client"
                         :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
-                <v-col cols="2">
+                <v-col cols="3">
                     <v-text-field label="RIF" disabled v-model="formData.client.rif"></v-text-field>
                 </v-col>
                 <v-col cols="3">
@@ -25,86 +25,122 @@
                         return-object item-title="name"
                         :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
-                <v-col cols="3">
-                    <v-text-field label="Registro Maquina Fiscal" v-model="formData.maquina_fiscal"></v-text-field>
-                </v-col>
-                <v-col cols="2">
-                    <v-text-field label="Primera Factura" v-model="formData.primera_factura"></v-text-field>
-                </v-col>
-                <v-col cols="2">
-                    <v-text-field label="Ultima Factura" v-model="formData.ultima_factura"></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                    <v-text-field label="N° Factura (Compra, NC, ND)" v-model="formData.numero_factura"></v-text-field>
-                </v-col>
-                <v-col cols="2">
-                    <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                        label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
-                </v-col>
-                <v-col cols="3">
-                    <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                        label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                    <v-radio-group inline>
-                        <v-radio label="Contribuyente" value="one"
-                            @click="(expandContribuyentes = true) && (expandNoContribuyentes = false)"
-                            @focus="base_imponible_alic_no_contribuyente = null"></v-radio>
-                        <v-radio label="No Contribuyente" value="two"
-                            @click="(expandNoContribuyentes = true) && (expandContribuyentes = false)"
-                            @focus="formData.base_imponible_alic_contribuyente = null"></v-radio>
-                        <!-- <v-radio label="No Aplica" value="three" @click="(expandNoContribuyentes = false) && (expandContribuyentes = false)" @focus="(base_imponible_alic_no_contribuyente = null) && (base_imponible_alic_contribuyente = null)"></v-radio> -->
-                    </v-radio-group>
-                    <v-expand-transition>
-                        <v-row v-show="expandContribuyentes">
-                            <v-col cols="3">
-                                <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
-                                    :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-select label="% IVA" v-model="formData.porcentaje_iva"
-                                    :items="[8, 16, 31]"></v-select>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="Impuesto IVA" disabled v-model="impuesto_iva_contribuyente"></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-select label="% Retencion" v-model="formData.porcentaje_retencion"
-                                    :items="[75, 100]"></v-select>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="Monto retencion" v-model="impuesto_retencion_contribuyente"
-                                    disabled></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-expand-transition>
+                <v-expand-transition>
+                    <v-row v-show="showRetencionIva">
+                        <v-col cols="6">
+                            <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
+                        </v-col>
+                        <v-col cols="6">
+                            <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
+                        </v-col>
+
+                        <v-col cols="4">
+                            <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
+                                :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                :items="[8, 16, 31]"></v-select>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-text-field label="Impuesto I.V.A." disabled v-model="impuesto_iva_contribuyente"></v-text-field>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-select label="% Retencion" v-model="formData.porcentaje_retencion"
+                                :items="[75, 100]"></v-select>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-text-field label="Monto retencion" v-model="impuesto_retencion_contribuyente"
+                                disabled></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row class="px-3" v-show="showingConditions">
+                        <v-col cols="3">
+                            <v-text-field label="Registro Maquina Fiscal" v-model="formData.maquina_fiscal"></v-text-field>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-text-field label="Primera Factura" v-model="formData.primera_factura"></v-text-field>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-text-field label="Ultima Factura"  v-model="formData.ultima_factura"></v-text-field>
+                        </v-col>
+                        <v-col cols="3">
+                            <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
+                        </v-col>
+                        <v-col cols="2">
+                            <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
+                        </v-col>
+                        <v-col cols="3">
+                            <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
+                        </v-col>
+                        <v-col cols="3">
+                            <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-radio-group inline>
+                                <v-radio label="Contribuyente" value="one"
+                                    @click="(expandContribuyentes = true) && (expandNoContribuyentes = false)"
+                                    @focus="base_imponible_alic_no_contribuyente = null"></v-radio>
+                                <v-radio label="No Contribuyente" value="two"
+                                    @click="(expandNoContribuyentes = true) && (expandContribuyentes = false)"
+                                    @focus="formData.base_imponible_alic_contribuyente = null"></v-radio>
+                                <!-- <v-radio label="No Aplica" value="three" @click="(expandNoContribuyentes = false) && (expandContribuyentes = false)" @focus="(base_imponible_alic_no_contribuyente = null) && (base_imponible_alic_contribuyente = null)"></v-radio> -->
+                            </v-radio-group>
+                            <v-expand-transition>
+                                <v-row v-show="expandContribuyentes">
+                                    <v-col cols="3">
+                                        <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
+                                            :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                            v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            :items="[8, 16, 31]"></v-select>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-text-field label="Impuesto I.V.A." disabled v-model="impuesto_iva_contribuyente"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-select label="% Retencion" v-model="formData.porcentaje_retencion"
+                                            :items="[75, 100]"></v-select>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-text-field label="Monto retencion" v-model="impuesto_retencion_contribuyente"
+                                            disabled></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-expand-transition>
 
 
-                    <v-expand-transition>
-                        <v-row v-show="expandNoContribuyentes">
-                            <v-col cols="4">
-                                <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
-                                    v-model="base_imponible_alic_no_contribuyente"></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="% I.V.A." v-model="formData.ivaPercent" disabled></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva"
-                                    disabled></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="Retencion I.V.A. Soportada"
-                                    v-model="formData.retencion_iva_soportada"></v-text-field>
-                            </v-col>
-                        </v-row>
-                    </v-expand-transition>
-
-                </v-col>
+                            <v-expand-transition>
+                                <v-row v-show="expandNoContribuyentes">
+                                    <v-col cols="4">
+                                        <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
+                                            v-model="formData.base_imponible_alic_no_contribuyente"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-text-field label="% I.V.A." v-model="formData.ivaPercent" disabled></v-text-field>
+                                    </v-col>
+                                    <v-col cols="3">
+                                        <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_no_contribuyente"
+                                            disabled></v-text-field>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-select label="% Retencion" v-model="formData.porcentaje_retencion"
+                                            :items="[75, 100]"></v-select>
+                                    </v-col>
+                                    <v-col cols="2">
+                                        <v-text-field label="Monto retencion" v-model="impuesto_retencion_no_contribuyente"
+                                            disabled></v-text-field>
+                                    </v-col>
+                                </v-row>
+                            </v-expand-transition>
+                        </v-col>
+                    </v-row>
+                </v-expand-transition>
                 <v-col cols="2" offset="10" @click="submit()" class="mb-5">
                     <v-btn :disabled="registerDisabled" type="submit">Registrar</v-btn>
                 </v-col>
@@ -120,7 +156,7 @@ import { registroLibroDiario } from '@/routes';
 //import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
-import { shallowRef, computed, ref, onMounted } from 'vue';
+import {computed, ref, onMounted } from 'vue';
 import { VDateInput } from 'vuetify/labs/VDateInput';
 import { useDate } from 'vuetify';
 import Swal from "sweetalert2";
@@ -133,30 +169,52 @@ const clientsList = ref([]);
 const expandContribuyentes = ref(false);
 const expandNoContribuyentes = ref(false);
 
+    const showRetencionIva = ref(false);
+    const ShowReporteZ = ref(false);
+    const showNotadeCredito = ref(false);
+    const showNotadeDebito = ref(false);
+    const showFacturaCompras = ref(false);
+    const showFacturaVentas = ref(false);
+
+/*const displayElements = ref({
+    maquina_fiscal: false,
+    primera_factura: false,
+    ultima_factura: false,
+    numero_factura: false,
+    factura_afectada: false,
+    total_ventas: false,
+    total_ventas_no_gravadas: false,
+    base_imponible_alic_contribuyente: false,
+    base_imponible_alic_no_contribuyente: false,
+    porcentaje_iva: false,
+    porcentaje_retencion: false,
+    retencion_iva_soportada: false,
+})*/
+
 const formData = ref({
     client: {
-        rif: null,
-        id: null,
-        descripcion: null
+        rif: '',
+        id: '',
+        descripcion: ''
     },
-    registerDate: null,
-    bookType: null,
+    registerDate: '',
+    bookType: '',
     documentType: {
       synonym:'',
-      name:''  
+      name:''
     },
-    maquina_fiscal: null,
-    primera_factura: null,
-    ultima_factura: null,
-    numero_factura: null,
-    factura_afectada: null,
-    total_ventas: null,
-    total_ventas_no_gravadas: null,
-    base_imponible_alic_contribuyente: null,
-    base_imponible_alic_no_contribuyente: null,
+    maquina_fiscal: '',
+    primera_factura: '',
+    ultima_factura: '',
+    numero_factura: '',
+    factura_afectada: '',
+    total_ventas: '',
+    total_ventas_no_gravadas: '',
+    base_imponible_alic_contribuyente: '',
+    base_imponible_alic_no_contribuyente: '',
     porcentaje_iva: '',
     porcentaje_retencion: '',
-    retencion_iva_soportada: null,
+    retencion_iva_soportada: '',
 });
 
 const bookTypes = ref([
@@ -169,19 +227,23 @@ const bookTypes = ref([
 const documentTypeList = ref([
     {
         synonym: 'FACT',
-        name: 'factura'
+        name: 'Factura'
     },
     {
         synonym: 'RIVA',
-        name: 'retención de iva'
+        name: 'Retención de IVA'
     },
     {
         synonym: 'Z',
-        name: 'reporte z'
+        name: 'Reporte Z'
     },
     {
         synonym: 'NCD',
-        name: 'nota de credito'
+        name: 'Nota de Credito'
+    },
+    {
+        synonym: 'NDT',
+        name: 'Nota de Debito'
     }
 ]);
 
@@ -201,7 +263,7 @@ const impuesto_iva_contribuyente = computed(() => {
 });
 
 const impuesto_retencion_contribuyente = computed(() => {
-    if (impuesto_iva_contribuyente.value > 0 || 
+    if (impuesto_iva_contribuyente.value > 0 ||
     formData.value.porcentaje_retencion !== null ||
     formData.value.porcentaje_retencion !== ''
 ){
@@ -215,7 +277,14 @@ const impuesto_retencion_contribuyente = computed(() => {
 });
 
 const impuesto_iva_no_contribuyente = computed(() => {
-    return 200;
+    if (formData.value.base_imponible_alic_no_contribuyente > 0 || formData.value.base_imponible_alic_no_contribuyente ) {
+        const porcentaje = formData.value.porcentaje_iva;
+        const base_imponible = formData.value.base_imponible_alic_no_contribuyente;
+        const result = (base_imponible * porcentaje) / 100
+        return result.toFixed(2);
+    } else {
+        return 0;
+    }
 })
 
 const impuesto_retencion_no_contribuyente = computed(() => {
@@ -264,6 +333,70 @@ const resetFormData = () => {//limpiar formulario
     }
 }
 
+const showingConditions = computed(() => {
+    if(formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Factura"){
+        showRetencionIva.value = false;
+        ShowReporteZ.value = false;
+        showNotadeCredito.value = false;
+        showNotadeDebito.value = false;
+        showFacturaCompras.value = false;
+        showFacturaVentas.value = true;
+        return true;
+    } else {
+        if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Retención de IVA") {
+            ShowReporteZ.value = false;
+            showNotadeCredito.value = false;
+            showNotadeDebito.value = false;
+            showFacturaCompras.value = false;
+            showFacturaVentas.value = false;
+            showRetencionIva.value = true;
+            return true;
+        } else {
+            if(formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Reporte Z"){
+                showNotadeCredito.value = false;
+                showNotadeDebito.value = false;
+                showFacturaCompras.value = false;
+                showFacturaVentas.value = false;
+                showRetencionIva.value = false;
+                ShowReporteZ.value = true;
+                return true;
+            } else {
+                if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Credito"){
+                    showNotadeDebito.value = false;
+                    showFacturaCompras.value = false;
+                    showFacturaVentas.value = false;
+                    showRetencionIva.value = false;
+                    ShowReporteZ.value = false;
+                    showNotadeCredito.value = true;
+                    return true;
+                } else {
+                    if(formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Debito"){
+                        showFacturaCompras.value = false;
+                        showFacturaVentas.value = false;
+                        showRetencionIva.value = false;
+                        ShowReporteZ.value = false;
+                        showNotadeCredito.value = false;
+                        showNotadeDebito.value = true;
+                        return true;
+                    } else {
+                        if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Factura"){
+                            showFacturaVentas.value = false;
+                            showRetencionIva.value = false;
+                            ShowReporteZ.value = false;
+                            showNotadeCredito.value = false;
+                            showNotadeDebito.value = false;
+                            showFacturaCompras.value = true;
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
 async function submit() {
     const urlmovimientos = '/api/crear/movimientos';
     console.log('al hacer submit, formdata: ', formData.value)
@@ -308,11 +441,11 @@ async function submit() {
                     "base_imponible_alic_no_contribuyente": formData.value.base_imponible_alic_no_contribuyente,
                     //dependiendo si es contribuyente o no, pasar la variable correcpondiente
                     //ver operadores condicionales ternarios
-                    "impuesto_iva": expandContribuyentes.value ? 
-                    impuesto_iva_contribuyente.value : 
+                    "impuesto_iva": expandContribuyentes.value ?
+                    impuesto_iva_contribuyente.value :
                     impuesto_iva_no_contribuyente.value,
-                    "retencion_iva_soportada": expandContribuyentes.value ? 
-                    impuesto_retencion_contribuyente.value : 
+                    "retencion_iva_soportada": expandContribuyentes.value ?
+                    impuesto_retencion_contribuyente.value :
                     impuesto_retencion_no_contribuyente.value,
                     "contribuyente": expandContribuyentes.value
                 }],
