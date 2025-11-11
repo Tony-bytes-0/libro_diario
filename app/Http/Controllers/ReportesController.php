@@ -63,6 +63,7 @@ class ReportesController extends Controller
             'movimiento.impuesto_iva',
             'movimiento.porcentaje_iva_contribuyente',
             'movimiento.retencion_iva_soportada',
+            'movimiento.comprobante_retencion'
             ])
         ->whereIn('movimiento.libro_movimiento_id', $libroIds)
         ->get();
@@ -122,6 +123,7 @@ class ReportesController extends Controller
                 'movimiento.impuesto_iva',
                 'movimiento.porcentaje_iva_contribuyente',
                 'movimiento.retencion_iva_soportada',
+                'movimiento.comprobante_retencion'
             ])
             ->whereIn('movimiento.libro_movimiento_id', $libroIds)
             ->get();
