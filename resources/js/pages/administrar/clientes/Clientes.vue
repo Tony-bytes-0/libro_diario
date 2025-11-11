@@ -47,6 +47,7 @@
     </AppLayout>
 </template>
 <script setup>
+import { fastMsg, staticError } from '@/helpers';
 import AppLayout from '@/layouts/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
@@ -69,9 +70,10 @@ const breadcrumbs = [
 const submit = async () => {
     const url = '/api/administrar/clientes/crear'
     try {
-        const response = axios.post(url, formData.value)
+        const response = await axios.post(url, formData.value)
+        fastMsg(response.data.msg);
     } catch (error) {
-        
+        staticError('rellene los campos principales');
     }
     
 }
