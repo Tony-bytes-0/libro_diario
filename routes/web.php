@@ -36,4 +36,9 @@ Route::get('administrar/clientes/Clientes', function () {
     return Inertia::render('administrar/clientes/Clientes');
 })->middleware(['auth', 'verified'])->name('viewCreateClients');
 
+Route::get('administrar/cuentas_contables', function () {
+    return Inertia::render('administrar/cuentas_contables/CuentasContables');
+})->middleware(['auth', 'verified']);
+///administrar/cuentas_contables
+
 require __DIR__.'/settings.php';

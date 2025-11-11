@@ -49,5 +49,10 @@ class Movimiento extends Model
         return $this->belongsTo(Cliente::class);
     }
 
+    public function cuenta_contable()
+    {
+        return $this->belongsTo(CuentaContable::class);
+    }
+
 
 }

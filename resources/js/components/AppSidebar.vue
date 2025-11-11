@@ -14,7 +14,7 @@ import {
 import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch } from 'lucide-vue-next';
+import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -42,6 +42,11 @@ const mainNavItems: NavItem[] = [
         title: 'Administrar Clientes',
         href: viewCreateClients(),
         icon: UserSearch,
+    },
+    {
+        title: 'Cuentas contables',
+        href: '/administrar/cuentas_contables',
+        icon: ListCollapse,
     },
 ];
 
