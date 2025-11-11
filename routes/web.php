@@ -18,8 +18,8 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //registros
-Route::get('registroLibroDiario', function () {
-    return Inertia::render('RegistroLibroDiario');
+Route::get('registroLibroDiario/RegistroLibroDiario', function () {
+    return Inertia::render('registroLibroDiario/RegistroLibroDiario');
 })->middleware(['auth', 'verified'])->name('registroLibroDiario');
 
 //reportes
@@ -36,9 +36,10 @@ Route::get('administrar/clientes/Clientes', function () {
     return Inertia::render('administrar/clientes/Clientes');
 })->middleware(['auth', 'verified'])->name('viewCreateClients');
 
-Route::get('administrar/cuentas_contables', function () {
-    return Inertia::render('administrar/cuentas_contables/CuentasContables');
-})->middleware(['auth', 'verified']);
 ///administrar/cuentas_contables
+Route::get('administrar/cuentas_contables/CuentasContables', function () {
+    return Inertia::render('administrar/cuentas_contables/CuentasContables');
+})->middleware(['auth', 'verified'])->name('createCuentasContables');
+
 
 require __DIR__.'/settings.php';

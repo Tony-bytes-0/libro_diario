@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas } from '@/routes';
+import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas, createCuentasContables } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse } from 'lucide-vue-next';
@@ -45,7 +45,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Cuentas contables',
-        href: '/administrar/cuentas_contables',
+        href: createCuentasContables(),
         icon: ListCollapse,
     },
 ];

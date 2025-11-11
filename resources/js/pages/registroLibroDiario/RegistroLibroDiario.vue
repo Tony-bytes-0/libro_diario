@@ -4,7 +4,7 @@
         <v-form class="d-flex" @submit.prevent="submit">
             <v-row class="pt-6 px-5 align-center ma-1">
                 <v-col cols="9">
-                    <v-autocomplete label="Libro" :items="bookTypes" v-model="formData.bookType" return-object
+                    <v-autocomplete label="Libro" :items="bookTypes" v-model="formData.bookType" return-object autocomplete="off"
                         item-title="name" :rules="[rules.required('Este campo es requerido')]" @update:model-value="resetDocumentType"></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
@@ -26,6 +26,7 @@
                 </v-col>
                 <v-expand-transition>
                     <v-row class="px-6" v-show="showingConditions">
+                        <!---Reporte Z---->
                         <v-row v-if="ShowReporteZ">
                             <v-col cols="4">
                                 <v-text-field label="Registro Maquina Fiscal" v-model="formData.maquina_fiscal"></v-text-field>
