@@ -34,6 +34,7 @@
                     <th class="text-center text-xs cellTitle pa-2">Maquina fiscal</th>
                     <th class="text-center text-xs cellTitle pa-2">Primera y ultima factura</th>
                     <th class="text-center text-xs cellTitle pa-2">Factura afectada</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Comprobante retención</th>
                     <th class="text-center text-xs cellTitle pa-2">Total ventas</th>
                     <th class="text-center text-xs cellTitle pa-2">Ventas internas no gravadas</th>
                     <th class="text-center text-xs cellTitle pa-2">Base imponible ALIC GEN contribuyente</th>
@@ -55,6 +56,7 @@
                     <td class="text-center cellInnerField text-sm">{{ item.primera_factura }} - {{ item.ultima_factura
                         }}</td>
                     <td class="text-center cellInnerField text-sm">{{ item.numero_factura }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.comprobante_retencion }}</td>
                     <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas) }}</td>
                     <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas_no_gravadas) }}
                     </td>
