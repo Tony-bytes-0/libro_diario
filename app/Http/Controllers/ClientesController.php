@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class ClientesController extends Controller
 {
@@ -14,6 +15,10 @@ class ClientesController extends Controller
             'msg' => 'clientes consultados con exito',
             'clientes' => $clients
         ]);
+    }
+
+    public function view(){
+        return Inertia::render('administrar/clientes/Clientes');
     }
 }
 

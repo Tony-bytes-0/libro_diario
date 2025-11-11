@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\LibroDiario;
 use App\Http\Controllers\ReportesController;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +29,7 @@ Route::get('reportes/libro_compras/LibroCompras', function () {
     return Inertia::render('reportes/libro_compras/LibroCompras');
 })->middleware(['auth', 'verified'])->name('viewLibroCompras');
 //reportes
+//administrar
+Route::get('administrar/clientes', [ClientesController::class, 'view']);
 
 require __DIR__.'/settings.php';
