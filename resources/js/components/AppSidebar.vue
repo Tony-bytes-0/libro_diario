@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, registroLibroDiario, viewLibroCompras, viewLibroVentas } from '@/routes';
+import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck } from 'lucide-vue-next';
@@ -39,8 +39,8 @@ const mainNavItems: NavItem[] = [
         icon: BookOpenCheck,
     },
     {
-        title: 'Clientes',
-        href: '/administrar/clientes',
+        title: 'Administrar Clientes',
+        href: viewCreateClients(),
         icon: BookOpenCheck,
     },
 ];

@@ -1,7 +1,6 @@
 <template>
+    <head title="Administrar Clientes" />
     <AppLayout :breadcrumbs="breadcrumbs" style="background-color: #454545">
-
-        <head />
         <v-form style="padding: 10px;" @submit.prevent="submit">
             <v-row class="text-center">
                 <v-col cols="12">Administrar clientes</v-col>
@@ -50,6 +49,14 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
+import {viewCreateClients} from '@/routes';
+
+const breadcrumbs = [
+    {
+        title: 'Administrar Clientes',
+        href: viewCreateClients().url,
+    },
+];
 
 const formData = ref({
     tipo: "",
@@ -60,20 +67,15 @@ const formData = ref({
     telefono: "",
     correo: ""
 })
-const breadcrumbs = [
-    {
-        title: 'Administrar clientes',
-    },
-];
 
 const submit = async () => {
     const url = '/api/administrar/clientes/crear'
     try {
         const response = axios.post(url, formData.value)
     } catch (error) {
-        
+
     }
-    
+
 }
 </script>
 <style>
