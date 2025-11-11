@@ -28,3 +28,13 @@ export const staticError = (errorText) => {
         icon: "error",
     });
 }
+
+export const fastMsg = (successText) => {
+    Swal.fire({
+        title: "Listo!",
+        text: successText,
+        icon: "success",
+        timer: 3000,
+        showConfirmButton: false
+    });
+}
