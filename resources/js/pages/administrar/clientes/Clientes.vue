@@ -7,15 +7,15 @@
                 <v-col cols="12">Administrar clientes</v-col>
                 <v-col cols="2">
                     <v-label>Tipo</v-label>
-                    <v-select :items="['V', 'J', 'G']"></v-select>
+                    <v-select :items="['V', 'J', 'G']" v-model="formData.tipo" ></v-select>
                 </v-col>
                 <v-col cols=" 4">
                     <v-label>Rif o cedula</v-label>
-                    <v-text-field></v-text-field>
+                    <v-text-field v-model="formData.rif" ></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Nombre completo o descrpción</v-label>
-                    <v-text-field></v-text-field>
+                    <v-text-field v-model="formData.descripcion"></v-text-field>
                 </v-col>
 
             </v-row>
@@ -23,19 +23,19 @@
             <v-row>
                 <v-col cols="4">
                     <v-label>Nombre</v-label>
-                    <v-text-field></v-text-field>
+                    <v-text-field v-model="formData.nombre"></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Apellido</v-label>
-                    <v-text-field></v-text-field>
+                    <v-text-field v-model="formData.apellido"></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Teléfono</v-label>
-                    <v-text-field></v-text-field>
+                    <v-text-field v-model="formData.telefono"></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Correo</v-label>
-                    <v-text-field></v-text-field>
+                    <v-text-field v-model="formData.correo"></v-text-field>
                 </v-col>
             </v-row>
         </v-form>
@@ -43,5 +43,15 @@
 </template>
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
+import { ref } from 'vue';
 
+const formData = ref({
+    tipo: "",
+    rif: "",
+    descripcion: "",
+    nombre: "",
+    apellido: "",
+    telefono: "",
+    correo: ""
+})
 </script>
