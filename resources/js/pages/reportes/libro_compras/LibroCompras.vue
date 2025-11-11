@@ -1,7 +1,7 @@
 <template>
 
     <Head title="Reporte Libro de Ventas" />
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout :breadcrumbs="breadcrumbs" style="background-color: #454545" >
         <v-row class="pt-6 px-8 ma-1">
             <v-col cols="5">
                 <v-select label="Mes" :items="allowedDates.months" v-model="filterData.month">
@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th class="text-center text-xs pa-2">Fecha</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Nombre o razón social</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Cliente</th>
                     <th class="text-center text-xs pa-2 cellTitle">Rif</th>
                     <th class="text-center text-xs pa-2 cellTitle">Tipo documento</th>
                     <th class="text-center text-xs pa-2 cellTitle">Maquina fiscal</th>

@@ -1,7 +1,7 @@
 <template>
 
     <Head title="Reporte Libro de Ventas" />
-    <AppLayout :breadcrumbs="breadcrumbs">
+    <AppLayout :breadcrumbs="breadcrumbs" style="background-color: #454545">
         <v-row class="pt-6 px-8 ma-1">
             <v-col cols="5">
                 <v-select label="Mes" :items="allowedDates.months" v-model="filterData.month">
@@ -28,7 +28,7 @@
             <thead>
                 <tr>
                     <th class="text-center text-xs cellTitle pa-2">Fecha</th>
-                    <th class="text-center text-xs cellTitle pa-2">Nombre o razón social</th>
+                    <th class="text-center text-xs cellTitle pa-2">Cliente</th>
                     <th class="text-center text-xs cellTitle pa-2">Rif</th>
                     <th class="text-center text-xs cellTitle pa-2">Tipo documento</th>
                     <th class="text-center text-xs cellTitle pa-2">Maquina fiscal</th>
@@ -52,15 +52,20 @@
                     <td class="text-center cellInnerField text-sm">{{ item.cliente_rif }}</td>
                     <td class="text-center cellInnerField text-sm">{{ item.tipo_documento }}</td>
                     <td class="text-center cellInnerField text-sm">{{ item.maquina_fiscal }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ item.primera_factura }} - {{ item.ultima_factura
+                        }}</td>
                     <td class="text-center cellInnerField text-sm">{{ item.numero_factura }}</td>
                     <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.base_imponible_alic_contribuyente) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas_no_gravadas) }}
+                    </td>
+                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(
+                        item.base_imponible_alic_contribuyente) }}</td>
                     <td class="text-center cellInnerField text-sm">{{ item.porcentaje_iva_contribuyente }}%</td>
                     <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
+                    <td class="text-center cellInnerField text-sm">{{
+                        formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
+                    <td class="text-center cellInnerField text-sm">{{
+                        formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
                     <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.impuesto_iva) }}</td>
                     <td class="text-center cellInnerField text-sm">{{ item.retencion_iva_soportada }}</td>
                 </tr>
