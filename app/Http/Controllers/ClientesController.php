@@ -8,6 +8,9 @@ use Inertia\Inertia;
 
 class ClientesController extends Controller
 {
+    public function view(){
+        return Inertia::render('administrar/clientes/Clientes');
+    }
     public function consultar(Request $request){
         $clients = DB::table('clientes')->select('*')->get();
 
@@ -17,9 +20,12 @@ class ClientesController extends Controller
         ]);
     }
 
-    public function view(){
-        return Inertia::render('administrar/clientes/Clientes');
+    public function crear(Request $request){
+        
+
+        return response()->json(['msg' => 'Creado con éxito'], 201);
     }
+
 }
 
 /*
