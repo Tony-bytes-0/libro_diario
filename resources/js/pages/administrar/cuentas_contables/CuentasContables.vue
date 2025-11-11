@@ -7,11 +7,11 @@
                     <v-col cols="12">Cuentas contables</v-col>
                     <v-col cols="6">
                         <v-label>Código</v-label>
-                        <v-text-field></v-text-field>
+                        <v-text-field v-model="formData.codigo" ></v-text-field>
                     </v-col>
                     <v-col cols="6">
                         <v-label>Descripción</v-label>
-                        <v-text-field></v-text-field>
+                        <v-text-field v-model="formData.descripcion" ></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row class="text-center">
@@ -23,7 +23,10 @@
         </AppLayout>
     </template>
 <script setup>
+import { fastMsg, staticError } from '@/helpers';
 import AppLayout from '@/layouts/AppLayout.vue';
+import axios from 'axios';
+import { ref } from 'vue';
 
 const breadcrumbs = [
     {
@@ -31,8 +34,19 @@ const breadcrumbs = [
         //href: viewCreateClients().url,
     },
 ];
-const submit = () => {
-    
+const formData = ref({
+    codigo:"",
+    descripcion:"",
+
+})
+const submit = async () => {
+    const url = '/api/administrar/cuenta_contable/crear'
+    try {
+        const response = axios.post(url, formData.value)
+        fastMsg((await response).data.msg)
+    } catch (error) {
+        staticError('Error al crear cuenta')
+    }
 }
 </script>
 
