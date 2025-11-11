@@ -21,7 +21,15 @@ class ClientesController extends Controller
     }
 
     public function crear(Request $request){
-        
+        $validated = $request->validate([
+            'rif' => 'required|string',
+             'descripcion' => 'required|string',
+             'tipo' => 'required|string',
+             'nombre' => 'nullable|string',
+            'apellido' => 'nullable|string',
+            'telefono' => 'nullable|string',
+            'correo' => 'nullable|string',
+        ]);
 
         return response()->json(['msg' => 'Creado con éxito'], 201);
     }
