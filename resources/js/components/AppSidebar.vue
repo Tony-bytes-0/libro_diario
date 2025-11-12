@@ -65,7 +65,7 @@ const mainNavItems: NavItem[] = [
 </script>
 
 <template>
-    <Sidebar collapsible="icon" variant="inset" class="pa-2">
+    <Sidebar collapsible="icon" variant="inset" class="pr-2 pb-3">
         <SidebarHeader class="pa-4">
             <SidebarMenu>
                 <SidebarMenuItem>
@@ -84,7 +84,7 @@ const mainNavItems: NavItem[] = [
 
         <SidebarFooter>
             <!--NavFooter :items="footerNavItems" /-->
-            <NavUser class="pa-3"/>
+            <NavUser class="pa-4"/>
         </SidebarFooter>
     </Sidebar>
     <slot />

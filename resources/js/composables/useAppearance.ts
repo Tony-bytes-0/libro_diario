@@ -1,6 +1,6 @@
 import { onMounted, ref } from 'vue';
 
-type Appearance = 'light' | 'dark' | 'system';
+type Appearance = 'light' | 'dark' | 'grey' | 'system';
 
 export function updateTheme(value: Appearance) {
     if (typeof window === 'undefined') {
@@ -17,8 +17,12 @@ export function updateTheme(value: Appearance) {
             'dark',
             systemTheme === 'dark',
         );
-    } else {
+    } else if (value === 'light'){
+        document.documentElement.classList.toggle('light', value === 'light');
+    } else if (value === 'dark'){
         document.documentElement.classList.toggle('dark', value === 'dark');
+    } else {
+        document.documentElement.classList.toggle('grey', value === 'grey');
     }
 }
 

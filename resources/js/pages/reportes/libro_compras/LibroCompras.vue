@@ -1,7 +1,7 @@
 <template>
 
-    <Head title="Reporte Libro de Ventas" />
-    <AppLayout :breadcrumbs="breadcrumbs" style="background-color: #454545">
+    <Head title="Reporte Libro de Compras" />
+    <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
         <v-row class="pt-6 px-8 ma-1">
             <v-col cols="5">
                 <v-select label="Mes" :items="allowedDates.months" v-model="filterData.month">
@@ -25,7 +25,7 @@
 
         <v-divider thickness="3"></v-divider>
 
-        <table>
+        <table class="px-2 mx-4 mb-4">
             <thead>
                 <tr>
                     <th class="text-center text-xs pa-2">Fecha</th>
@@ -49,28 +49,23 @@
             </thead>
             <tbody>
                 <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow">
-                    <td class="text-center cellInnerField text-sm">{{ item.fecha }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.cliente_descripcion }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.cliente_rif }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.tipo_documento }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.maquina_fiscal }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.primera_factura }} - {{ item.ultima_factura
-                        }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.numero_factura }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.comprobante_retencion }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber( item.total_ventas_no_gravadas) }}
-                    </td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(
-                        item.base_imponible_alic_contribuyente) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.porcentaje_iva_contribuyente }}%</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{
-                        formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
-                    <td class="text-center cellInnerField text-sm">{{
-                        formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField text-sm">{{ item.retencion_iva_soportada }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.fecha }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.cliente_descripcion }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.cliente_rif }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.tipo_documento }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.maquina_fiscal }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.numero_factura }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.comprobante_retencion }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber( item.total_ventas) }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.base_imponible_alic_contribuyente) }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.porcentaje_iva_contribuyente }}%</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.impuesto_iva) }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.impuesto_iva) }}</td>
+                    <td class="text-center cellInnerField text-xs">{{ item.retencion_iva_soportada }}</td>
                 </tr>
             </tbody>
         </table>
@@ -152,17 +147,34 @@ const submit = async () => {
 
 </script>
 <style scoped>
-.cellTitle {
-    color: #e7e7e7;
+table {
+    border-collapse:separate;
+    border:solid #616161 3px;
+    border-radius:10px;
+    display: block;
+    overflow-x:auto;
+    overflow-y: scroll;
+    white-space: normal;
 }
+
+td, th {
+    border-top:solid black 1px;
+}
+
+th {
+    border-top: none;
+}
+
+td:first-child, th:first-child {
+     border-left: none;
+}
+
 .cellRow{
     border-style: solid;
     border-color: #616161;
     border-width: 3px;
-
 }
 .cellInnerField{
-    padding:8px;
-
+    padding:6px;
 }
 </style>

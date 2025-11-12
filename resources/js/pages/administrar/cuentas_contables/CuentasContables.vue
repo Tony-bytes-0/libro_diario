@@ -1,10 +1,9 @@
     <template>
 
         <head title="Cuentas contables" />
-        <AppLayout :breadcrumbs="breadcrumbs" style="background-color: #454545">
+        <AppLayout :breadcrumbs="breadcrumbs">
             <v-form style="padding: 10px;" @submit.prevent="submit">
                 <v-row class="text-center">
-                    <v-col cols="12">Cuentas contables</v-col>
                     <v-col cols="6">
                         <v-label>Código</v-label>
                         <v-text-field v-model="formData.codigo" ></v-text-field>

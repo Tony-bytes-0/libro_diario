@@ -37,6 +37,8 @@ class MovimientosController extends Controller
             'movimientos.*.impuesto_iva' => 'nullable|numeric',
             'movimientos.*.retencion_iva_soportada' => 'nullable|numeric',
             'movimientos.*.contribuyente' => 'nullable|boolean',
+            'movimientos.*.base_imponible_IGTF' => 'nullable|numeric',
+            'movimientos.*.porcentaje_IGTF' => 'nullable|numeric',
             //'movimientos.*.' => 'nullable',
         ]);
         $transactionResult = DB::transaction(function () use ($validated){

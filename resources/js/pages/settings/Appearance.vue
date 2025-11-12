@@ -19,12 +19,12 @@ const breadcrumbItems: BreadcrumbItem[] = [
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbItems">
-        <Head title="Appearance settings" />
+        <Head title="Tema" />
 
         <SettingsLayout>
             <div class="space-y-6">
                 <HeadingSmall
-                    title="Appearance settings"
+                    title="Configuracion del Tema"
                     description="Cambia el color del tema"
                 />
                 <AppearanceTabs />

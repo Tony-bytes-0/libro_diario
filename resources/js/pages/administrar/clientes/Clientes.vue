@@ -1,6 +1,6 @@
 <template>
     <head title="Administrar Clientes" />
-    <AppLayout :breadcrumbs="breadcrumbs" style="background-color: #454545">
+    <AppLayout :breadcrumbs="breadcrumbs">
         <v-form style="padding: 10px;" @submit.prevent="submit">
             <v-row class="text-center">
                 <v-col cols="12">Administrar clientes</v-col>
