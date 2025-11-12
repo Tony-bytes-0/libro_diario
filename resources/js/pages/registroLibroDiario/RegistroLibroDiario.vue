@@ -4,23 +4,28 @@
         <v-form class="d-flex" @submit.prevent="submit">
             <v-row class="pt-6 px-5 align-center ma-1">
                 <v-col cols="9">
-                    <v-autocomplete label="Libro" :items="bookTypes" v-model="formData.bookType" return-object autocomplete="off"
+                    <v-label>Libro</v-label>
+                    <v-autocomplete variant="outlined" :items="bookTypes" v-model="formData.bookType" return-object autocomplete="off"
                         item-title="name" :rules="[rules.required('Este campo es requerido')]" @update:model-value="resetDocumentType"></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
-                    <v-date-input v-model="formData.registerDate" :display-format="format" label="Fecha" prepend-icon="" autocomplete="off"
+                    <v-label>Fecha</v-label>
+                    <v-date-input variant="outlined" v-model="formData.registerDate" :display-format="format"  prepend-icon="" autocomplete="off"
                         :rules="[rules.required('Este campo es requerido')]"></v-date-input>
                 </v-col>
                 <v-col cols="6">
-                    <v-autocomplete label="Nombre o Razon Social del cliente" :items="clientsList"
+                    <v-label>Nombre o Razon Social</v-label>
+                    <v-autocomplete variant="outlined" :items="clientsList"
                         item-title="descripcion" return-object v-model="formData.client"
                         :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
                 <v-col cols="3">
-                    <v-text-field label="RIF" disabled v-model="formData.client.rif"></v-text-field>
+                    <v-label>RIF</v-label>
+                    <v-text-field variant="outlined" disabled v-model="formData.client.rif"></v-text-field>
                 </v-col>
                 <v-col cols="3">
-                    <v-autocomplete autocomplete="off" label="Tipo de Documento" :items="documentTypeList" v-model="formData.documentType"
+                    <v-label>Tipo de Documento</v-label>
+                    <v-autocomplete variant="outlined" autocomplete="off" :items="documentTypeList" v-model="formData.documentType"
                         return-object item-title="name"
                         :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
@@ -29,92 +34,108 @@
                         <!---Reporte Z---->
                         <v-row v-if="ShowReporteZ" class="align-center">
                             <v-col cols="3">
-                                <v-text-field label="Registro Maquina Fiscal" v-model="formData.maquina_fiscal"></v-text-field>
+                                <v-label>Registro Maquina Fiscal</v-label>
+                                <v-text-field variant="outlined" v-model="formData.maquina_fiscal"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field label="Primera Factura" v-model="formData.primera_factura"></v-text-field>
+                                <v-label>Primera Factura</v-label>
+                                <v-text-field variant="outlined" v-model="formData.primera_factura"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field label="Ultima Factura"  v-model="formData.ultima_factura"></v-text-field>
+                                <v-label>Ultima Factura</v-label>
+                                <v-text-field variant="outlined" v-model="formData.ultima_factura"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
+                                <v-label>N° Factura</v-label>
+                                <v-text-field variant="outlined"  v-model="formData.numero_factura"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
+                                <v-label>Total Vental (Con I.V.A.)</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                <v-label> Total Ventas no Agravadas</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
-                            <v-divider></v-divider>
+                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
                             <v-col cols="4">
-                                <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
+                                <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
+                                <v-text-field variant="outlined"
                                     v-model="formData.base_imponible_alic_no_contribuyente"></v-text-field>
                             </v-col>
-                            <v-col cols="2">
-                                <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                            <v-col cols="4">
+                                <v-label>% I.V.A.</v-label>
+                                <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                     :items="[8, 16, 31]"></v-select>
                             </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_no_contribuyente"
+                            <v-col cols="4">
+                                <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                     disabled></v-text-field>
                             </v-col>
-                            <v-divider></v-divider>
-                            <v-col cols="3">
-                                <v-select label="% Retencion" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
+                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                            <v-col cols="4">
+                                <v-label v-show="retencionManual == false">% Retencion</v-label>
+                                <v-select variant="outlined" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
                                     :items="[75, 100]"></v-select>
                             </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="Monto retencion" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
+                            <v-col cols="4">
+                                <v-label>Monto Retencion</v-label>
+                                <v-text-field variant="outlined" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
                                     disabled></v-text-field>
-                                <v-text-field label="Monto retencion" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
+                                <v-text-field variant="outlined" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
                                     ></v-text-field>
                             </v-col>
-                            <v-col cols="2">
-                                <v-btn class="mb-5" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
+                            <v-col cols="2" offset="2">
+                                <v-btn class="py-3 h-100" style="background-color: gainsboro;" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
                             </v-col>
-                            <v-divider></v-divider>
-                            <v-col cols="3">
-                                <v-text-field label="Base Imponible IGTF" v-model="formData.base_imponible_IGTF"
+                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                            <v-col cols="4">
+                                <v-label>Base Imponible IGTF</v-label>
+                                <v-text-field variant="outlined" v-model="formData.base_imponible_IGTF"
                                     ></v-text-field>
                             </v-col>
-                             <v-col cols="2">
-                                <v-text-field label="IGTF 3%" v-model="IGTF"
+                             <v-col cols="4">
+                                <v-label>IGTF 3%</v-label>
+                                <v-text-field variant="outlined" v-model="IGTF"
                                     disabled></v-text-field>
                             </v-col>
                         </v-row>
                         <!--Retencion IVA-->
-                        <v-row v-if="showRetencionIva">
+                        <v-row v-if="showRetencionIva" class="align-center">
                             <v-col cols="4">
-                                <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
+                                <v-label>N° Factura</v-label>
+                                <v-text-field variant="outlined" v-model="formData.numero_factura"></v-text-field>
                             </v-col>
                             <v-col cols="4">
-                                <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
+                                <v-label>Factura Afectada</v-label>
+                                <v-text-field variant="outlined" v-model="formData.factura_afectada"></v-text-field>
                             </v-col>
-
                             <v-col cols="4">
-                                <v-text-field label="Monto retencion" v-model="formData.retencion_iva_soportada"
-                                >
+                                <v-label>Monto Retencion</v-label>
+                                <v-text-field variant="outlined" v-model="formData.retencion_iva_soportada">
                                 </v-text-field>
                             </v-col>
                         </v-row>
                         <!--Factura Ventas-->
-                        <v-row v-if="showFacturaVentas">
-
+                        <v-row v-if="showFacturaVentas" class="align-center">
                             <v-col cols="4">
-                                <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
-                            </v-col>
-
-                            <v-col cols="4">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
+                                <v-label>N° Factura</v-label>
+                                <v-text-field variant="outlined" v-model="formData.numero_factura"></v-text-field>
                             </v-col>
                             <v-col cols="4">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                <v-label>Total Ventas (con I.V.A.)</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas"></v-text-field>
                             </v-col>
+                            <v-col cols="4">
+                                <v-label>Total Ventas No Agravadas</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                            </v-col>
+                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Contribuyente" value="one"
@@ -125,35 +146,40 @@
                                         @focus="(formData.base_imponible_alic_contribuyente = '', formData.porcentaje_iva = '', formData.porcentaje_retencion = '')"></v-radio>
                                 </v-radio-group>
                                 <v-expand-transition>
-                                    <v-row v-show="expandContribuyentes">
+                                    <v-row v-if="expandContribuyentes">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 :rules="[rules.number('Este campo utiliza numeros')]" type="number"
                                                 v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
                                         </v-col>
                                         <v-col cols="4">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="4">
-                                            <v-text-field label="Impuesto I.V.A. (Contrib.)" disabled v-model="impuesto_iva_contribuyente"></v-text-field>
+                                            <v-label>Impuesto I.V.A. (Contrib.)</v-label>
+                                            <v-text-field variant="outlined" disabled v-model="impuesto_iva_contribuyente"></v-text-field>
                                         </v-col>
                                     </v-row>
                                 </v-expand-transition>
 
-
                                 <v-expand-transition>
-                                    <v-row v-show="expandNoContribuyentes">
+                                    <v-row v-if="expandNoContribuyentes">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"></v-text-field>
                                         </v-col>
                                         <v-col cols="4">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="4">
-                                            <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_no_contribuyente"
+                                            <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                            <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
                                     </v-row>
@@ -161,23 +187,28 @@
                             </v-col>
                         </v-row>
                         <!---Nota de Credito-->
-                        <v-row v-if="showNotadeCredito">
+                        <v-row v-if="showNotadeCredito" class="align-center">
                             <v-col cols="3">
-                                <v-text-field label="Registro Maquina Fiscal" v-model="formData.maquina_fiscal"></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
+                                <v-label>Registro Maquina Fiscal</v-label>
+                                <v-text-field variant="outlined" v-model="formData.maquina_fiscal"></v-text-field>
                             </v-col>
                             <v-col cols="2">
-                                <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
+                                <v-label>N° Factura</v-label>
+                                <v-text-field variant="outlined" v-model="formData.numero_factura"></v-text-field>
+                            </v-col>
+                            <v-col cols="2">
+                                <v-label>Factura Afectada</v-label>
+                                <v-text-field variant="outlined" v-model="formData.factura_afectada"></v-text-field>
+                            </v-col>
+                            <v-col cols="2">
+                                <v-label>Total Ventas (con I.V.A)</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                <v-label>Total Ventas no Agravadas</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-radio-group inline>
@@ -189,85 +220,100 @@
                                         @focus="(formData.base_imponible_alic_contribuyente = '', formData.porcentaje_iva = '', formData.porcentaje_retencion = '')"></v-radio>
                                 </v-radio-group>
                                 <v-expand-transition>
-                                    <v-row v-show="expandContribuyentes">
+                                    <v-row v-if="expandContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_contribuyente" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="3">
-                                            <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_contribuyente"
+                                            <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                            <v-text-field variant="outlined" v-model="impuesto_iva_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider></v-divider>
+                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
                                         <v-col cols="3">
-                                            <v-select label="% Retencion" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
+                                            <v-label v-show="retencionManual == false">% Retencion</v-label>
+                                            <v-select variant="outlined" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
                                                 :items="[75, 100]"></v-select>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == false" v-model="impuesto_retencion_contribuyente"
+                                            <v-label>Monto retencion</v-label>
+                                            <v-text-field variant="outlined" v-if="retencionManual == false" v-model="impuesto_retencion_contribuyente"
                                                 disabled></v-text-field>
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
+                                            <v-text-field variant="outlined" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
                                                 ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-btn class="mb-5" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
+                                            <v-btn class="py-3 h-100" style="background-color: gainsboro;" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-expand-transition>
                                 <v-expand-transition>
-                                    <v-row v-show="expandNoContribuyentes">
+                                    <v-row v-if="expandNoContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="3">
-                                            <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_no_contribuyente"
+                                            <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                            <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider></v-divider>
+                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
                                         <v-col cols="3">
-                                            <v-select label="% Retencion" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
+                                            <v-label v-show="retencionManual == false">% Retencion</v-label>
+                                            <v-select variant="outlined" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
                                                 :items="[75, 100]"></v-select>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
+                                            <v-label>Monto Retencion</v-label>
+                                            <v-text-field variant="outlined" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
                                                 disabled></v-text-field>
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
+                                            <v-text-field variant="outlined" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
                                                 ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-btn class="mb-5" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
+                                            <v-btn class="py-3 h-100" style="background-color: gainsboro;" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-expand-transition>
                             </v-col>
                         </v-row>
                          <!---Nota de Debito-->
-                        <v-row v-if="showNotadeDebito">
+                        <v-row v-if="showNotadeDebito" class="align-center">
                             <v-col cols="3">
-                                <v-text-field label="Registro Maquina Fiscal" v-model="formData.maquina_fiscal"></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
+                                <v-label>Registro Maquina Fiscal</v-label>
+                                <v-text-field variant="outlined" v-model="formData.maquina_fiscal"></v-text-field>
                             </v-col>
                             <v-col cols="2">
-                                <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
+                                <v-label>N° Factura</v-label>
+                                <v-text-field variant="outlined" v-model="formData.numero_factura"></v-text-field>
+                            </v-col>
+                            <v-col cols="2">
+                                <v-label>Factura Afectada</v-label>
+                                <v-text-field variant="outlined" v-model="formData.factura_afectada"></v-text-field>
+                            </v-col>
+                            <v-col cols="2">
+                                <v-label>Total Ventas (con I.V.A.)</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
-                            </v-col>
-                            <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                <v-label>Total Ventas no Agravadas</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-radio-group inline>
@@ -279,82 +325,96 @@
                                         @focus="(formData.base_imponible_alic_contribuyente = '', formData.porcentaje_iva = '', formData.porcentaje_retencion = '')"></v-radio>
                                 </v-radio-group>
                                 <v-expand-transition>
-                                    <v-row v-show="expandContribuyentes">
+                                    <v-row v-if="expandContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_contribuyente" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                        <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="3">
-                                            <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_contribuyente"
+                                            <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                            <v-text-field variant="outlined" v-model="impuesto_iva_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider></v-divider>
+                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
                                         <v-col cols="3">
-                                            <v-select label="% Retencion" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
+                                            <v-label v-show="retencionManual == false">% Retencion</v-label>
+                                            <v-select variant="outlined" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
                                                 :items="[75, 100]"></v-select>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == false" v-model="impuesto_retencion_contribuyente"
+                                            <v-label>Monto Retencion</v-label>
+                                            <v-text-field variant="outlined" v-if="retencionManual == false" v-model="impuesto_retencion_contribuyente"
                                                 disabled></v-text-field>
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
+                                            <v-text-field variant="outlined" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
                                                 ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-btn class="mb-5" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
+                                            <v-btn class="py-3 h-100" style="background-color: gainsboro;" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-expand-transition>
                                 <v-expand-transition>
-                                    <v-row v-show="expandNoContribuyentes">
+                                    <v-row v-if="expandNoContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente" type="number"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="3">
-                                            <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_no_contribuyente"
+                                            <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                            <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider></v-divider>
+                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
                                         <v-col cols="3">
-                                            <v-select label="% Retencion" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
+                                            <v-label v-show="retencionManual == false">% Retencion</v-label>
+                                            <v-select variant="outlined" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
                                                 :items="[75, 100]"></v-select>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
+                                            <v-label>Monto Retencion</v-label>
+                                            <v-text-field variant="outlined" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
                                                 disabled></v-text-field>
-                                            <v-text-field label="Monto retencion" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
+                                            <v-text-field variant="outlined" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
                                                 ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
-                                            <v-btn class="mb-5" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
+                                            <v-btn class="py-3 h-100" style="background-color: gainsboro;" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-expand-transition>
                             </v-col>
                         </v-row>
                         <!-- Factura compras-->
-                        <v-row v-if="showFacturaCompras">
+                        <v-row v-if="showFacturaCompras" class="align-center">
                             <v-col cols="3">
-                                <v-text-field label="N° Factura (Compra, NC, ND)"  v-model="formData.numero_factura"></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-text-field label="Factura Afectada" v-model="formData.factura_afectada"></v-text-field>
+                                <v-label>N° Factura</v-label>
+                                <v-text-field variant="outlined"  v-model="formData.numero_factura"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Total Ventas (con I.V.A)" v-model="formData.total_ventas"></v-text-field>
+                                <v-label>Factura Afectada</v-label>
+                                <v-text-field variant="outlined" v-model="formData.factura_afectada"></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-text-field :rules="[rules.number('Este campo utiliza numeros')]" type="number"
-                                    label="Ventas Internas no Agravadas" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                <v-label>Total Ventas (con I.V.A)</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas"></v-text-field>
+                            </v-col>
+                            <v-col cols="3">
+                                <v-label>Total Ventas no Agravadas</v-label>
+                                <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                    v-model="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-radio-group inline>
@@ -366,41 +426,55 @@
                                         @focus="(formData.base_imponible_alic_contribuyente = '', formData.porcentaje_iva = '', formData.porcentaje_retencion = '')"></v-radio>
                                 </v-radio-group>
                                 <v-expand-transition>
-                                    <v-row v-show="expandContribuyentes">
+                                    <v-row v-if="expandContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 :rules="[rules.number('Este campo utiliza numeros')]" type="number"
                                                 v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
                                         </v-col>
-                                        <v-col cols="2">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                        <v-col cols="4">
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
-                                        <v-col cols="2">
-                                            <v-text-field label="Impuesto I.V.A." disabled v-model="impuesto_iva_contribuyente"></v-text-field>
+                                        <v-col cols="4">
+                                            <v-label>Impuesto I.V.A.</v-label>
+                                            <v-text-field variant="outlined" disabled v-model="impuesto_iva_contribuyente"></v-text-field>
                                         </v-col>
-                                        <v-col cols="2">
-                                            <v-select label="% Retencion" v-model="formData.porcentaje_retencion"
+                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-col cols="4">
+                                            <v-label v-show="retencionManual == false">% Retencion</v-label>
+                                            <v-select variant="outlined" v-show="retencionManual == false" v-model="formData.porcentaje_retencion"
                                                 :items="[75, 100]"></v-select>
                                         </v-col>
-                                        <v-col cols="2">
-                                            <v-text-field label="Monto retencion" v-model="impuesto_retencion_contribuyente"
+                                        <v-col cols="4">
+                                            <v-label>Monto Retencion</v-label>
+                                            <v-text-field variant="outlined" v-if="retencionManual == false" v-model="impuesto_retencion_no_contribuyente"
                                                 disabled></v-text-field>
+                                            <v-text-field variant="outlined" v-if="retencionManual == true" v-model="formData.retencion_iva_soportada"
+                                                ></v-text-field>
+                                        </v-col>
+                                        <v-col cols="2" offset="2">
+                                            <v-btn class="py-3 h-100" style="background-color: gainsboro;" @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{ tipoRetencion }}</v-btn>
                                         </v-col>
                                     </v-row>
                                 </v-expand-transition>
                                 <v-expand-transition>
-                                    <v-row v-show="expandNoContribuyentes">
+                                    <v-row v-if="expandNoContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-text-field label="Base Imponible Alic (Gen - No Contrib.)"
+                                            <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"></v-text-field>
                                         </v-col>
                                         <v-col cols="4">
-                                            <v-select label="% I.V.A." v-model="formData.porcentaje_iva"
+                                            <v-label>% I.V.A.</v-label>
+                                            <v-select variant="outlined" v-model="formData.porcentaje_iva"
                                                 :items="[8, 16, 31]"></v-select>
                                         </v-col>
                                         <v-col cols="4">
-                                            <v-text-field label="Impuesto I.V.A. (No Contrib.)" v-model="impuesto_iva_no_contribuyente"
+                                            <v-label>Impuesto I.V.A. (No Contrib.)</v-label>
+                                            <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
                                     </v-row>
@@ -409,8 +483,11 @@
                         </v-row>
                     </v-row>
                 </v-expand-transition>
-                <v-col cols="2" offset="10" @click="submit()" class="mb-5">
-                    <v-btn :disabled="registerDisabled" type="submit">Registrar</v-btn>
+                <v-col cols="2" offset="10" @click="submit()">
+                    <v-btn :disabled="registerDisabled" type="submit"
+                    style="background-color: #2aa134; padding: 25px; display: flex; justify-content: center; color: rgb(236, 236, 236); font-size: medium;">
+                        Registrar
+                    </v-btn>
                 </v-col>
             </v-row>
         </v-form>
@@ -790,21 +867,21 @@ async function submit() {
 };
 
 const registerDisabled = computed(() => {
-    /* //bypass para pruebas
-    if ((formData.value.documentType.value !== null) && (formData.value.registerDate !== null) && (formData.value.bookType.value !== null) && (formData.value.client.id !== null)) {
+     //bypass para pruebas
+    if ((formData.value.documentType.value !== '') && (formData.value.registerDate !== '') && (formData.value.bookType !== '') && (formData.value.client.id !== '')) {
         return false;
-    } else {
-        return true;
-    }
-    */
-       return false
+    }  else {
+            return true;
+        }
+
 });
 
 
-/*function prueba() {
-    console.log(formData.value.porcentaje_iva);
-    console.log(formData.value.porcentaje_retencion);
-};*/
+function prueba() {
+    console.log(formData.value.registerDate);
+    console.log(formData.value.bookType);
+    console.log(formData.value.client.id)
+};
 
 onMounted(async () => {
     //consultar clientes

@@ -2,9 +2,10 @@
 
     <Head title="Reporte Libro de Compras" />
     <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
-        <v-row class="pt-6 px-8 ma-1">
+        <v-row class="pt-6 px-8 ma-1 align-center">
             <v-col cols="5">
-                <v-select label="Mes" :items="allowedDates.months" v-model="filterData.month">
+                <v-label>Mes</v-label>
+                <v-select :items="allowedDates.months" v-model="filterData.month">
                     <template v-slot:item="{ props, item }">
                         <v-list-item v-bind="props">
                             <template v-slot:title>
@@ -15,10 +16,11 @@
                 </v-select>
             </v-col>
             <v-col cols="4">
-                <v-select label="Año" :items="allowedDates.years" v-model="filterData.year"></v-select>
+                <v-label>Año</v-label>
+                <v-select :items="allowedDates.years" v-model="filterData.year"></v-select>
             </v-col>
-            <v-col cols="3" style="">
-                <v-btn width="100%" height="70%" variant="outlined" :loading="queryData.loading" @click="submit()">
+            <v-col cols="3">
+                <v-btn class="pb-4 pt-5 h-100 w-100" :loading="queryData.loading" @click="submit()" style="background-color: #2aa134; color: white;">
                     Buscar</v-btn>
             </v-col>
         </v-row>

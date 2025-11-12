@@ -3,14 +3,14 @@
         <head title="Cuentas contables" />
         <AppLayout :breadcrumbs="breadcrumbs">
             <v-form style="padding: 10px;" @submit.prevent="submit">
-                <v-row class="text-center">
+                <v-row class="pt-6 px-5 align-center ma-1">
                     <v-col cols="6">
                         <v-label>Código</v-label>
-                        <v-text-field v-model="formData.codigo" ></v-text-field>
+                        <v-text-field variant="outlined" v-model="formData.codigo" ></v-text-field>
                     </v-col>
                     <v-col cols="6">
                         <v-label>Descripción</v-label>
-                        <v-text-field v-model="formData.descripcion" ></v-text-field>
+                        <v-text-field variant="outlined" v-model="formData.descripcion" ></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row class="text-center">

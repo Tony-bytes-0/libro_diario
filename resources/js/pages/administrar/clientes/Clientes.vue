@@ -2,39 +2,38 @@
     <head title="Administrar Clientes" />
     <AppLayout :breadcrumbs="breadcrumbs">
         <v-form style="padding: 10px;" @submit.prevent="submit">
-            <v-row class="text-center">
-                <v-col cols="12">Administrar clientes</v-col>
+            <v-row class="pt-6 px-5 align-center ma-1">
                 <v-col cols="2">
                     <v-label>Tipo</v-label>
-                    <v-select :items="['V', 'J', 'G']" v-model="formData.tipo"></v-select>
+                    <v-select variant="outlined" :items="['V', 'J', 'G']" v-model="formData.tipo"></v-select>
                 </v-col>
                 <v-col cols=" 4">
                     <v-label>Rif o cedula</v-label>
-                    <v-text-field v-model="formData.rif"></v-text-field>
+                    <v-text-field variant="outlined" v-model="formData.rif"></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Nombre completo o descrpción</v-label>
-                    <v-text-field v-model="formData.descripcion"></v-text-field>
+                    <v-text-field variant="outlined" v-model="formData.descripcion"></v-text-field>
                 </v-col>
 
             </v-row>
-            <v-divider thickness="4" class="mt-10">Informacion adicional</v-divider>
-            <v-row>
+            <v-divider thickness="2" class="mt-10">Informacion adicional</v-divider>
+            <v-row class="px-5 align-center ma-1">
                 <v-col cols="4">
                     <v-label>Nombre</v-label>
-                    <v-text-field v-model="formData.nombre"></v-text-field>
+                    <v-text-field variant="outlined" v-model="formData.nombre"></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Apellido</v-label>
-                    <v-text-field v-model="formData.apellido"></v-text-field>
+                    <v-text-field variant="outlined" v-model="formData.apellido"></v-text-field>
                 </v-col>
                 <v-col cols="4">
                     <v-label>Teléfono</v-label>
-                    <v-text-field v-model="formData.telefono"></v-text-field>
+                    <v-text-field variant="outlined" v-model="formData.telefono"></v-text-field>
                 </v-col>
                 <v-col cols="12">
                     <v-label>Correo</v-label>
-                    <v-text-field v-model="formData.correo"></v-text-field>
+                    <v-text-field variant="outlined" v-model="formData.correo"></v-text-field>
                 </v-col>
             </v-row>
             <v-row class="text-center">
@@ -51,6 +50,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import {viewCreateClients} from '@/routes';
+import Swal from 'sweetalert2';
 
 const breadcrumbs = [
     {
