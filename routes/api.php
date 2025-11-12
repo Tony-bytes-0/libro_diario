@@ -7,7 +7,9 @@ use App\Http\Controllers\CuentaContableController;
 use App\Http\Controllers\MovimientosController;
 use App\Http\Controllers\ReportesController;
 
+//consultar
 Route::get('clientes', [ClientesController::class, 'consultar']);
+Route::get('cuentas_contables', [CuentaContableController::class, 'consultar']);
 
 //creacion
 Route::post('crear/movimientos', [MovimientosController::class, 'insert']);
