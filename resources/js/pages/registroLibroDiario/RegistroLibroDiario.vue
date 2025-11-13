@@ -501,9 +501,12 @@
                         </v-row>
                     </v-row>
                 </v-expand-transition>
-                <CuentasContables :show="cuentasContables.show" :isLoading="cuentasContables.isLoading"
+                <CuentasContables 
+                :show="cuentasContables.show" 
+                :isLoading="cuentasContables.isLoading"
+                :selectedList="formData.cuentas_contables"
                     :list="cuentasContables.list"
-                    @selectCuentaContable="selectCuentaContable()"
+                    @selectCuentaContable="selectCuentaContable"
                     />
                 <v-col cols="2" offset="10" @click="submit()">
                     <v-btn :disabled="registerDisabled" type="submit"
@@ -595,9 +598,9 @@ const formData = ref({
     porcentaje_iva: '',
     porcentaje_retencion: '',
     retencion_iva_soportada: '',
-
     base_imponible_IGTF: '',
     porcentaje_IGTF: '',
+    cuentas_contables:[],
 
 });
 
@@ -605,14 +608,11 @@ const cuentasContables = ref({
     list: [],
     show: true,
     isLoading: false,
-    selected: {
-        id: "", descripcion: ""
-    }
 })
 
 const selectCuentaContable = (item) => {
-    console.log('item seleccionado antes de asignar')
-    cuentasContables.value.selected = item
+    console.log('item seleccionado antes de asignar', item)
+    formData.value.cuentas_contables.push(item)
 }
 
 const bookTypes = ref([
@@ -737,6 +737,7 @@ const resetFormData = () => {//limpiar formulario
         base_imponible_alic_contribuyente: '',
         base_imponible_alic_no_contribuyente: '',
         retencion_iva_soportada: '',
+        cuentas_contables: [],
     }
 }
 
@@ -921,6 +922,7 @@ function prueba() {
 };
 
 onMounted(async () => {
+    
     //consultar clientes
     let urlClients = '/api/clientes';
     let clientsResponse = await axios.get(urlClients);
@@ -929,5 +931,7 @@ onMounted(async () => {
     const urlCuentasContables = '/api/cuentas_contables'
     const cuentasContablesResponse = await axios.get(urlCuentasContables)
     cuentasContables.value.list = cuentasContablesResponse.data.cuentas_contables
+    cuentasContables.value.isLoading = false
+    cuentasContables.value.show = true
 })
 </script>

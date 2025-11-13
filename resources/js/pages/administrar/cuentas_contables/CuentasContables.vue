@@ -2,7 +2,7 @@
 
         <head title="Cuentas contables" />
         <AppLayout :breadcrumbs="breadcrumbs">
-            <v-form style="padding: 10px;" @submit.prevent="submit">
+            <v-form style="padding: 10px;" @submit.prevent>
                 <v-row class="pt-6 px-5 align-center ma-1">
                     <v-col cols="6">
                         <v-label>Código</v-label>
@@ -41,9 +41,10 @@ const formData = ref({
 const submit = async () => {
     const url = '/api/administrar/cuenta_contable/crear'
     try {
-        const response = axios.post(url, formData.value)
-        fastMsg((await response).data.msg)
+        const response = await axios.post(url, formData.value)
+        fastMsg(response.data.msg)
     } catch (error) {
+        console.log(error)
         staticError('Error al crear cuenta')
     }
 }
