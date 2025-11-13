@@ -870,7 +870,8 @@ async function submit() {
                         impuesto_retencion_no_contribuyente.value,
                     "contribuyente": expandContribuyentes.value,
                     "base_imponible_IGTF": formData.value.base_imponible_IGTF,
-                    "porcentaje_IGTF": IGTF.value
+                    "porcentaje_IGTF": IGTF.value,
+                    "cuentas_contables": formData.value.cuentas_contables
                 }],
                 "libro_movimiento": {
                     "tipo_documento": formData.value.bookType,

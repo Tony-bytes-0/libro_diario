@@ -39,18 +39,25 @@ class MovimientosController extends Controller
             'movimientos.*.contribuyente' => 'nullable|boolean',
             'movimientos.*.base_imponible_IGTF' => 'nullable|numeric',
             'movimientos.*.porcentaje_IGTF' => 'nullable|numeric',
+            //cuentas contables
+            'movimientos.*.cuentas_contables' => 'nullable|array',
+            'movimientos.*.cuentas_contables.*.id' => 'required|numeric',
+            
             //'movimientos.*.' => 'nullable',
         ]);
         $transactionResult = DB::transaction(function () use ($validated){
             $queryStatus = [//saber el estado de cada query al final
                 'libro_movimiento' => null,
                 'movimientos' => null,
+                'movimientos_cuentas_contables' => null,
                 'movimientos_creados' => 0
             ];
+            $movimientosCuentasContablesInstance = new MovimientoCuentasContables;
+            //Libro movimiento
             $LibroMovimiento = LibroMovimiento::create($validated['libro_movimiento']);
             $libro_movimiento_id = $LibroMovimiento->toArray()['id'];
             $queryStatus['libro_movimiento'] = 201;
-
+            //Movimientos
             foreach($validated['movimientos'] as $movimiento){
                 $movimiento['libro_movimiento_id'] = $libro_movimiento_id;
                 //correlativa, numero retencion por factura y por mes.
@@ -72,7 +79,11 @@ class MovimientosController extends Controller
                 }
                 //dd($movimiento);
                 $movimiento['comprobante_retencion'] = $ultimoNumeroRetencion;
-                Movimiento::create($movimiento);
+                $newMovimiento = Movimiento::create($movimiento);
+
+                //movimientos cuentas contables
+                $movimientosCuentasContablesInstance->
+                insertar($newMovimiento->id, $movimiento['cuentas_contables']);
             }
             $queryStatus['movimientos'] = 201;
             $queryStatus['movimientos_creados'] = count($validated['movimientos']);

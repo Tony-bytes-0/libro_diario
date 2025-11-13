@@ -23,4 +23,6 @@ class CuentaContableController extends Controller
 
         return response()->json(['msg' => 'cuentas consultadas con exito', 'cuentas_contables' => $result]);
     }
+
+    
 }
