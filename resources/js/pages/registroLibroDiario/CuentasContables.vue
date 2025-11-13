@@ -7,7 +7,7 @@
         </v-col>
         <v-col cols="2">
             <v-label>Tipo</v-label>
-            <v-select :items="['debe', 'haber']" v-model="selected.tipo">
+            <v-select :items="['debe', 'haber']" v-model="accType">
 
             </v-select>
         </v-col>
@@ -15,7 +15,7 @@
             <v-btn class="boton_registrar" @click="addToList()">+</v-btn>
         </v-col>
     </v-row>
-    <v-row class="w-full" >
+    <v-row class="w-full">
         {{ selectedList }}
     </v-row>
 
@@ -29,14 +29,29 @@ const selected = ref({
     descripcion: "",
     tipo: "",
 })
+const accType = ref('')
 
 const props = defineProps(['list', 'isLoading', 'show', 'selectedList'])
 
 const emit = defineEmits(['selectCuentaContable'])
 
 const addToList = () => {
+    //para añadir un item, comprobar que ambos valores tengan datos
     const sharedValue = selected.value
-    emit('selectCuentaContable', sharedValue)
+    const accountType = accType.value
+    if (sharedValue.tipo !== '' && accountType !== '') {
+        emit('selectCuentaContable', sharedValue)
+        resetForm();
+    }
+}
+
+const resetForm = () => {
+    selected.value = {
+        id: "",
+        descripcion: "",
+        tipo: "",
+    }
+    accType.value = ''
 }
 </script>
 <style>
