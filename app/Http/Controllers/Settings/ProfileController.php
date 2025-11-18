@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -21,6 +22,16 @@ class ProfileController extends Controller
         return Inertia::render('settings/Profile', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => $request->session()->get('status'),
+        ]);
+    }
+
+    public function consultarUsuarios(Request $request)
+    {
+        $users = DB::table('users')->select(['id','name','email','created_at','updated_at','rol'])->get();
+
+        return response()->json([
+            'msg' => 'usuarios consultados con exito',
+            'users' => $users
         ]);
     }
 

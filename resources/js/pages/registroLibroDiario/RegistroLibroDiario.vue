@@ -644,6 +644,14 @@ const documentTypeList = ref([
     }
 ]);
 
+const displayTypes = computed(() => {
+    if (formData.value.bookType === "libro de compras") {
+        return documentTypeList.value[0];
+    } else {
+        return documentTypeList.value;
+    }
+});
+
 const impuesto_iva_contribuyente = computed(() => {
     if (formData.value.base_imponible_alic_contribuyente > 0 || formData.value.base_imponible_alic_contribuyente !== '' || formData.value.base_imponible_alic_contribuyente !== null) {
         const porcentaje = formData.value.porcentaje_iva;
