@@ -41,5 +41,10 @@ Route::get('administrar/cuentas_contables/CuentasContables', function () {
     return Inertia::render('administrar/cuentas_contables/CuentasContables');
 })->middleware(['auth', 'verified'])->name('createCuentasContables');
 
+//Administrar Usuarios
+Route::get('administrar/usuarios/Usuarios', function () {
+    return Inertia::render('administrar/usuarios/Usuarios');
+})->middleware(['auth', 'verified'])->name('adminUsers');
+
 
 require __DIR__.'/settings.php';

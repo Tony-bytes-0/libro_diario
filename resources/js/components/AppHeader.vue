@@ -31,10 +31,10 @@ import {
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
-import { dashboard, registroLibroDiario, reporteLibroDiario } from '@/routes';
+import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas, createCuentasContables } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, BookOpenCheckIcon, Pencil, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
@@ -72,13 +72,28 @@ const mainNavItems: NavItem[] = [
         icon: Pencil,
     },
     {
-        title: 'Reporte Libro Diario',
-        href: reporteLibroDiario(),
-        icon: BookOpenCheckIcon,
+        title: 'Reporte Libro Ventas',
+        href: viewLibroVentas(),
+        icon: BookOpenCheck,
+    },
+    {
+        title: 'Reporte Libro Compras',
+        href: viewLibroCompras(),
+        icon: BookOpenCheck,
+    },
+    {
+        title: 'Administrar Clientes',
+        href: viewCreateClients(),
+        icon: UserSearch,
+    },
+    {
+        title: 'Cuentas contables',
+        href: createCuentasContables(),
+        icon: ListCollapse,
     },
 ];
 
-const rightNavItems: NavItem[] = [
+/*const rightNavItems: NavItem[] = [
     {
         title: 'Repository',
         href: 'https://github.com/laravel/vue-starter-kit',
@@ -89,7 +104,7 @@ const rightNavItems: NavItem[] = [
         href: 'https://laravel.com/docs/starter-kits#vue',
         icon: BookOpen,
     },
-];
+];*/
 </script>
 
 <template>

@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas, createCuentasContables } from '@/routes';
+import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas, createCuentasContables, adminUsers } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse } from 'lucide-vue-next';
@@ -34,7 +34,7 @@ const mainNavItems: NavItem[] = [
         icon: BookOpenCheck,
     },
     {
-        title: 'Reporte Libro Compras', ///reportes/libro_compras/LibroCompras
+        title: 'Reporte Libro Compras',
         href: viewLibroCompras(),
         icon: BookOpenCheck,
     },
@@ -46,6 +46,11 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Cuentas contables',
         href: createCuentasContables(),
+        icon: ListCollapse,
+    },
+    {
+        title: 'Administrar Usuarios',
+        href: adminUsers(),
         icon: ListCollapse,
     },
 ];
