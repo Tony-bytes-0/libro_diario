@@ -36,7 +36,7 @@ class ClientesController extends Controller
         ]);
 
         $result = Cliente::create($validated);
-        
+
         return response()->json(['msg' => 'Creado con éxito'], 201);
     }
 }

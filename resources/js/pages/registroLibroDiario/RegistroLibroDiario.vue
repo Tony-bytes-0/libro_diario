@@ -501,8 +501,8 @@
                         </v-row>
                     </v-row>
                 </v-expand-transition>
-                <CuentasContables 
-                :show="cuentasContables.show" 
+                <CuentasContables
+                :show="cuentasContables.show"
                 :isLoading="cuentasContables.isLoading"
                 :selectedList="formData.cuentas_contables"
                     :list="cuentasContables.list"
@@ -601,7 +601,6 @@ const formData = ref({
     base_imponible_IGTF: '',
     porcentaje_IGTF: '',
     cuentas_contables:[],
-
 });
 
 const cuentasContables = ref({
@@ -893,13 +892,7 @@ async function submit() {
                 confirmButtonColor: "#00A603",
                 allowOutsideClick: false
             }).then(() => {
-                resetFormData()
-                //no recargar la pagina
-                /*
-                if (result.isConfirmed) {
-                    window.location.href = "http://localhost:8000/reportes/libro/ventas";
-                }
-                */
+                resetFormData();
             });
         }
     });
@@ -916,17 +909,17 @@ const registerDisabled = computed(() => {
 });
 
 
-function prueba() {
+/*function prueba() {
     console.log(formData.value.registerDate);
     console.log(formData.value.bookType);
     console.log(formData.value.client.id)
-};
+};*/
 
 onMounted(async () => {
-    
+
     //consultar clientes
-    let urlClients = '/api/clientes';
-    let clientsResponse = await axios.get(urlClients);
+    const urlClients = '/api/clientes';
+    const clientsResponse = await axios.get(urlClients);
     clientsList.value = clientsResponse.data.clientes;
     //consultar cuentas contables
     const urlCuentasContables = '/api/cuentas_contables'

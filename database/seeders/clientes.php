@@ -14,7 +14,7 @@ class clientes extends Seeder
      */
     public function run(): void
     /*
-        'AKERMED C.A.',
+    'AKERMED C.A.',
     'AK GYM C.A.',
     'NAVIERA RASSI C.A.',
     'LICOMARKET C.A.',
@@ -111,6 +111,14 @@ class clientes extends Seeder
             'nombre' => '',
             'apellido' => '',
             'descripcion' => 'RESUMEN DIARIO DE VENTAS',
+            'telefono' => '',
+            'correo' => '',
+        ]);
+        Cliente::create([
+            'rif' => 'N/A',
+            'nombre' => '',
+            'apellido' => '',
+            'descripcion' => 'REPORTE GLOBAL DIARIO',
             'telefono' => '',
             'correo' => '',
         ]);

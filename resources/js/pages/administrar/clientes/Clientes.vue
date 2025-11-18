@@ -50,7 +50,6 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
 import {viewCreateClients} from '@/routes';
-import Swal from 'sweetalert2';
 
 const breadcrumbs = [
     {
@@ -75,7 +74,8 @@ const submit = async () => {
         const response = await axios.post(url, formData.value)
         fastMsg(response.data.msg);
     } catch (error) {
-
+        console.log(error);
+        staticError('Error al registrar cliente');
     }
 
 }

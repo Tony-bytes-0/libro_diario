@@ -6,11 +6,11 @@
                 <v-row class="pt-6 px-5 align-center ma-1">
                     <v-col cols="6">
                         <v-label>Código</v-label>
-                        <v-text-field variant="outlined" v-model="formData.codigo" ></v-text-field>
+                        <v-text-field variant="outlined" v-model="formData.codigo" autocomplete="off"></v-text-field>
                     </v-col>
                     <v-col cols="6">
                         <v-label>Descripción</v-label>
-                        <v-text-field variant="outlined" v-model="formData.descripcion" ></v-text-field>
+                        <v-text-field variant="outlined" v-model="formData.descripcion" autocomplete="off"></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row class="text-center">
@@ -24,6 +24,7 @@
 <script setup>
 import { fastMsg, staticError } from '@/helpers';
 import AppLayout from '@/layouts/AppLayout.vue';
+import { reset } from '@/routes/password';
 import axios from 'axios';
 import { ref } from 'vue';
 
@@ -38,14 +39,23 @@ const formData = ref({
     descripcion:"",
 
 })
+
+function resetForm() {
+    formData.value = {
+        codigo:"",
+        descripcion:"",
+    }
+};
+
 const submit = async () => {
     const url = '/api/administrar/cuenta_contable/crear'
     try {
-        const response = await axios.post(url, formData.value)
-        fastMsg(response.data.msg)
+        const response = await axios.post(url, formData.value);
+        fastMsg(response.data.msg);
+        resetForm();
     } catch (error) {
-        console.log(error)
-        staticError('Error al crear cuenta')
+        console.log(error);
+        staticError('Error al crear cuenta');
     }
 }
 </script>

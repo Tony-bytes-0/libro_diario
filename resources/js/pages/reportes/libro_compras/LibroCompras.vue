@@ -5,7 +5,7 @@
         <v-row class="pt-6 px-8 ma-1 align-center">
             <v-col cols="5">
                 <v-label>Mes</v-label>
-                <v-select :items="allowedDates.months" v-model="filterData.month">
+                <v-select :items="allowedDates.months" variant="outlined" v-model="filterData.month">
                     <template v-slot:item="{ props, item }">
                         <v-list-item v-bind="props">
                             <template v-slot:title>
@@ -17,7 +17,7 @@
             </v-col>
             <v-col cols="4">
                 <v-label>Año</v-label>
-                <v-select :items="allowedDates.years" v-model="filterData.year"></v-select>
+                <v-select :items="allowedDates.years" variant="outlined" v-model="filterData.year"></v-select>
             </v-col>
             <v-col cols="3">
                 <v-btn class="pb-4 pt-5 h-100 w-100" :loading="queryData.loading" @click="submit()" style="background-color: #2aa134; color: white;">
