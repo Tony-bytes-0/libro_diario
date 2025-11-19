@@ -4,31 +4,35 @@
     <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
         <v-row class="pt-6 px-8 ma-1 align-center">
             <table class="px-2 mx-4 mb-4 w-full">
-                <thead class="w-full">
-                    <tr class="w-full">
-                        <th class="text-center text-md cellTitle px-11 py-2" scope="row">ID</th>
+                <thead>
+                    <tr class="w-100">
+                        <th class="text-center text-md cellTitle px-4 py-2" scope="row">ID</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Cliente</th>
                         <th class="text-center text-md cellTitle px-11 py-2">E-mail</th>
-                        <th class="text-center text-md cellTitle px-11 py-2">Rol</th>
+                        <th class="text-center text-md cellTitle px-6 py-2">Rol</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Creado en</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Actualizado en</th>
-                        <th class="text-center text-md cellTitle px-11 py-2">Editar</th>
-                        <th class="text-center text-md cellTitle px-11 py-2">Eliminar</th>
+                        <th class="text-center text-md cellTitle px-4 py-2">Editar</th>
+                        <th class="text-center text-md cellTitle px-4 py-2">Eliminar</th>
                     </tr>
                 </thead>
-                <tbody class="w-full">
-                    <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow w-full" >
+                <tbody>
+                    <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow w-100" >
                         <td class="text-center cellInnerField text-md">{{ item.id }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.name }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.email }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.rol }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.created_at }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.updated_at }}</td>
-                        <td class="cellInnerField">
-                            <component :is="Pencil"/>
+                        <td class="cellIcons">
+                            <div class="icon-wrapper" >
+                                <component :is="Pencil"/>
+                            </div>
                         </td>
-                        <td class="cellInnerField">
-                            <component :is="Trash"/>
+                        <td class="cellIcons">
+                            <div class="icon-wrapper" @click="BorrarUsuario(item.id)">
+                                <component :is="Trash"/>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -75,7 +79,18 @@ onMounted(async () => {
     finally{
         queryData.value.loading = false
     }
-})
+});
+
+const BorrarUsuario = async (id) => {
+    const url = `/api/administrar/usuarios/borrar/${id}`
+    try {
+        const response = await axios.delete(url)
+        queryData.value.items = queryData.value.items.filter(item => item.id !== id);
+    } catch (error) {
+        console.log(error);
+        staticError('Error al borrar usuario');
+    }
+};
 
 </script>
 <style scoped>
@@ -84,9 +99,6 @@ table {
     border-collapse:separate;
     border:solid #616161 3px;
     border-radius:10px;
-    display: block;
-    overflow-x:auto;
-    overflow-y: scroll;
     white-space: normal;
 }
 
@@ -112,6 +124,12 @@ td:first-child, th:first-child {
     padding:6px;
 }
 
+.cellIcons{
+    padding: 6px;
+}
 
+.icon-wrapper {
+    display: flex;
+    justify-content: center;
+}
 </style>
-
