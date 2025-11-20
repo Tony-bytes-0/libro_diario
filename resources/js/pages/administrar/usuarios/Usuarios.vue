@@ -12,6 +12,7 @@
                         <th class="text-center text-md cellTitle px-6 py-2">Rol</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Creado en</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Actualizado en</th>
+                        <th class="text-center text-md cellTitle px-4 py-2">Editar</th>
                         <th class="text-center text-md cellTitle px-4 py-2">Eliminar</th>
                     </tr>
                 </thead>
@@ -23,6 +24,11 @@
                         <td class="text-center cellInnerField text-md">{{ item.rol }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.created_at }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.updated_at }}</td>
+                        <td class="cellIcons">
+                            <div class="icon-wrapper" @click="EditarUsuario(item.id)" style="cursor: pointer;">
+                                <component :is="Pencil" style="cursor: pointer; "/>
+                            </div>
+                        </td>
                         <td class="cellIcons">
                             <div class="icon-wrapper" @click="BorrarUsuario(item.id)" style="cursor: pointer;">
                                 <component :is="Trash"/>
@@ -44,7 +50,6 @@ import {staticError} from '@/helpers';
 import { Pencil, Trash } from 'lucide-vue-next';
 import {adminUsers} from '@/routes';
 import Swal from 'sweetalert2';
-import verification from '@/routes/verification';
 
 
 const breadcrumbs = [

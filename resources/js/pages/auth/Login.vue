@@ -20,7 +20,7 @@ defineProps<{
 </script>
 
 <template>
-    <AuthBase title="Inicia sesión!" description="Ingrese su correo y contraseña">
+    <AuthBase title="¡Inicia sesión!" description="Ingrese su correo y contraseña">
 
         <Head title="Log in" />
 
@@ -66,8 +66,8 @@ defineProps<{
                 class="text-center text-sm text-muted-foreground"
                 v-if="canRegister"
             >
-                Don't have an account?
-                <TextLink :href="register()" :tabindex="5">Sign up</TextLink>
+                ¿No tiene una cuenta?
+                <TextLink :href="register()" :tabindex="5">Registrese</TextLink>
             </div>
         </Form>
     </AuthBase>
