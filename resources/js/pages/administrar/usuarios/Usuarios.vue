@@ -13,7 +13,7 @@
                         <th class="text-center text-md cellTitle px-11 py-2">Creado en</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Actualizado en</th>
                         <th class="text-center text-md cellTitle px-4 py-2">Editar</th>
-                        <th class="text-center text-md cellTitle px-4 py-2">Eliminar</th>
+                        <!-- <th class="text-center text-md cellTitle px-4 py-2">Eliminar</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -29,11 +29,11 @@
                                 <component :is="Pencil" style="cursor: pointer; "/>
                             </div>
                         </td>
-                        <td class="cellIcons">
+   <!--                      <td class="cellIcons">
                             <div class="icon-wrapper" @click="BorrarUsuario(item.id)" style="cursor: pointer;">
                                 <component :is="Trash"/>
                             </div>
-                        </td>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>
