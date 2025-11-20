@@ -51,6 +51,20 @@ class ProfileController extends Controller
         return to_route('profile.edit');
     }
 
+    public function borrarUsuario($id)
+    {
+        try {
+            DB::table('users')->where('id', $id)->delete();
+            return response()->json([
+                'message' => 'Usuario eliminado con éxito'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Error al eliminar el usuario'
+            ], 500);
+        }
+    }
+
     /**
      * Delete the user's profile.
      */

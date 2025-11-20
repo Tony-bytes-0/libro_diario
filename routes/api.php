@@ -23,3 +23,6 @@ Route::post('reporte/libro/compras', [ReportesController::class, 'libroCompras']
 //administrar
 Route::post('administrar/clientes/crear', [ClientesController::class, 'crear']);
 Route::post('administrar/cuenta_contable/crear', [CuentaContableController::class, 'crear']);
+
+//borrar
+Route::delete('borrar/usuarios/{id}', [ProfileController::class, 'borrarUsuario']);
