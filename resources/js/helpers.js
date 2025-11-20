@@ -23,6 +23,7 @@ export const formatedNumber = (number) => {
 
 export const staticError = (errorText) => {
     Swal.fire({
+        theme: 'auto',
         title: "Error",
         text: errorText,
         icon: "error",
@@ -31,6 +32,7 @@ export const staticError = (errorText) => {
 
 export const fastMsg = (successText) => {
     Swal.fire({
+        theme: 'auto',
         title: "Listo!",
         text: successText,
         icon: "success",

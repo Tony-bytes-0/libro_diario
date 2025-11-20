@@ -12,7 +12,6 @@
                         <th class="text-center text-md cellTitle px-6 py-2">Rol</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Creado en</th>
                         <th class="text-center text-md cellTitle px-11 py-2">Actualizado en</th>
-                        <th class="text-center text-md cellTitle px-4 py-2">Editar</th>
                         <th class="text-center text-md cellTitle px-4 py-2">Eliminar</th>
                     </tr>
                 </thead>
@@ -25,12 +24,7 @@
                         <td class="text-center cellInnerField text-md">{{ item.created_at }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.updated_at }}</td>
                         <td class="cellIcons">
-                            <div class="icon-wrapper" >
-                                <component :is="Pencil"/>
-                            </div>
-                        </td>
-                        <td class="cellIcons">
-                            <div class="icon-wrapper" @click="BorrarUsuario(item.id)">
+                            <div class="icon-wrapper" @click="BorrarUsuario(item.id)" style="cursor: pointer;">
                                 <component :is="Trash"/>
                             </div>
                         </td>
@@ -46,9 +40,11 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
-import {formatedNumber, staticError} from '@/helpers';
+import {staticError} from '@/helpers';
 import { Pencil, Trash } from 'lucide-vue-next';
 import {adminUsers} from '@/routes';
+import Swal from 'sweetalert2';
+import verification from '@/routes/verification';
 
 
 const breadcrumbs = [
@@ -82,14 +78,37 @@ onMounted(async () => {
 });
 
 const BorrarUsuario = async (id) => {
-    const url = `/api/administrar/usuarios/borrar/${id}`
-    try {
-        const response = await axios.delete(url)
-        queryData.value.items = queryData.value.items.filter(item => item.id !== id);
-    } catch (error) {
-        console.log(error);
-        staticError('Error al borrar usuario');
-    }
+    const url = `/api/borrar/usuarios/${id}`
+    Swal.fire({
+        theme: 'auto',
+        title: "¿Esta seguro de eliminar este usuario?",
+        text: "Asegurese antes de continuar",
+        icon: "question",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        showConfirmButton: true,
+        confirmButtonText: "Borrar",
+        confirmButtonColor: "#a60000ff",
+        allowOutsideClick: false,
+    }).then( async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const response = await axios.delete(url);
+                Swal.fire({
+                    theme: 'auto',
+                    title: "Listo!",
+                    text: response.data.msg,
+                    icon: "success",
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+                window.location.reload()
+            } catch (error) {
+                console.log(error);
+                staticError('Error al borrar usuario');
+            }
+        }
+    });
 };
 
 </script>

@@ -18,6 +18,7 @@ interface Props {
 
 const handleLogout = () => {
     router.flushAll();
+    window.location.reload();
 };
 
 defineProps<Props>();
