@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
     public function consultarUsuarios(Request $request)
     {
-        $users = DB::table('users')->select(['id','name','email','created_at','updated_at','rol'])->get();
+        $users = DB::table('users')->select(['id','name','email','created_at','updated_at'])->get();
 
         return response()->json([
             'msg' => 'usuarios consultados con exito',
