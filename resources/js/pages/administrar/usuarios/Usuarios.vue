@@ -25,9 +25,30 @@
                         <td class="text-center cellInnerField text-md">{{ item.created_at }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.updated_at }}</td>
                         <td class="cellIcons">
-                            <div class="icon-wrapper" @click="EditarUsuario(item.id)" style="cursor: pointer;">
+                            <div class="icon-wrapper" @click="openModalClick(item.id)" style="cursor: pointer;">
                                 <component :is="Pencil" style="cursor: pointer; " />
                             </div>
+                            <v-dialog max-width="500">
+                                <template v-slot:activator="{ props: activatorProps }">
+                                    <v-btn id="openModalBtn" v-bind="activatorProps" style="display: none;"
+                                        color="surface-variant" text="Open Dialog" variant="flat"></v-btn>
+                                </template>
+
+                                <template v-slot:default="{ isActive }">
+                                    <v-card title="Dialog">
+                                        <v-card-text>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore magna aliqua.
+                                        </v-card-text>
+
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+
+                                            <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </template>
+                            </v-dialog>
                         </td>
                         <!--                      <td class="cellIcons">
                             <div class="icon-wrapper" @click="BorrarUsuario(item.id)" style="cursor: pointer;">
@@ -66,6 +87,12 @@ const queryData = ref({
     msg: '',
 })
 
+const openModalClick = (userId) => {
+    const btn = document.getElementById('openModalBtn')
+    btn.click()
+    console.log('pasar user id ', userId)
+}
+
 onMounted(async () => {
     const url = '/api/users'
     try {
@@ -76,7 +103,7 @@ onMounted(async () => {
     }
     catch {
         staticError('Error buscando usuarios')
-        
+
     }
     finally {
         queryData.value.loading = false
