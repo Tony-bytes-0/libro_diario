@@ -35,17 +35,24 @@
                                 </template>
 
                                 <template v-slot:default="{ isActive }">
-                                    <v-card title="Dialog">
-                                        <v-card-text>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua.
-                                        </v-card-text>
+                                    <v-card title="Editar" style="background-color: #C4C4C4;">
 
-                                        <v-card-actions>
-                                            <v-spacer></v-spacer>
+                                        <v-row>
+                                            <v-col cols="12" style="padding: 6%;">
+                                                <v-label>Rol</v-label>
+                                                <v-select :items="roles" return-object item-title="nombre"></v-select>
+                                            </v-col>
+                                        </v-row>
 
-                                            <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
-                                        </v-card-actions>
+                                        <v-row>
+                                            <v-col cols="12" style="padding: 6%;">
+                                                <v-label>Permisos</v-label>
+                                                <v-select :items="permisos" return-object
+                                                    item-title="descripcion"></v-select>
+                                            </v-col>
+                                        </v-row>
+
+                                        <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
                                     </v-card>
                                 </template>
                             </v-dialog>
@@ -87,6 +94,9 @@ const queryData = ref({
     msg: '',
 })
 
+const roles = ref([]);
+const permisos = ref([]);
+
 const openModalClick = (userId) => {
     const btn = document.getElementById('openModalBtn')
     btn.click()
@@ -95,10 +105,17 @@ const openModalClick = (userId) => {
 
 onMounted(async () => {
     const url = '/api/users'
+    const rolesPermisosUrl = '/api/rolespermisos/consultar'
+    //const permisosUrl = '/api/roles/permisos'
+
     try {
         queryData.value.loading = true
         const response = await axios.get(url)
         queryData.value.items = response.data.users
+        //Roles y permisos
+        const rolesPermisosResponse = await axios.post(rolesPermisosUrl);
+        roles.value = rolesPermisosResponse.data.roles
+        permisos.value = rolesPermisosResponse.data.permisos
         queryData.value.loaded = true
     }
     catch {

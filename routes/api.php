@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\CuentaContableController;
 use App\Http\Controllers\MovimientosController;
 use App\Http\Controllers\ReportesController;
+use App\Http\Controllers\RolesPermisosController;
 use App\Http\Controllers\Settings\ProfileController;
 
 //consultar
@@ -23,6 +24,7 @@ Route::post('reporte/libro/compras', [ReportesController::class, 'libroCompras']
 //administrar
 Route::post('administrar/clientes/crear', [ClientesController::class, 'crear']);
 Route::post('administrar/cuenta_contable/crear', [CuentaContableController::class, 'crear']);
-
+//Roles y permisos 
+Route::post('rolespermisos/consultar', [RolesPermisosController::class, 'consultar']);
 //borrar
 Route::delete('borrar/usuarios/{id}', [ProfileController::class, 'borrarUsuario']);
