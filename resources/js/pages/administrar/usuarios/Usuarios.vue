@@ -49,9 +49,10 @@
                                         <v-row>
                                             <v-col cols="12" style="padding: 6%;">
                                                 <v-label>Permisos</v-label>
-                                                <v-select :items="permisos" return-object item-title="nombre"
-                                                    v-model="formData.permission"
-                                                    @update:model-value="asignarPermiso(item)"></v-select>
+                                                <v-select chips :items="permisos" v-model="formData.permissions"
+                                                    item-title="nombre" return-object
+                                                    @update:model-value="asignarPermiso()" multiple></v-select>
+
                                             </v-col>
                                         </v-row>
 
@@ -103,10 +104,7 @@ const formData = ref({
         id: '',
         nombre: '',
     },
-    permission: {
-        id: '',
-        nombre: '',
-    },
+    permissions: [],
 })
 
 const roles = ref([]);
@@ -133,7 +131,7 @@ onMounted(async () => {
         permisos.value = rolesPermisosResponse.data.permisos
         queryData.value.loaded = true
     }
-    catch {
+    catch (error) {
         staticError('Error buscando usuarios')
 
     }
@@ -198,11 +196,11 @@ const asignarPermiso = async () => {
     try {
         const response = await axios.post(url, {
             user_id: formData.value.user_id,
-            permiso_id: formData.value.permiso_id
+            permisos: formData.value.permissions
         });
     }
     catch {
-        staticError('Error asignando permiso');
+        //staticError('Error asignando permiso');
     }
     finally {
         queryData.value.loading = false
