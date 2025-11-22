@@ -40,15 +40,18 @@
                                         <v-row>
                                             <v-col cols="12" style="padding: 6%;">
                                                 <v-label>Rol</v-label>
-                                                <v-select :items="roles" return-object item-title="nombre"></v-select>
+                                                <v-select :items="roles" return-object item-title="nombre"
+                                                    v-model="formData.role"
+                                                    @update:model-value="asignarRol(item)"></v-select>
                                             </v-col>
                                         </v-row>
 
                                         <v-row>
                                             <v-col cols="12" style="padding: 6%;">
                                                 <v-label>Permisos</v-label>
-                                                <v-select :items="permisos" return-object
-                                                    item-title="descripcion"></v-select>
+                                                <v-select :items="permisos" return-object item-title="nombre"
+                                                    v-model="formData.permission"
+                                                    @update:model-value="asignarPermiso(item)"></v-select>
                                             </v-col>
                                         </v-row>
 
@@ -94,20 +97,32 @@ const queryData = ref({
     msg: '',
 })
 
+const formData = ref({
+    user_id: '',
+    role: {
+        id: '',
+        nombre: '',
+    },
+    permission: {
+        id: '',
+        nombre: '',
+    },
+})
+
 const roles = ref([]);
 const permisos = ref([]);
 
 const openModalClick = (userId) => {
     const btn = document.getElementById('openModalBtn')
     btn.click()
-    console.log('pasar user id ', userId)
+    // asignar userId seleccionado
+    formData.value.user_id = userId
 }
 
 onMounted(async () => {
     const url = '/api/users'
     const rolesPermisosUrl = '/api/rolespermisos/consultar'
     //const permisosUrl = '/api/roles/permisos'
-
     try {
         queryData.value.loading = true
         const response = await axios.get(url)
@@ -160,6 +175,39 @@ const BorrarUsuario = async (id) => {
         }
     });
 };
+const asignarRol = async () => {
+    const url = '/api/roles/asignar';
+    console.log('rol seleccionado: ', formData.value.role)
+    try {
+        const response = await axios.post(url, {
+            user_id: formData.value.user_id,
+            role_id: formData.value.role.id,
+        });
+    }
+    catch {
+        //staticError('Error asignando rol');
+    }
+    finally {
+        queryData.value.loading = false
+    }
+
+}
+
+const asignarPermiso = async () => {
+    const url = '/api/permisos/asignar';
+    try {
+        const response = await axios.post(url, {
+            user_id: formData.value.user_id,
+            permiso_id: formData.value.permiso_id
+        });
+    }
+    catch {
+        staticError('Error asignando permiso');
+    }
+    finally {
+        queryData.value.loading = false
+    }
+}
 
 </script>
 <style scoped>

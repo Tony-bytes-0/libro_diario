@@ -26,5 +26,7 @@ Route::post('administrar/clientes/crear', [ClientesController::class, 'crear']);
 Route::post('administrar/cuenta_contable/crear', [CuentaContableController::class, 'crear']);
 //Roles y permisos 
 Route::post('rolespermisos/consultar', [RolesPermisosController::class, 'consultar']);
+Route::post('roles/asignar', [RolesPermisosController::class, 'asignarRol']);
+Route::post('permisos/asignar', [RolesPermisosController::class, 'asignarPermiso']);
 //borrar
 Route::delete('borrar/usuarios/{id}', [ProfileController::class, 'borrarUsuario']);
