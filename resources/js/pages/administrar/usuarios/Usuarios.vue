@@ -45,7 +45,7 @@
                                                     @update:model-value="asignarRol(item)"></v-select>
                                             </v-col>
                                         </v-row>
-
+                                        <!--
                                         <v-row>
                                             <v-col cols="12" style="padding: 6%;">
                                                 <v-label>Permisos</v-label>
@@ -55,7 +55,7 @@
 
                                             </v-col>
                                         </v-row>
-
+-->
                                         <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
                                     </v-card>
                                 </template>
@@ -104,17 +104,23 @@ const formData = ref({
         id: '',
         nombre: '',
     },
-    permissions: [],
+    //permissions: [],
 })
 
 const roles = ref([]);
-const permisos = ref([]);
+//const permisos = ref([]);
 
-const openModalClick = (userId) => {
+const openModalClick = (item) => {
     const btn = document.getElementById('openModalBtn')
+    const user = queryData.value.items.find(item => item.id === item.id)
     btn.click()
     // asignar userId seleccionado
-    formData.value.user_id = userId
+    formData.value.user_id = user.id
+    formData.value.role = {
+        id: user.rol_id,
+        nombre: user.rol_nombre,
+    }
+    //console.log(item, formData.value.role)
 }
 
 onMounted(async () => {
@@ -128,11 +134,11 @@ onMounted(async () => {
         //Roles y permisos
         const rolesPermisosResponse = await axios.post(rolesPermisosUrl);
         roles.value = rolesPermisosResponse.data.roles
-        permisos.value = rolesPermisosResponse.data.permisos
         queryData.value.loaded = true
     }
     catch (error) {
         staticError('Error buscando usuarios')
+        console.log(error)
 
     }
     finally {
@@ -190,8 +196,8 @@ const asignarRol = async () => {
     }
 
 }
-
-const asignarPermiso = async () => {
+/*
+const asigmiso = async () => {
     const url = '/api/permisos/asignar';
     try {
         const response = await axios.post(url, {
@@ -206,7 +212,7 @@ const asignarPermiso = async () => {
         queryData.value.loading = false
     }
 }
-
+*/
 </script>
 <style scoped>
 table {
