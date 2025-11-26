@@ -21,7 +21,7 @@
                         <td class="text-center cellInnerField text-md">{{ item.id }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.name }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.email }}</td>
-                        <td class="text-center cellInnerField text-md">{{ item.rol }}</td>
+                        <td class="text-center cellInnerField text-md">{{ item.rol_nombre }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.created_at }}</td>
                         <td class="text-center cellInnerField text-md">{{ item.updated_at }}</td>
                         <td class="cellIcons">
@@ -31,16 +31,15 @@
                             <v-dialog max-width="500">
                                 <template v-slot:activator="{ props: activatorProps }">
                                     <v-btn id="openModalBtn" v-bind="activatorProps" style="display: none;"
-                                        color="surface-variant" text="Open Dialog" variant="flat"></v-btn>
+                                        color="surface-variant" variant="flat"></v-btn>
                                 </template>
 
                                 <template v-slot:default="{ isActive }">
-                                    <v-card title="Editar" style="background-color: #C4C4C4;">
-
-                                        <v-row>
+                                    <v-card title="Editar" class="pa-5" style="background: var(--background); color: var(--foreground);">
+                                        <v-row class="px-2">
                                             <v-col cols="12" style="padding: 6%;">
                                                 <v-label>Rol</v-label>
-                                                <v-select :items="roles" return-object item-title="nombre"
+                                                <v-select :items="roles" return-object variant="outlined" item-title="nombre"
                                                     v-model="formData.role"
                                                     @update:model-value="asignarRol(item)"></v-select>
                                             </v-col>
@@ -56,7 +55,7 @@
                                             </v-col>
                                         </v-row>
 -->
-                                        <v-btn text="Close Dialog" @click="isActive.value = false"></v-btn>
+                                        <v-btn class="mx-5" text="Cerrar" @click="isActive.value = false"></v-btn>
                                     </v-card>
                                 </template>
                             </v-dialog>
@@ -110,9 +109,12 @@ const formData = ref({
 const roles = ref([]);
 //const permisos = ref([]);
 
-const openModalClick = (item) => {
+const openModalClick = (id) => {
     const btn = document.getElementById('openModalBtn')
-    const user = queryData.value.items.find(item => item.id === item.id)
+    const numero = `${id}`;
+    console.log ('numero ID: ', numero);
+    const user = queryData.value.items.find(item => item.id == numero);
+    console.log(user);
     btn.click()
     // asignar userId seleccionado
     formData.value.user_id = user.id
@@ -122,29 +124,6 @@ const openModalClick = (item) => {
     }
     //console.log(item, formData.value.role)
 }
-
-onMounted(async () => {
-    const url = '/api/users'
-    const rolesPermisosUrl = '/api/rolespermisos/consultar'
-    //const permisosUrl = '/api/roles/permisos'
-    try {
-        queryData.value.loading = true
-        const response = await axios.get(url)
-        queryData.value.items = response.data.users
-        //Roles y permisos
-        const rolesPermisosResponse = await axios.post(rolesPermisosUrl);
-        roles.value = rolesPermisosResponse.data.roles
-        queryData.value.loaded = true
-    }
-    catch (error) {
-        staticError('Error buscando usuarios')
-        console.log(error)
-
-    }
-    finally {
-        queryData.value.loading = false
-    }
-});
 
 const BorrarUsuario = async (id) => {
     const url = `/api/borrar/usuarios/${id}`
@@ -179,6 +158,7 @@ const BorrarUsuario = async (id) => {
         }
     });
 };
+
 const asignarRol = async () => {
     const url = '/api/roles/asignar';
     console.log('rol seleccionado: ', formData.value.role)
@@ -213,6 +193,31 @@ const asigmiso = async () => {
     }
 }
 */
+
+onMounted(async () => {
+    const url = '/api/users'
+    const rolesPermisosUrl = '/api/rolespermisos/consultar'
+    //const permisosUrl = '/api/roles/permisos'
+    try {
+        queryData.value.loading = true
+        const response = await axios.get(url)
+        queryData.value.items = response.data.users
+        //Roles y permisos
+        const rolesPermisosResponse = await axios.post(rolesPermisosUrl);
+        roles.value = rolesPermisosResponse.data.roles
+        queryData.value.loaded = true
+
+        console.log(queryData.value.items)
+    }
+    catch (error) {
+        staticError('Error buscando usuarios')
+        console.log(error)
+
+    }
+    finally {
+        queryData.value.loading = false
+    }
+});
 </script>
 <style scoped>
 table {

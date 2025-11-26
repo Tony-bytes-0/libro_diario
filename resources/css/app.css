@@ -171,11 +171,11 @@
 }
 
 .grey {
-    --background: hsl(0 0% 3.9%);
+    --background: hsl(0 0% 27%);
     --foreground: hsl(0 0% 98%);
-    --card: hsl(0 0% 3.9%);
+    --card: hsl(0 0% 27%);
     --card-foreground: hsl(0 0% 98%);
-    --popover: hsl(0 0% 3.9%);
+    --popover: hsl(0 0% 27%);
     --popover-foreground: hsl(0 0% 98%);
     --primary: hsl(0 0% 98%);
     --primary-foreground: hsl(0 0% 9%);
