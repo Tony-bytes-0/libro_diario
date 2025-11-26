@@ -2,7 +2,7 @@
 
     <Head title="Reporte Libro de Compras" />
     <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
-        <v-row class="pt-6 px-8 ma-1 align-center">
+        <v-row class="pt-6 px-5 align-center ma-1">
             <v-col cols="5">
                 <v-label>Mes</v-label>
                 <v-select :items="allowedDates.months" variant="outlined" v-model="filterData.month">

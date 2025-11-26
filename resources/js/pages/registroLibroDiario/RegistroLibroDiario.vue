@@ -18,7 +18,7 @@
                 </v-col>
                 <v-col cols="6">
                     <v-label>Nombre o Razon Social</v-label>
-                    <v-autocomplete variant="outlined" :items="clientsList" item-title="descripcion" return-object
+                    <v-autocomplete variant="outlined" autocomplete="off" :items="clientsList" item-title="descripcion" return-object
                         v-model="formData.client" :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
                 </v-col>
                 <v-col cols="3">

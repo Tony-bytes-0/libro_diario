@@ -2,7 +2,7 @@
 
         <head title="Cuentas contables" />
         <AppLayout :breadcrumbs="breadcrumbs">
-            <v-form style="padding: 10px;" @submit.prevent>
+            <v-form @submit.prevent>
                 <v-row class="pt-6 px-5 align-center ma-1">
                     <v-col cols="6">
                         <v-label>Código</v-label>

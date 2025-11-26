@@ -2,7 +2,7 @@
 
     <Head title="Reporte Libro de Ventas" />
     <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
-        <v-row class="pt-6 px-8 ma-1 align-center">
+        <v-row class="pt-6 px-5 align-center ma-1">
             <table class="px-2 mx-4 mb-4 w-full">
                 <thead>
                     <tr class="w-100">

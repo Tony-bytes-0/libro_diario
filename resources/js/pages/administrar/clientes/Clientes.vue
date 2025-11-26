@@ -1,7 +1,7 @@
 <template>
     <head title="Administrar Clientes" />
     <AppLayout :breadcrumbs="breadcrumbs">
-        <v-form style="padding: 10px;" @submit.prevent="submit">
+        <v-form @submit.prevent="submit">
             <v-row class="pt-6 px-5 align-center ma-1">
                 <v-col cols="2">
                     <v-label>Tipo</v-label>
