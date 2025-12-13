@@ -23,6 +23,7 @@
     </template>
 <script setup>
 import { fastMsg, staticError } from '@/helpers';
+import readXlsxFile from 'read-excel-file';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { reset } from '@/routes/password';
 import axios from 'axios';
@@ -37,8 +38,9 @@ const breadcrumbs = [
 const formData = ref({
     codigo:"",
     descripcion:"",
-
 })
+
+const file = ref(null);
 
 function resetForm() {
     formData.value = {
@@ -46,6 +48,42 @@ function resetForm() {
         descripcion:"",
     }
 };
+
+const submitAutoExcel = async () => {
+    const excelFile = file.value;
+    await readXlsxFile(excelFile, { sheet: 1 }).then(
+        async (rows) => {
+            console.log(rows.length);
+            if (rows.length === 4) { /// verifica si hay datos en la primera fila despues de los encabezados
+            console.log("El documento no posee datos");
+            } else {
+                for (let i = 4; i < rows.length; i++) {
+                    const fila = rows[i].length;
+                    for (let j = 0; j < fila; j++) {
+                        if (rows[3][j] === "#date+reported") {
+                            reportDate.value = rows[i][j];
+                        }
+                        if (rows[3][j] === "#date+month+cycle") {
+                            reportedMonth.value = rows[i][j];
+                        }
+                    }
+                    await axios.post("http://localhost:5000/project", {
+                        reportDate: reportDate.value,
+                        reportedMonth: reportedMonth.value,
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error, "error en proyecto");
+                    });
+                }
+            }
+        }
+    );
+}
+
+
 
 const submit = async () => {
     const url = '/api/administrar/cuenta_contable/crear'

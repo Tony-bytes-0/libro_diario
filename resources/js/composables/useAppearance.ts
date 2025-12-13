@@ -2,7 +2,11 @@ import { onMounted, ref } from 'vue';
 
 type Appearance = 'light' | 'dark' | 'grey' | 'system';
 
+const isClient = () => typeof window !== 'undefined';
+
 export function updateTheme(value: Appearance) {
+    console.log('Updating theme to:', value);
+
     if (typeof window === 'undefined') {
         return;
     }
@@ -17,11 +21,15 @@ export function updateTheme(value: Appearance) {
             'dark',
             systemTheme === 'dark',
         );
-    } else if (value === 'light'){
+        document.documentElement.classList.remove('light', 'grey');
+    } else if (value === 'light') {
         document.documentElement.classList.toggle('light', value === 'light');
-    } else if (value === 'dark'){
+        document.documentElement.classList.remove('dark', 'grey');
+    } else if (value === 'dark') {
         document.documentElement.classList.toggle('dark', value === 'dark');
+        document.documentElement.classList.remove('light', 'grey');
     } else {
+        document.documentElement.classList.remove('light', 'dark');
         document.documentElement.classList.toggle('grey', value === 'grey');
     }
 }
@@ -30,7 +38,7 @@ const setCookie = (name: string, value: string, days = 365) => {
     if (typeof document === 'undefined') {
         return;
     }
-
+    console.log('Setting cookie:', name, value);
     const maxAge = days * 24 * 60 * 60;
 
     document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`;
@@ -73,16 +81,21 @@ export function initializeTheme() {
 
 const appearance = ref<Appearance>('system');
 
+let systemThemeListenerAdded = false;
+
 export function useAppearance() {
     onMounted(() => {
+        console.log('useAppearance mounted');
+
         const savedAppearance = localStorage.getItem(
-            'appearance',
+            'appearance'
         ) as Appearance | null;
 
         if (savedAppearance) {
             appearance.value = savedAppearance;
         }
     });
+
 
     function updateAppearance(value: Appearance) {
         appearance.value = value;

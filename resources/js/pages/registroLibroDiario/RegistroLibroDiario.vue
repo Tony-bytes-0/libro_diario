@@ -467,7 +467,7 @@
                                         <v-col cols="4">
                                             <v-label>Monto Retencion</v-label>
                                             <v-text-field variant="outlined" v-if="retencionManual == false"
-                                                v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field>
+                                                v-model="impuesto_retencion_contribuyente" disabled></v-text-field>
                                             <v-text-field variant="outlined" v-if="retencionManual == true"
                                                 v-model="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
@@ -674,17 +674,6 @@ const impuesto_retencion_contribuyente = computed(() => {
     }
 });
 
-const impuesto_iva_no_contribuyente = computed(() => {
-    if (impuesto_iva_contribuyente.value > 0 || formData.value.porcentaje_retencion !== null || formData.value.porcentaje_retencion !== '') {
-        const porcentaje = formData.value.porcentaje_iva;
-        const base_imponible = formData.value.base_imponible_alic_no_contribuyente;
-        const result = (base_imponible * porcentaje) / 100
-        return result.toFixed(2);
-    } else {
-        return 0;
-    }
-})
-
 const impuesto_retencion_no_contribuyente = computed(() => {
     if (impuesto_iva_no_contribuyente.value > 0 || formData.value.porcentaje_retencion !== null || formData.value.porcentaje_retencion !== '') {
         const porcentaje = formData.value.porcentaje_retencion;
@@ -695,6 +684,17 @@ const impuesto_retencion_no_contribuyente = computed(() => {
         return 0;
     }
 })
+
+const impuesto_iva_no_contribuyente = computed(() => {
+    if (impuesto_iva_contribuyente.value > 0 || formData.value.porcentaje_retencion !== null || formData.value.porcentaje_retencion !== '') {
+        const porcentaje = formData.value.porcentaje_iva;
+        const base_imponible = formData.value.base_imponible_alic_no_contribuyente;
+        const result = (base_imponible * porcentaje) / 100
+        return result.toFixed(2);
+    } else {
+        return 0;
+    }
+});
 
 const IGTF = computed(() => {
     if (formData.value.base_imponible_IGTF !== '' || formData.value.base_imponible_IGTF > 0 || formData.value.base_imponible_IGTF !== null) {
