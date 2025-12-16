@@ -15,9 +15,8 @@
                     <v-label>Nombre completo o descrpción</v-label>
                     <v-text-field variant="outlined" v-model="formData.descripcion"></v-text-field>
                 </v-col>
-
             </v-row>
-            <v-divider thickness="2" class="mt-10">Informacion adicional</v-divider>
+            <v-divider thickness="2" class="border-opacity-100 mx-10">Informacion adicional</v-divider>
             <v-row class="px-5 align-center ma-1">
                 <v-col cols="4">
                     <v-label>Nombre</v-label>

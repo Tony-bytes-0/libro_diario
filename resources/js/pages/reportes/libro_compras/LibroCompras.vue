@@ -38,8 +38,8 @@
                     <th class="text-center text-xs pa-2 cellTitle">Primera y ultima factura</th>
                     <th class="text-center text-xs pa-2 cellTitle">Factura afectada</th>
                     <th class="text-center text-xs pa-2 cellTitle">Comprobante retención</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Total ventas</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Ventas internas no gravadas</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Total compras</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Compras internas no gravadas</th>
                     <th class="text-center text-xs pa-2 cellTitle">Base imponible ALIC GEN contribuyente</th>
                     <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
                     <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>

@@ -20,23 +20,23 @@
 
     <v-row class="w-full justify-center" v-if="props.selectedList.length > 0">
         <table class="px-2 mx-4 mb-4">
-                <thead>
-                    <tr>
-                        <th class="text-center text-md pa-2 cellTitle">ID</th>
-                        <th class="text-center text-md pa-2 cellTitle">Codigo</th>
-                        <th class="text-center text-md pa-2 cellTitle">Descripcion</th>
-                        <th class="text-center text-md pa-2 cellTitle">Tipo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in selectedList" :key="item.id" class="cellRow">
-                        <td class="text-center cellInnerField px-15 text-md">{{ item.id }}</td>
-                        <td class="text-center cellInnerField px-15 text-md">{{ item.codigo }}</td>
-                        <td class="text-center cellInnerField px-15 text-md">{{ item.descripcion }}</td>
-                        <td class="text-center cellInnerField px-15 text-md">{{ item.tipo }}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <thead>
+                <tr>
+                    <th class="text-center text-md pa-2 cellTitle">ID</th>
+                    <th class="text-center text-md pa-2 cellTitle">Codigo</th>
+                    <th class="text-center text-md pa-2 cellTitle">Descripcion</th>
+                    <th class="text-center text-md pa-2 cellTitle">Tipo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in selectedList" :key="item.id" class="cellRow">
+                    <td class="text-center cellInnerField px-15 text-md">{{ item.id }}</td>
+                    <td class="text-center cellInnerField px-15 text-md">{{ item.codigo }}</td>
+                    <td class="text-center cellInnerField px-15 text-md">{{ item.descripcion }}</td>
+                    <td class="text-center cellInnerField px-15 text-md">{{ item.tipo }}</td>
+                </tr>
+            </tbody>
+        </table>
     </v-row>
 </template>
 
