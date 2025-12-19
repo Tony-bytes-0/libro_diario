@@ -12,7 +12,7 @@ import { Link } from '@inertiajs/vue3';
 
 const sidebarNavItems: NavItem[] = [
     {
-        title: 'Perfil',
+        title: 'Editar Perfil',
         href: editProfile(),
     },
     /*
@@ -26,7 +26,7 @@ const sidebarNavItems: NavItem[] = [
     },
     */
     {
-        title: 'Tema',
+        title: 'Temas',
         href: editAppearance(),
     },
 ];
@@ -43,13 +43,13 @@ const currentPath = typeof window !== undefined ? window.location.pathname : '';
 
         <div class="flex flex-col lg:flex-row lg:space-x-12">
             <aside class="w-full max-w-xl lg:w-48">
-                <nav class="flex flex-col space-y-1 space-x-0">
+                <nav class="flex flex-col space-y-1 space-x-0 mx-12">
                     <Button
                         v-for="item in sidebarNavItems"
                         :key="toUrl(item.href)"
                         variant="ghost"
                         :class="[
-                            'w-full justify-start my-1',
+                            'w-full justify-center py-1 my-2 elevation-2 rounded-xl',
                             { 'bg-muted': urlIsActive(item.href, currentPath) },
                         ]"
                         as-child

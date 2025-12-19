@@ -507,6 +507,7 @@
                 :selectedList="formData.cuentas_contables"
                     :list="cuentasContables.list"
                     @selectCuentaContable="selectCuentaContable"
+                    @deselectCuentaContable="deselectCuentaContable"
                     />
                 <v-col cols="2" offset="10" @click="submit()">
                     <v-btn :disabled="registerDisabled" type="submit"
@@ -612,6 +613,17 @@ const cuentasContables = ref({
 const selectCuentaContable = (item) => {
     console.log('item seleccionado antes de asignar', item)
     formData.value.cuentas_contables.push(item)
+}
+
+const deselectCuentaContable = (item) => {
+    console.log('items antes de borrar', formData.value.cuentas_contables);
+    for (let i = 0; i < formData.value.cuentas_contables.length; i++) {
+        if (formData.value.cuentas_contables[i].id === item) {
+            formData.value.cuentas_contables.splice(i, 1);
+        }
+    }
+
+    console.log('items despues de borrar', formData.value.cuentas_contables);
 }
 
 const bookTypes = ref([

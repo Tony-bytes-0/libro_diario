@@ -15,23 +15,21 @@
                 </v-row>
                     <v-divider thickness="2" class="border-opacity-100 mx-10">Registro manual de cuentas</v-divider>
                 <v-row class="px-5 align-center ma-1">
-                    <v-col cols="6">
+                    <v-col cols="5">
                         <v-label>Descripción</v-label>
                         <v-text-field variant="outlined" v-model="formData.descripcion" autocomplete="off"></v-text-field>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col cols="5">
                         <v-label>Código</v-label>
                         <v-text-field variant="outlined" v-model="formData.codigo" autocomplete="off"></v-text-field>
                     </v-col>
-                </v-row>
-                <v-row class="text-center mb-10">
-                    <v-col cols="12" class="d-flex justify-center">
-                        <v-btn class="boton_verde_submit w-50" type="submit" @click="submit()">Añadir</v-btn>
+                    <v-col cols="2" class="d-flex justify-center">
+                        <v-btn class="boton_verde_submit w-100" type="submit" @click="submit()">Añadir</v-btn>
                     </v-col>
                 </v-row>
                 <v-divider thickness="2" class="border-opacity-100 mx-10">Cuentas Registradas</v-divider>
                 <v-row class="w-full justify-center px-2 mb-4 mt-5">
-                    <div class="table-container ml-10 mr-2 mb-10">
+                    <div class="table-container ml-10 mr-2 mb-10 elevation-4 px-3">
                         <table class="w-100">
                             <thead>
                                 <tr>
@@ -185,7 +183,7 @@ th {
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: var(--background);
+    background-color: var(--sidebar-background);
     color: var(--foreground);
 }
 

@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 
+
 export function notNullString(item){
     if(item == null || item == ''){
         console.log('devolviendo null')
@@ -23,7 +24,8 @@ export const formatedNumber = (number) => {
 
 export const staticError = (errorText) => {
     Swal.fire({
-        theme: 'auto',
+        background: "var(--background)",
+        color: "var(--foreground)",
         title: "Error",
         text: errorText,
         icon: "error",
@@ -32,7 +34,8 @@ export const staticError = (errorText) => {
 
 export const fastMsg = (successText) => {
     Swal.fire({
-        theme: 'auto',
+        background: "var(--background)",
+        color: "var(--foreground)",
         title: "Listo!",
         text: successText,
         icon: "success",

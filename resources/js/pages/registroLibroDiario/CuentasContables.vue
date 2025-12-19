@@ -1,9 +1,17 @@
 <template>
     <v-row v-if="props.show" class="w-full align-center px-3">
-        <v-col cols="8">
+        <v-col cols="5">
             <v-label>Cuenta contable</v-label>
             <v-autocomplete variant="outlined" autocomplete="off" :items="props.list" v-model="selected" return-object
-                item-title="descripcion" key="id"></v-autocomplete>
+                item-title="descripcion" item-subtitle="codigo" key="id">
+                <template v-slot:item="{ props, item }">
+                    <v-list-item
+                    v-bind="props"
+                    :title="item.raw.descripcion"
+                    :subtitle="item.raw.codigo"
+                    ></v-list-item>
+                </template>
+            </v-autocomplete>
         </v-col>
         <v-col cols="3">
             <v-label>Tipo</v-label>
@@ -11,12 +19,17 @@
 
             </v-select>
         </v-col>
+        <v-col cols="3">
+            <v-label>Monto</v-label>
+            <v-text-field variant="outlined" type="number" v-model="montoContable" autocomplete="off">
+            </v-text-field>
+        </v-col>
         <v-col cols="1" class="flex justify-center">
-            <v-btn class="boton_registrar" @click="addToList()">+</v-btn>
+            <v-btn class="boton_registrar" @click="addToList()" :disabled="accType !== '' && montoContable !== '' ? false : true">+</v-btn>
         </v-col>
     </v-row>
 
-    <v-divider class="border-opacity-100 py-5" thickness="2">Cuentas Seleccionadas</v-divider>
+    <v-divider class="border-opacity-100 py-5" thickness="2">Cuentas Seleccionadas (balance del registro: {{  }})</v-divider>
 
     <v-row class="w-full justify-center" v-if="props.selectedList.length > 0">
         <table class="px-2 mx-4 mb-4">
@@ -26,6 +39,7 @@
                     <th class="text-center text-md pa-2 cellTitle">Codigo</th>
                     <th class="text-center text-md pa-2 cellTitle">Descripcion</th>
                     <th class="text-center text-md pa-2 cellTitle">Tipo</th>
+                    <th class="text-center text-md pa-2 cellTitle">Monto</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +48,12 @@
                     <td class="text-center cellInnerField px-15 text-md">{{ item.codigo }}</td>
                     <td class="text-center cellInnerField px-15 text-md">{{ item.descripcion }}</td>
                     <td class="text-center cellInnerField px-15 text-md">{{ item.tipo }}</td>
+                    <td class="text-center cellInnerField px-15 text-md">{{ item.monto }}</td>
+                    <td class="cellIcons">
+                            <div class="icon-wrapper" @click="deleteFromList(item.id)" style="cursor: pointer;">
+                                <component :is="Trash" style="cursor: pointer; " />
+                            </div>
+                        </td>
                 </tr>
             </tbody>
         </table>
@@ -42,28 +62,49 @@
 
 <script setup>
 import { ref } from 'vue';
+import { Trash } from 'lucide-vue-next';
+
+const deleteSelectedAccount = (id) => {
+    const btn = document.getElementById('openModalBtn')
+    const numero = `${id}`;
+    console.log ('numero ID: ',numero);
+    //const cuenta = formData.value.cuentas_contables.list.find(item => item.id == numero);
+    //console.log(cuenta);
+    btn.click()
+    console.log(btn);
+}
 
 const selected = ref({
     id: "",
     codigo:"",
     descripcion: "",
     tipo: "",
+    monto: ""
 })
 const accType = ref('')
 
+const montoContable = ref('')
+
 const props = defineProps(['list', 'isLoading', 'show', 'selectedList'])
 
-const emit = defineEmits(['selectCuentaContable'])
+const emit = defineEmits(['selectCuentaContable', 'deselectCuentaContable'])
 
 const addToList = () => {
     //para añadir un item, comprobar que ambos valores tengan datos
     const sharedValue = selected.value
     const accountType = accType.value
-    if (sharedValue.tipo !== '' && accountType !== '') {
+    const amountValue = montoContable.value
+    if (sharedValue.tipo !== '' && accountType !== '' && amountValue !== '') {
         sharedValue.tipo = accountType;
+        sharedValue.monto = amountValue;
         emit('selectCuentaContable', sharedValue)
         resetForm();
     }
+}
+
+const deleteFromList = (item) => {
+    console.log('Eliminar item ID: ', item);
+    emit('deselectCuentaContable', item)
 }
 
 const resetForm = () => {
