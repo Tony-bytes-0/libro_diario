@@ -4,7 +4,7 @@
     <AppLayout :breadcrumbs="breadcrumbs">
         <v-form class="d-flex" @submit.prevent="submit">
             <v-row class="pt-6 px-5 align-center ma-1">
-                <v-col cols="9">
+                <v-col cols="6">
                     <v-label>Libro</v-label>
                     <v-autocomplete variant="outlined" :items="bookTypes" v-model="formData.bookType" return-object
                         autocomplete="off" item-title="name" :rules="[rules.required('Este campo es requerido')]"
@@ -13,6 +13,12 @@
                 <v-col cols="3">
                     <v-label>Fecha</v-label>
                     <v-date-input variant="outlined" v-model="formData.registerDate" :display-format="format"
+                        prepend-icon="" autocomplete="off"
+                        :rules="[rules.required('Este campo es requerido')]"></v-date-input>
+                </v-col>
+                <v-col cols="3">
+                    <v-label>Fecha del periodo</v-label>
+                    <v-date-input variant="outlined" v-model="formData.registerPeriodDate" :display-format="format"
                         prepend-icon="" autocomplete="off"
                         :rules="[rules.required('Este campo es requerido')]"></v-date-input>
                 </v-col>
@@ -85,16 +91,16 @@
                             </v-col>
                             <v-col cols="4">
                                 <v-label>Monto Retencion</v-label>
-                                <v-text-field variant="outlined" v-if="retencionManual == false"
-                                    v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field>
-                                <v-text-field variant="outlined" v-if="retencionManual == true"
+                                <!--v-text-field variant="outlined" v-if="retencionManual == false"
+                                    v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
+                                <v-text-field variant="outlined"
                                     v-model="formData.retencion_iva_soportada"></v-text-field>
                             </v-col>
-                            <v-col cols="2" offset="2">
+                            <!--v-col cols="2" offset="2">
                                 <v-btn class="py-3 h-100" style="background-color: gainsboro;"
                                     @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{
                                     tipoRetencion }}</v-btn>
-                            </v-col>
+                            </v-col-->
                             <v-divider class="border-opacity-100" thickness="2"></v-divider>
                             <v-col cols="4">
                                 <v-label>Base Imponible IGTF</v-label>
@@ -248,16 +254,16 @@
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>Monto retencion</v-label>
-                                            <v-text-field variant="outlined" v-if="retencionManual == false"
-                                                v-model="impuesto_retencion_contribuyente" disabled></v-text-field>
-                                            <v-text-field variant="outlined" v-if="retencionManual == true"
+                                            <!--v-text-field variant="outlined" v-if="retencionManual == false"
+                                                v-model="impuesto_retencion_contribuyente" disabled></v-text-field-->
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
-                                        <v-col cols="2">
+                                        <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
                                                 @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{
                                                 tipoRetencion }}</v-btn>
-                                        </v-col>
+                                        </v-col-->
                                     </v-row>
                                 </v-expand-transition>
                                 <v-expand-transition>
@@ -286,9 +292,9 @@
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>Monto Retencion</v-label>
-                                            <v-text-field variant="outlined" v-if="retencionManual == false"
-                                                v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field>
-                                            <v-text-field variant="outlined" v-if="retencionManual == true"
+                                            <!--v-text-field variant="outlined" v-if="retencionManual == false"
+                                                v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
@@ -359,16 +365,16 @@
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>Monto Retencion</v-label>
-                                            <v-text-field variant="outlined" v-if="retencionManual == false"
-                                                v-model="impuesto_retencion_contribuyente" disabled></v-text-field>
-                                            <v-text-field variant="outlined" v-if="retencionManual == true"
+                                            <!--v-text-field variant="outlined" v-if="retencionManual == false"
+                                                v-model="impuesto_retencion_contribuyente" disabled></v-text-field-->
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
-                                        <v-col cols="2">
+                                        <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
                                                 @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{
                                                 tipoRetencion }}</v-btn>
-                                        </v-col>
+                                        </v-col-->
                                     </v-row>
                                 </v-expand-transition>
                                 <v-expand-transition>
@@ -397,9 +403,9 @@
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>Monto Retencion</v-label>
-                                            <v-text-field variant="outlined" v-if="retencionManual == false"
-                                                v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field>
-                                            <v-text-field variant="outlined" v-if="retencionManual == true"
+                                            <!--v-text-field variant="outlined" v-if="retencionManual == false"
+                                                v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
+                                            <v-text-field variant="outlined"
                                                 v-model="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
@@ -466,16 +472,16 @@
                                         </v-col>
                                         <v-col cols="4">
                                             <v-label>Monto Retencion</v-label>
-                                            <v-text-field variant="outlined" v-if="retencionManual == false"
+                                            <v-text-field variant="outlined"
                                                 v-model="impuesto_retencion_contribuyente" disabled></v-text-field>
-                                            <v-text-field variant="outlined" v-if="retencionManual == true"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                            <!--v-text-field variant="outlined" v-if="retencionManual == true"
+                                                v-model="formData.retencion_iva_soportada"></v-text-field-->
                                         </v-col>
-                                        <v-col cols="2" offset="2">
+                                        <!--v-col cols="2" offset="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
                                                 @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{
                                                 tipoRetencion }}</v-btn>
-                                        </v-col>
+                                        </v-col-->
                                     </v-row>
                                 </v-expand-transition>
                                 <v-expand-transition>
@@ -501,14 +507,25 @@
                         </v-row>
                     </v-row>
                 </v-expand-transition>
-                <CuentasContables
-                :show="cuentasContables.show"
-                :isLoading="cuentasContables.isLoading"
-                :selectedList="formData.cuentas_contables"
-                    :list="cuentasContables.list"
-                    @selectCuentaContable="selectCuentaContable"
-                    @deselectCuentaContable="deselectCuentaContable"
-                    />
+                <v-divider class="border-opacity-100 mx-3 mb-4" thickness="2"></v-divider>
+                <v-row>
+                    <v-col cols="9">
+                        <CuentasContables
+                        :show="cuentasContables.show"
+                        :isLoading="cuentasContables.isLoading"
+                        :selectedList="formData.cuentas_contables"
+                        :list="cuentasContables.list"
+                        @selectCuentaContable="selectCuentaContable"
+                        @deselectCuentaContable="deselectCuentaContable"
+                        />
+                    </v-col>
+                    <v-divider vertical class="border-opacity-100" thickness="2"></v-divider>
+                    <v-col cols="2" class="">
+                            <div><u>Balance de registro</u>: {{ formData.total_ventas }} Bs.</div>
+                            <br><br>
+                            <div><u>Estado del balance</u>: {{ balanceState }}</div>
+                    </v-col>
+                </v-row>
                 <v-col cols="2" offset="10" @click="submit()">
                     <v-btn :disabled="registerDisabled" type="submit"
                         style="background-color: #2aa134; padding: 25px; display: flex; justify-content: center; color: rgb(236, 236, 236); font-size: medium;">
@@ -542,6 +559,24 @@ const expandContribuyentes = ref(false);
 const expandNoContribuyentes = ref(false);
 
 const retencionManual = ref(false);
+
+const accountsBalance = computed(() => {
+    const valoresMonto = ref(0);
+    const i = formData.value.cuentas_contables.length;
+    for (let index = 0; index < i; index++) {
+        valoresMonto.value = formData.value.cuentas_contables[index].monto + valoresMonto.value;
+        console.log('valoresMonto', valoresMonto.value);
+    }
+    return valoresMonto.value;
+});
+
+const balanceState = computed(() => {
+    if (formData.value.total_ventas == accountsBalance.value) {
+        return 'Balanceado';
+    } else {
+        return 'No Balanceado';
+    }
+});
 
 const tipoRetencion = computed(() => {
     const manual = 'Retencion Manual';
@@ -582,6 +617,7 @@ const formData = ref({
         descripcion: ''
     },
     registerDate: '',
+    registerPeriodDate: '',
     bookType: '',
     documentType: {
         synonym: '',
@@ -592,15 +628,15 @@ const formData = ref({
     ultima_factura: '',
     numero_factura: '',
     factura_afectada: '',
-    total_ventas: '',
-    total_ventas_no_gravadas: '',
-    base_imponible_alic_contribuyente: '',
-    base_imponible_alic_no_contribuyente: '',
-    porcentaje_iva: '',
-    porcentaje_retencion: '',
-    retencion_iva_soportada: '',
-    base_imponible_IGTF: '',
-    porcentaje_IGTF: '',
+    total_ventas: 0,
+    total_ventas_no_gravadas: 0,
+    base_imponible_alic_contribuyente: 0,
+    base_imponible_alic_no_contribuyente: 0,
+    porcentaje_iva: 0,
+    porcentaje_retencion: 0,
+    retencion_iva_soportada: 0,
+    base_imponible_IGTF: 0,
+    porcentaje_IGTF: 0,
     cuentas_contables:[],
 });
 
@@ -741,6 +777,7 @@ const resetFormData = () => {//limpiar formulario
             descripcion: ''
         },
         registerDate: '',
+        registerPeriodDate: '',
         bookType: '',
         documentType: {
             synonym: '',
@@ -896,7 +933,7 @@ async function submit() {
                     "tipo_documento": formData.value.bookType,
                     "rif": formData.value.client.rif,
                     "descripcion": formData.value.client.descripcion,
-                    "periodo": formData.value.registerDate.toISOString().slice(0, 10),
+                    "periodo": formData.value.registerPeriodDate.toISOString().slice(0, 10),
                 }
             }).then((response) => {
                 console.log(response, "movimientos creado");

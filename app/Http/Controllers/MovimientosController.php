@@ -14,7 +14,7 @@ class MovimientosController extends Controller
     public function insert(Request $request){
         $validated = $request->validate([
             'libro_movimiento' => 'required|array',
-            'libro_movimiento.periodo' => 'required|date',
+            'libro_movimiento.periodo' => 'required',
             'libro_movimiento.rif' => 'nullable|string', /////// esto estaba required, y si es un "resumen diario de ventas" no posee rif, cambie a nullable, en todo caso, habria que relacionarlo con el id del cliente aqui, y no en movimientos
             'libro_movimiento.tipo_documento' => 'required|string',
             'libro_movimiento.descripcion' => 'nullable|string',
@@ -42,7 +42,7 @@ class MovimientosController extends Controller
             //cuentas contables
             'movimientos.*.cuentas_contables' => 'nullable|array',
             'movimientos.*.cuentas_contables.*.id' => 'required|numeric',
-            
+
             //'movimientos.*.' => 'nullable',
         ]);
         $transactionResult = DB::transaction(function () use ($validated){

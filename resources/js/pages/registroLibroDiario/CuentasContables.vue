@@ -16,7 +16,6 @@
         <v-col cols="3">
             <v-label>Tipo</v-label>
             <v-select variant="outlined" :items="['debe', 'haber']" v-model="accType">
-
             </v-select>
         </v-col>
         <v-col cols="3">
@@ -25,11 +24,11 @@
             </v-text-field>
         </v-col>
         <v-col cols="1" class="flex justify-center">
-            <v-btn class="boton_registrar" @click="addToList()" :disabled="accType !== '' && montoContable !== '' ? false : true">+</v-btn>
+            <v-btn class="boton_registrar" @click="addToList()" :disabled="accType !== '' && montoContable !== 0 ? false : true">+</v-btn>
         </v-col>
     </v-row>
 
-    <v-divider class="border-opacity-100 py-5" thickness="2">Cuentas Seleccionadas (balance del registro: {{  }})</v-divider>
+    <v-divider class="border-opacity-100 mx-3" thickness="2">Cuentas Seleccionadas</v-divider>
 
     <v-row class="w-full justify-center" v-if="props.selectedList.length > 0">
         <table class="px-2 mx-4 mb-4">
@@ -64,39 +63,30 @@
 import { ref } from 'vue';
 import { Trash } from 'lucide-vue-next';
 
-const deleteSelectedAccount = (id) => {
-    const btn = document.getElementById('openModalBtn')
-    const numero = `${id}`;
-    console.log ('numero ID: ',numero);
-    //const cuenta = formData.value.cuentas_contables.list.find(item => item.id == numero);
-    //console.log(cuenta);
-    btn.click()
-    console.log(btn);
-}
-
 const selected = ref({
     id: "",
     codigo:"",
     descripcion: "",
     tipo: "",
-    monto: ""
+    monto: 0
 })
-const accType = ref('')
+const accType = ref('');
 
-const montoContable = ref('')
+const montoContable = ref(0);
 
-const props = defineProps(['list', 'isLoading', 'show', 'selectedList'])
+const props = defineProps(['list', 'isLoading', 'show', 'selectedList']);
 
-const emit = defineEmits(['selectCuentaContable', 'deselectCuentaContable'])
+const emit = defineEmits(['selectCuentaContable', 'deselectCuentaContable']);
 
 const addToList = () => {
     //para añadir un item, comprobar que ambos valores tengan datos
-    const sharedValue = selected.value
+    const sharedValue = selected.value;
+    const amount = montoContable.value;
+    console.log(sharedValue);
     const accountType = accType.value
-    const amountValue = montoContable.value
-    if (sharedValue.tipo !== '' && accountType !== '' && amountValue !== '') {
+    if (sharedValue.tipo !== '' && accountType !== '' && amount !== 0) {
         sharedValue.tipo = accountType;
-        sharedValue.monto = amountValue;
+        sharedValue.monto = amount;
         emit('selectCuentaContable', sharedValue)
         resetForm();
     }
@@ -113,6 +103,7 @@ const resetForm = () => {
         codigo: "",
         descripcion: "",
         tipo: "",
+        monto: 0,
     }
     accType.value = ''
 }
