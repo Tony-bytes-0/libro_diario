@@ -449,7 +449,7 @@
                                 <v-expand-transition>
                                     <v-row v-if="expandContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
+                                            <v-label>Base Imponible Alicuota</v-label>
                                             <v-text-field variant="outlined"
                                                 :rules="[rules.number('Este campo utiliza numeros')]" type="number"
                                                 v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
@@ -487,7 +487,7 @@
                                 <v-expand-transition>
                                     <v-row v-if="expandNoContribuyentes" class="align-center">
                                         <v-col cols="4">
-                                            <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
+                                            <v-label>Base Imponible Alicuota</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"></v-text-field>
                                         </v-col>
