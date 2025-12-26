@@ -20,7 +20,7 @@
         </v-col>
         <v-col cols="3">
             <v-label>Monto</v-label>
-            <v-text-field variant="outlined" type="number" v-model="montoContable" autocomplete="off">
+            <v-text-field variant="outlined" type="number" v-model.number="montoContable" autocomplete="off">
             </v-text-field>
         </v-col>
         <v-col cols="1" class="flex justify-center">
@@ -28,10 +28,10 @@
         </v-col>
     </v-row>
 
-    <v-divider class="border-opacity-100 mx-3" thickness="2">Cuentas Seleccionadas</v-divider>
+    <v-divider class="border-opacity-100 mx-1" thickness="1">Cuentas Seleccionadas</v-divider>
 
-    <v-row class="w-full justify-center" v-if="props.selectedList.length > 0">
-        <table class="px-2 mx-4 mb-4">
+    <v-row class="w-full justify-center mt-2" v-if="props.selectedList.length > 0">
+        <table class=" mb-4">
             <thead>
                 <tr>
                     <th class="text-center text-md pa-2 cellTitle">ID</th>
@@ -43,16 +43,16 @@
             </thead>
             <tbody>
                 <tr v-for="item in selectedList" :key="item.id" class="cellRow">
-                    <td class="text-center cellInnerField px-15 text-md">{{ item.id }}</td>
-                    <td class="text-center cellInnerField px-15 text-md">{{ item.codigo }}</td>
-                    <td class="text-center cellInnerField px-15 text-md">{{ item.descripcion }}</td>
-                    <td class="text-center cellInnerField px-15 text-md">{{ item.tipo }}</td>
-                    <td class="text-center cellInnerField px-15 text-md">{{ item.monto }}</td>
-                    <td class="cellIcons">
-                            <div class="icon-wrapper" @click="deleteFromList(item.id)" style="cursor: pointer;">
-                                <component :is="Trash" style="cursor: pointer; " />
-                            </div>
-                        </td>
+                    <td class="text-center cellInnerField px-10 text-md">{{ item.id }}</td>
+                    <td class="text-center cellInnerField px-10 text-md">{{ item.codigo }}</td>
+                    <td class="text-center cellInnerField px-10 text-md">{{ item.descripcion }}</td>
+                    <td class="text-center cellInnerField px-10 text-md">{{ item.tipo }}</td>
+                    <td class="text-center cellInnerField px-10 text-md">{{ item.monto }}</td>
+                    <td class="cellIcons px-10 ">
+                        <div class="icon-wrapper" @click="deleteFromList(item.id)" style="cursor: pointer;">
+                            <component :is="Trash" style="cursor: pointer; " />
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -80,8 +80,9 @@ const emit = defineEmits(['selectCuentaContable', 'deselectCuentaContable']);
 
 const addToList = () => {
     //para añadir un item, comprobar que ambos valores tengan datos
-    const sharedValue = selected.value;
-    const amount = montoContable.value;
+    const sharedValue = { ...selected.value };
+    const amount = Number(montoContable.value);
+    console.log(typeof amount);
     console.log(sharedValue);
     const accountType = accType.value
     if (sharedValue.tipo !== '' && accountType !== '' && amount !== 0) {
@@ -105,7 +106,8 @@ const resetForm = () => {
         tipo: "",
         monto: 0,
     }
-    accType.value = ''
+    accType.value = '';
+    montoContable.value = 0;
 }
 </script>
 <style>
@@ -121,13 +123,7 @@ const resetForm = () => {
 table {
     border-collapse:separate;
     border-radius:10px;
-
     overflow-x:auto;
-
-}
-
-td, th {
-
 }
 
 th {

@@ -60,12 +60,12 @@
                             <v-col cols="3">
                                 <v-label>Total Vental (Con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label> Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100" thickness="2"></v-divider>
                             <v-col cols="4">
@@ -136,12 +136,12 @@
                             <v-col cols="4">
                                 <v-label>Total Ventas (con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="4">
                                 <v-label>Total Ventas No Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -212,12 +212,12 @@
                             <v-col cols="2">
                                 <v-label>Total Ventas (con I.V.A)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-radio-group inline>
@@ -323,12 +323,12 @@
                             <v-col cols="2">
                                 <v-label>Total Ventas (con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-radio-group inline>
@@ -430,12 +430,12 @@
                             <v-col cols="3">
                                 <v-label>Total Ventas (con I.V.A)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model="formData.total_ventas_no_gravadas"></v-text-field>
+                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-radio-group inline>
@@ -508,7 +508,7 @@
                     </v-row>
                 </v-expand-transition>
                 <v-divider class="border-opacity-100 mx-3 mb-4" thickness="2"></v-divider>
-                <v-row>
+                <v-row class="mb-4">
                     <v-col cols="9">
                         <CuentasContables
                         :show="cuentasContables.show"
@@ -519,11 +519,13 @@
                         @deselectCuentaContable="deselectCuentaContable"
                         />
                     </v-col>
-                    <v-divider vertical class="border-opacity-100" thickness="2"></v-divider>
-                    <v-col cols="2" class="">
-                            <div><u>Balance de registro</u>: {{ formData.total_ventas }} Bs.</div>
+                    <v-divider vertical class="border-opacity-100" thickness="1"></v-divider>
+                    <v-col cols="3" class="flex flex-column align-center justify-center">
+                            <div><u>Balance de registro</u>: <br></div>
+                            <div class="text-h4">{{ formData.total_ventas }} Bs.</div>
                             <br><br>
-                            <div><u>Estado del balance</u>: {{ balanceState }}</div>
+                            <div><u>Estado del balance</u>:<br></div>
+                            <div class="text-h4" :style="balanceState === 'Balanceado' ? 'color: green' : balanceState === 'Sin Datos' ? 'color:grey' : 'color:red'">{{ balanceState }}</div>
                     </v-col>
                 </v-row>
                 <v-col cols="2" offset="10" @click="submit()">
@@ -537,6 +539,12 @@
         <!--v-btn @click="prueba">prueba</v-btn-->
     </AppLayout>
 </template>
+<style scoped>
+    .v-col-9 {
+    flex: 0 0 75%;
+    max-width: 100%;
+}
+</style>
 
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -565,13 +573,17 @@ const accountsBalance = computed(() => {
     const i = formData.value.cuentas_contables.length;
     for (let index = 0; index < i; index++) {
         valoresMonto.value = formData.value.cuentas_contables[index].monto + valoresMonto.value;
-        console.log('valoresMonto', valoresMonto.value);
+        console.log('total ventas', formData.value.total_ventas, typeof formData.value.total_ventas);
+        console.log('valoresMonto', valoresMonto.value, typeof valoresMonto.value);
     }
     return valoresMonto.value;
 });
 
 const balanceState = computed(() => {
-    if (formData.value.total_ventas == accountsBalance.value) {
+    if (formData.value.total_ventas == null || formData.value.total_ventas == 0 ) {
+        return 'Sin Datos';
+    } else
+    if (formData.value.total_ventas === accountsBalance.value) {
         return 'Balanceado';
     } else {
         return 'No Balanceado';
@@ -957,7 +969,7 @@ async function submit() {
 
 const registerDisabled = computed(() => {
     //bypass para pruebas
-    if ((formData.value.documentType.value !== '') && (formData.value.registerDate !== '') && (formData.value.bookType !== '') && (formData.value.client.id !== '')) {
+    if ((formData.value.documentType.value !== '') && (formData.value.registerDate !== '') && (formData.value.bookType !== '') && (formData.value.client.id !== '') && (balanceState.value === 'Balanceado')) {
         return false;
     } else {
         return true;
