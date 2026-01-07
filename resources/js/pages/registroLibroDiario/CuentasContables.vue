@@ -2,7 +2,7 @@
     <v-row v-if="props.show" class="w-full align-center px-3">
         <v-col cols="5">
             <v-label>Cuenta contable</v-label>
-            <v-autocomplete variant="outlined" autocomplete="off" :items="props.list" v-model="selected" return-object
+            <v-autocomplete variant="outlined" autocomplete="off" :items="availableAccounts" v-model="selected" return-object
                 item-title="descripcion" item-subtitle="codigo" key="id">
                 <template v-slot:item="{ props, item }">
                     <v-list-item
@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Trash } from 'lucide-vue-next';
 
 const selected = ref({
@@ -68,15 +68,22 @@ const selected = ref({
     codigo:"",
     descripcion: "",
     tipo: "",
-    monto: 0
+    monto: ''
 })
 const accType = ref('');
 
-const montoContable = ref(0);
+const montoContable = ref('');
 
 const props = defineProps(['list', 'isLoading', 'show', 'selectedList']);
 
 const emit = defineEmits(['selectCuentaContable', 'deselectCuentaContable']);
+
+const availableAccounts = computed(() => {
+    const currentList = props.list || [];
+    const currentSelected = props.selectedList || [];
+    const selectedIds = new Set(currentSelected.map(item => item.id));
+    return currentList.filter(item => !selectedIds.has(item.id));
+});
 
 const addToList = () => {
     //para añadir un item, comprobar que ambos valores tengan datos
@@ -104,10 +111,10 @@ const resetForm = () => {
         codigo: "",
         descripcion: "",
         tipo: "",
-        monto: 0,
+        monto: '',
     }
     accType.value = '';
-    montoContable.value = 0;
+    montoContable.value = '';
 }
 </script>
 <style>

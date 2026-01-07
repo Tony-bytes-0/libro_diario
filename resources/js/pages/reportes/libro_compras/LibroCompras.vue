@@ -40,10 +40,10 @@
                     <th class="text-center text-xs pa-2 cellTitle">Comprobante retención</th>
                     <th class="text-center text-xs pa-2 cellTitle">Total compras</th>
                     <th class="text-center text-xs pa-2 cellTitle">Compras internas no gravadas</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Base imponible ALIC GEN contribuyente</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Base imponible Alicuota adicional</th>
                     <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
                     <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Base imponible ALIC GEN NO contribuyente</th>
+                    <th class="text-center text-xs pa-2 cellTitle">Base imponible Alicuota reducida</th>
                     <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
                     <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
                     <th class="text-center text-xs pa-2 cellTitle">Retencion IVA soportada</th>
