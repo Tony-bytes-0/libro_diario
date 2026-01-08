@@ -8,10 +8,8 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', function () {
-    return Inertia::render('/', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
-})->name('home');
+    return redirect()->route('dashboard');
+});
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
