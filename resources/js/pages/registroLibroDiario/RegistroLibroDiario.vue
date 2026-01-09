@@ -844,21 +844,6 @@ const showNotadeDebitoCompras = ref(false);
 const showFacturaCompras = ref(false);
 const showFacturaVentas = ref(false);
 
-/*const displayElements = ref({
-    maquina_fiscal: false,
-    primera_factura: false,
-    ultima_factura: false,
-    numero_factura: false,
-    factura_afectada: false,
-    total_ventas: false,
-    total_ventas_no_gravadas: false,
-    base_imponible_alic_contribuyente: false,
-    base_imponible_alic_no_contribuyente: false,
-    porcentaje_iva: false,
-    porcentaje_retencion: false,
-    retencion_iva_soportada: false,
-})*/
-
 const formData = ref({
     client: {
         rif: '',
