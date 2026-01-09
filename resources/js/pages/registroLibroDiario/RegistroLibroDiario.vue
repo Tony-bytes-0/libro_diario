@@ -123,7 +123,7 @@
                             </v-col>
                             <v-col cols="4">
                                 <v-label>Monto Retencion</v-label>
-                                <v-text-field variant="outlined" v-model="formData.retencion_iva_soportada">
+                                <v-text-field variant="outlined" v-model.number="formData.retencion_iva_soportada">
                                 </v-text-field>
                             </v-col>
                         </v-row>
@@ -805,7 +805,13 @@ const balanceState = computed(() => {
     if ((formData.value.total_ventas == null || formData.value.total_ventas == 0) && (accountsBalance.value == 0 || accountsBalance.value == null)) {
         return 'Sin Datos';
     } else
+    if ((formData.value.retencion_iva_soportada === 0 || formData.value.retencion_iva_soportada === null) && (accountsBalance.value == 0 || accountsBalance.value == null)){
+        return 'Sin Datos';
+    }
     if (formData.value.total_ventas === accountsBalance.value) {
+        return 'Balanceado';
+    } else
+    if (formData.value.retencion_iva_soportada === accountsBalance.value) {
         return 'Balanceado';
     } else {
         return 'No Balanceado';
@@ -920,21 +926,13 @@ const documentTypeList = ref([
     },
     {
         synonym: 'NCD',
-        name: 'Nota de Credito'
+        name: 'Nota de Crédito'
     },
     {
         synonym: 'NDT',
-        name: 'Nota de Debito'
+        name: 'Nota de Débito'
     }
 ]);
-
-const displayTypes = computed(() => {
-    if (formData.value.bookType === "libro de compras") {
-        return documentTypeList.value[0];
-    } else {
-        return documentTypeList.value;
-    }
-});
 
 const impuesto_iva_contribuyente = computed(() => {
     if (formData.value.base_imponible_alic_contribuyente > 0 || formData.value.base_imponible_alic_contribuyente !== '' || formData.value.base_imponible_alic_contribuyente !== null) {
@@ -1061,6 +1059,7 @@ const showingConditions = computed(() => {
             showNotadeCreditoCompras.value = false;
             showNotadeDebitoCompras.value = false;
             showRetencionIva.value = true;
+
             return true;
         } else {
             if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Reporte Z") {
@@ -1072,6 +1071,7 @@ const showingConditions = computed(() => {
                 showNotadeCreditoCompras.value = false;
                 showNotadeDebitoCompras.value = false;
                 ShowReporteZ.value = true;
+
                 return true;
             } else {
                 if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Credito") {
@@ -1083,6 +1083,7 @@ const showingConditions = computed(() => {
                     showNotadeCreditoCompras.value = false;
                     showNotadeDebitoCompras.value = false;
                     showNotadeCredito.value = true;
+
                     return true;
                 } else {
                     if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Debito") {
@@ -1094,6 +1095,7 @@ const showingConditions = computed(() => {
                         showNotadeCreditoCompras.value = false;
                         showNotadeDebitoCompras.value = false;
                         showNotadeDebito.value = true;
+
                         return true;
                     } else {
                         if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Factura") {
@@ -1105,6 +1107,7 @@ const showingConditions = computed(() => {
                             showNotadeCreditoCompras.value = false;
                             showNotadeDebitoCompras.value = false;
                             showFacturaCompras.value = true;
+
                             return true;
                         } else {
                             if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Credito") {
@@ -1116,6 +1119,7 @@ const showingConditions = computed(() => {
                                 showFacturaCompras.value = false;
                                 showNotadeDebitoCompras.value = false;
                                 showNotadeCreditoCompras.value = true;
+
                                 return true;
                             } else {
                                 if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Debito") {
@@ -1127,6 +1131,7 @@ const showingConditions = computed(() => {
                                     showFacturaCompras.value = false;
                                     showNotadeCreditoCompras.value = false;
                                     showNotadeDebitoCompras.value = true;
+
                                     return true;
                                 }
                                 else {
