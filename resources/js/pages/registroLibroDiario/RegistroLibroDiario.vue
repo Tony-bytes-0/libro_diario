@@ -756,6 +756,12 @@
                         Registrar
                     </v-btn>
                 </v-col>
+                <!--
+                que valor tiene account:balance: {{accountsBalance}}
+                <br/>
+                debug: 
+                {{ formData }}
+                 -->
             </v-row>
         </v-form>
         <!--v-btn @click="prueba">prueba</v-btn-->
