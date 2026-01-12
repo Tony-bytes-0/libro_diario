@@ -35,7 +35,7 @@
                     <v-label>Tipo de Documento</v-label>
                     <v-autocomplete variant="outlined" autocomplete="off" :items="documentTypeList"
                         v-model="formData.documentType" return-object item-title="name"
-                        :rules="[rules.required('Este campo es requerido')]"></v-autocomplete>
+                        :rules="[rules.required('Este campo es requerido')]" @update:model-value="resetElements"></v-autocomplete>
                 </v-col>
                 <v-expand-transition>
                     <v-row class="px-6" v-show="showingConditions">
@@ -94,7 +94,7 @@
                                 <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                     v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
                                 <v-text-field variant="outlined"
-                                    v-model="formData.retencion_iva_soportada"></v-text-field>
+                                    v-model.number="formData.retencion_iva_soportada"></v-text-field>
                             </v-col>
                             <!--v-col cols="2" offset="2">
                                 <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -123,7 +123,7 @@
                             </v-col>
                             <v-col cols="4">
                                 <v-label>Monto Retencion</v-label>
-                                <v-text-field variant="outlined" v-model="formData.retencion_iva_soportada">
+                                <v-text-field variant="outlined" v-model.number="formData.retencion_iva_soportada">
                                 </v-text-field>
                             </v-col>
                         </v-row>
@@ -257,7 +257,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -295,7 +295,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -368,7 +368,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -406,7 +406,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -567,7 +567,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -605,7 +605,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -678,7 +678,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -716,7 +716,7 @@
                                             <!--v-text-field variant="outlined" v-if="retencionManual == false"
                                                 v-model="impuesto_retencion_no_contribuyente" disabled></v-text-field-->
                                             <v-text-field variant="outlined"
-                                                v-model="formData.retencion_iva_soportada"></v-text-field>
+                                                v-model.number="formData.retencion_iva_soportada"></v-text-field>
                                         </v-col>
                                         <!--v-col cols="2">
                                             <v-btn class="py-3 h-100" style="background-color: gainsboro;"
@@ -744,7 +744,7 @@
                     <v-divider vertical class="border-opacity-100" thickness="1"></v-divider>
                     <v-col cols="3" class="flex flex-column align-center justify-center">
                             <div><u>Balance de registro</u>: <br></div>
-                            <div class="text-h4">{{ formData.total_ventas }} Bs.</div>
+                            <div class="text-h4">{{ formData.documentType.name === 'Retención de IVA' ? formData.retencion_iva_soportada : formData.total_ventas }} Bs.</div>
                             <br><br>
                             <div><u>Estado del balance</u>:<br></div>
                             <div class="text-h4" :style="balanceState === 'Balanceado' ? 'color: green' : balanceState === 'Sin Datos' ? 'color:grey' : 'color:red'">{{ balanceState }}</div>
@@ -808,14 +808,27 @@ const accountsBalance = computed(() => {
 });
 
 const balanceState = computed(() => {
-    if ((formData.value.total_ventas == null || formData.value.total_ventas == 0) && (accountsBalance.value == 0 || accountsBalance.value == null)) {
-        return 'Sin Datos';
-    } else
-    if (formData.value.total_ventas === accountsBalance.value) {
-        return 'Balanceado';
+    if (formData.value.documentType.name === 'Retención de IVA') {
+        if ((formData.value.retencion_iva_soportada === null || formData.value.retencion_iva_soportada === '') && (accountsBalance.value === 0 || accountsBalance.value === null)){
+            console.log ('op 2');
+            return 'Sin Datos';
+        } else
+        if (formData.value.documentType.name === 'Retención de IVA' && (formData.value.retencion_iva_soportada === accountsBalance.value)) {
+            console.log ('op 4');
+            return 'Balanceado';
+        }
     } else {
-        return 'No Balanceado';
+        if ((formData.value.total_ventas === null || formData.value.total_ventas === '') && (accountsBalance.value === 0 || accountsBalance.value === null)) {
+            console.log ('op 1');
+            return 'Sin Datos';
+        } else
+        if (formData.value.total_ventas === accountsBalance.value) {
+            console.log ('op 3');
+            return 'Balanceado';
+        }
     }
+    console.log ('op 5');
+    return 'No Balanceado';
 });
 
 const tipoRetencion = computed(() => {
@@ -836,21 +849,6 @@ const showNotadeCreditoCompras = ref(false);
 const showNotadeDebitoCompras = ref(false);
 const showFacturaCompras = ref(false);
 const showFacturaVentas = ref(false);
-
-/*const displayElements = ref({
-    maquina_fiscal: false,
-    primera_factura: false,
-    ultima_factura: false,
-    numero_factura: false,
-    factura_afectada: false,
-    total_ventas: false,
-    total_ventas_no_gravadas: false,
-    base_imponible_alic_contribuyente: false,
-    base_imponible_alic_no_contribuyente: false,
-    porcentaje_iva: false,
-    porcentaje_retencion: false,
-    retencion_iva_soportada: false,
-})*/
 
 const formData = ref({
     client: {
@@ -926,21 +924,13 @@ const documentTypeList = ref([
     },
     {
         synonym: 'NCD',
-        name: 'Nota de Credito'
+        name: 'Nota de Crédito'
     },
     {
         synonym: 'NDT',
-        name: 'Nota de Debito'
+        name: 'Nota de Débito'
     }
 ]);
-
-const displayTypes = computed(() => {
-    if (formData.value.bookType === "libro de compras") {
-        return documentTypeList.value[0];
-    } else {
-        return documentTypeList.value;
-    }
-});
 
 const impuesto_iva_contribuyente = computed(() => {
     if (formData.value.base_imponible_alic_contribuyente > 0 || formData.value.base_imponible_alic_contribuyente !== '' || formData.value.base_imponible_alic_contribuyente !== null) {
@@ -1046,6 +1036,25 @@ function resetDocumentType() {
     }
 };
 
+function resetElements() {
+    formData.value.client.rif = '';
+    formData.value.client.id = '';
+    formData.value.client.descripcion = ''
+    formData.value.registerDate = '';
+    formData.value.registerPeriodDate = '';
+    formData.value.maquina_fiscal = '';
+    formData.value.primera_factura = '';
+    formData.value.ultima_factura = '';
+    formData.value.numero_factura = '';
+    formData.value.factura_afectada = '';
+    formData.value.total_ventas = '';
+    formData.value.total_ventas_no_gravadas = '';
+    formData.value.base_imponible_alic_contribuyente = '';
+    formData.value.base_imponible_alic_no_contribuyente = '';
+    formData.value.retencion_iva_soportada = '';
+    formData.value.cuentas_contables = [];
+};
+
 const showingConditions = computed(() => {
     if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Factura") {
         showRetencionIva.value = false;
@@ -1067,6 +1076,7 @@ const showingConditions = computed(() => {
             showNotadeCreditoCompras.value = false;
             showNotadeDebitoCompras.value = false;
             showRetencionIva.value = true;
+
             return true;
         } else {
             if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Reporte Z") {
@@ -1078,6 +1088,7 @@ const showingConditions = computed(() => {
                 showNotadeCreditoCompras.value = false;
                 showNotadeDebitoCompras.value = false;
                 ShowReporteZ.value = true;
+
                 return true;
             } else {
                 if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Credito") {
@@ -1089,6 +1100,7 @@ const showingConditions = computed(() => {
                     showNotadeCreditoCompras.value = false;
                     showNotadeDebitoCompras.value = false;
                     showNotadeCredito.value = true;
+
                     return true;
                 } else {
                     if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Debito") {
@@ -1100,6 +1112,7 @@ const showingConditions = computed(() => {
                         showNotadeCreditoCompras.value = false;
                         showNotadeDebitoCompras.value = false;
                         showNotadeDebito.value = true;
+
                         return true;
                     } else {
                         if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Factura") {
@@ -1111,6 +1124,7 @@ const showingConditions = computed(() => {
                             showNotadeCreditoCompras.value = false;
                             showNotadeDebitoCompras.value = false;
                             showFacturaCompras.value = true;
+
                             return true;
                         } else {
                             if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Credito") {
@@ -1122,6 +1136,7 @@ const showingConditions = computed(() => {
                                 showFacturaCompras.value = false;
                                 showNotadeDebitoCompras.value = false;
                                 showNotadeCreditoCompras.value = true;
+
                                 return true;
                             } else {
                                 if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Debito") {
@@ -1133,6 +1148,7 @@ const showingConditions = computed(() => {
                                     showFacturaCompras.value = false;
                                     showNotadeCreditoCompras.value = false;
                                     showNotadeDebitoCompras.value = true;
+
                                     return true;
                                 }
                                 else {
