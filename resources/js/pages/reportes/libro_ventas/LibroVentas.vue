@@ -1,9 +1,9 @@
 <template>
 
     <Head title="Reporte Libro de Ventas" />
-    <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
+    <AppLayout :breadcrumbs="breadcrumbs">
         <v-row class="pt-6 px-5 align-center ma-1">
-            <v-col cols="5">
+            <v-col cols="12" md="5">
                 <v-label> Mes</v-label>
                 <v-select variant="outlined" :items="allowedDates.months" v-model="filterData.month">
                     <template v-slot:item="{ props, item }">
@@ -15,17 +15,18 @@
                     </template>
                 </v-select>
             </v-col>
-            <v-col cols="4">
+            <v-col cols="12" md="4">
                 <v-label>Año</v-label>
                 <v-select variant="outlined" :items="allowedDates.years" v-model="filterData.year"></v-select>
             </v-col>
-            <v-col cols="3">
+            <v-col cols="12" md="3">
                 <v-btn class="pb-4 pt-5 h-100 w-100"  :loading="queryData.loading" @click="submit()" style="background-color: #2aa134; color: white;">
                     Buscar</v-btn>
             </v-col>
         </v-row>
         <v-divider thickness="3"></v-divider>
-        <table class="px-2 mx-4 mb-4">
+        <div class="table-responsive px-2 mx-4 mb-4">
+        <table>
             <thead>
                 <tr>
                     <th class="text-center text-xs cellTitle pa-2" scope="row">Fecha</th>
@@ -69,6 +70,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </AppLayout>
 </template>
 
@@ -148,13 +150,15 @@ const submit = async () => {
 </script>
 <style scoped>
 
+.table-responsive {
+    overflow-x: auto;
+    border: solid #616161 3px;
+    border-radius: 10px;
+}
+
 table {
+    width: 100%;
     border-collapse:separate;
-    border:solid #616161 3px;
-    border-radius:10px;
-    display: block;
-    overflow-x:auto;
-    overflow-y: scroll;
     white-space: normal;
 }
 

@@ -67,7 +67,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
-                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="4">
                                 <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
                                 <v-text-field variant="outlined"
@@ -83,7 +83,7 @@
                                 <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                     disabled></v-text-field>
                             </v-col>
-                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="4">
                                 <v-label v-show="retencionManual == false">% Retencion</v-label>
                                 <v-select variant="outlined" v-show="retencionManual == false"
@@ -101,7 +101,7 @@
                                     @click="(retencionManual = !retencionManual, formData.porcentaje_retencion = '', formData.retencion_iva_soportada = '')">{{
                                     tipoRetencion }}</v-btn>
                             </v-col-->
-                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="4">
                                 <v-label>Base Imponible IGTF</v-label>
                                 <v-text-field variant="outlined" v-model="formData.base_imponible_IGTF"></v-text-field>
@@ -143,7 +143,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
-                            <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Contribuyente" value="one"
@@ -219,6 +219,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Contribuyente" value="one"
@@ -246,7 +247,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -284,7 +285,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -330,6 +331,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Contribuyente" value="one"
@@ -357,7 +359,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -395,7 +397,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -437,6 +439,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Aplica Retencion" value="one"
@@ -464,7 +467,7 @@
                                             <v-text-field variant="outlined" disabled
                                                 v-model="impuesto_iva_contribuyente"></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="4">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -529,6 +532,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Contribuyente" value="one"
@@ -556,7 +560,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -594,7 +598,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -640,6 +644,7 @@
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
                                     type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
+                            <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
                                 <v-radio-group inline>
                                     <v-radio label="Contribuyente" value="one"
@@ -667,7 +672,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -705,7 +710,7 @@
                                             <v-text-field variant="outlined" v-model="impuesto_iva_no_contribuyente"
                                                 disabled></v-text-field>
                                         </v-col>
-                                        <v-divider class="border-opacity-100" thickness="2"></v-divider>
+                                        <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                                         <v-col cols="3">
                                             <v-label v-show="retencionManual == false">% Retencion</v-label>
                                             <v-select variant="outlined" v-show="retencionManual == false"
@@ -730,7 +735,7 @@
                     </v-row>
                 </v-expand-transition>
                 <v-divider class="border-opacity-100 mx-3 mb-4" thickness="2"></v-divider>
-                <v-row class="mb-4">
+                <v-row class="mb-4 px-3">
                     <v-col cols="9">
                         <CuentasContables
                         :show="cuentasContables.show"
@@ -741,13 +746,16 @@
                         @deselectCuentaContable="deselectCuentaContable"
                         />
                     </v-col>
-                    <v-divider vertical class="border-opacity-100" thickness="1"></v-divider>
-                    <v-col cols="3" class="flex flex-column align-center justify-center">
+
+                    <v-col cols="3" class="flex flex-column align-center justify-center ">
                             <div><u>Balance de registro</u>: <br></div>
                             <div class="text-h4">{{ formData.documentType.name === 'Retención de IVA' ? formData.retencion_iva_soportada : formData.total_ventas }} Bs.</div>
-                            <br><br>
+                            <br>
+                            <div><u>Balance en cuentas</u>: <br></div>
+                            <div class="text-h4">{{accountsBalance}} Bs.</div>
+                            <br>
                             <div><u>Estado del balance</u>:<br></div>
-                            <div class="text-h4" :style="balanceState === 'Balanceado' ? 'color: green' : balanceState === 'Sin Datos' ? 'color:grey' : 'color:red'">{{ balanceState }}</div>
+                            <div class="text-h4" style="text-shadow: 0.5px 1px grey;" :style="balanceState === 'Balanceado' ? 'color: green' : balanceState === 'Sin Datos' ? 'color:grey' : 'color:red'">{{ balanceState }}</div>
                     </v-col>
                 </v-row>
                 <v-col cols="2" offset="10" @click="submit()">
@@ -759,7 +767,7 @@
                 <!--
                 que valor tiene account:balance: {{accountsBalance}}
                 <br/>
-                debug: 
+                debug:
                 {{ formData }}
                  -->
             </v-row>
@@ -1086,7 +1094,7 @@ const showingConditions = computed(() => {
 
                 return true;
             } else {
-                if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Credito") {
+                if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Crédito") {
                     showNotadeDebito.value = false;
                     showFacturaCompras.value = false;
                     showFacturaVentas.value = false;
@@ -1095,10 +1103,9 @@ const showingConditions = computed(() => {
                     showNotadeCreditoCompras.value = false;
                     showNotadeDebitoCompras.value = false;
                     showNotadeCredito.value = true;
-
                     return true;
                 } else {
-                    if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Debito") {
+                    if (formData.value.bookType === "libro de ventas" && formData.value.documentType.name === "Nota de Débito") {
                         showFacturaCompras.value = false;
                         showFacturaVentas.value = false;
                         showRetencionIva.value = false;
@@ -1107,7 +1114,6 @@ const showingConditions = computed(() => {
                         showNotadeCreditoCompras.value = false;
                         showNotadeDebitoCompras.value = false;
                         showNotadeDebito.value = true;
-
                         return true;
                     } else {
                         if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Factura") {
@@ -1119,10 +1125,9 @@ const showingConditions = computed(() => {
                             showNotadeCreditoCompras.value = false;
                             showNotadeDebitoCompras.value = false;
                             showFacturaCompras.value = true;
-
                             return true;
                         } else {
-                            if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Credito") {
+                            if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Crédito") {
                                 showFacturaVentas.value = false;
                                 showRetencionIva.value = false;
                                 ShowReporteZ.value = false;
@@ -1131,10 +1136,9 @@ const showingConditions = computed(() => {
                                 showFacturaCompras.value = false;
                                 showNotadeDebitoCompras.value = false;
                                 showNotadeCreditoCompras.value = true;
-
                                 return true;
                             } else {
-                                if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Debito") {
+                                if (formData.value.bookType === "libro de compras" && formData.value.documentType.name === "Nota de Débito") {
                                     showFacturaVentas.value = false;
                                     showRetencionIva.value = false;
                                     ShowReporteZ.value = false;
@@ -1143,7 +1147,6 @@ const showingConditions = computed(() => {
                                     showFacturaCompras.value = false;
                                     showNotadeCreditoCompras.value = false;
                                     showNotadeDebitoCompras.value = true;
-
                                     return true;
                                 }
                                 else {

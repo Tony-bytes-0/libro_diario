@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="props.show" class="w-full align-center px-3">
+    <v-row v-if="props.show" class="w-full align-center">
         <v-col cols="5">
             <v-label>Cuenta contable</v-label>
             <v-autocomplete variant="outlined" autocomplete="off" :items="availableAccounts" v-model="selected" return-object
@@ -28,7 +28,7 @@
         </v-col>
     </v-row>
 
-    <v-divider class="border-opacity-100 mx-1" thickness="1">Cuentas Seleccionadas</v-divider>
+    <v-divider class="border-opacity-100 mx-1" thickness="2">Cuentas Seleccionadas</v-divider>
 
     <v-row class="w-full justify-center mt-2" v-if="props.selectedList.length > 0">
         <table class=" mb-4">

@@ -63,7 +63,6 @@
 import { fastMsg, staticError } from '@/helpers';
 import readXlsxFile from 'read-excel-file';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { reset } from '@/routes/password';
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
@@ -108,36 +107,31 @@ function resetForm() {
 
 const submitAutoExcel = async () => {
     isLoading.value = true;
-    const url = '/api/administrar/cuenta_contable/crear'
+    const importarUrl = '/api/administrar/cuenta_contable/importar';
     const excelFile = file.value;
     console.log(excelFile);
-    await readXlsxFile(excelFile).then(
-       async (rows) => {
-            console.log(rows.length, "cantidad de filas");
-            for (let i = 0; i < rows.length; i++) {
-                const fila = rows[i].length;
-                for (let j = 0; j < fila; j++) {
-                    if (j === 0) {
-                        formData.value.descripcion = rows[i][j];
-                    }
-                    if (j === 1) {
-                        formData.value.codigo = rows[i][j].toString();
-                    }
-                }
-                try {
-                    const response = await axios.post(url, formData.value);
-                    console.log(response.data.msg);
-                } catch (error) {
-                    console.log(error);
-                    staticError('Error al crear cuenta');
-                }
-            }
-            resetForm();
-            isLoading.value = false;
-            fastMsg('Importación finalizada con éxito');
-            consultarCuentasContables();
-        }
-    );
+
+    try {
+        const rows = await readXlsxFile(excelFile);
+
+        // Mapeamos todas las filas a un array de objetos para enviarlos juntos
+        const cuentas = rows.map(row => ({
+            descripcion: row[0],
+            codigo: row[1] ? row[1].toString() : ''
+        }));
+
+        // Enviamos una única petición con todas las cuentas
+        const response = await axios.post(importarUrl, { cuentas });
+
+        fastMsg(response.data.msg || 'Importación finalizada con éxito');
+        resetForm();
+        consultarCuentasContables();
+    } catch (error) {
+        console.log(error);
+        staticError('Error al importar cuentas');
+    } finally {
+        isLoading.value = false;
+    }
 }
 
 

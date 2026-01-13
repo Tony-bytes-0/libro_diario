@@ -1,9 +1,9 @@
 <template>
 
     <Head title="Reporte Libro de Compras" />
-    <AppLayout :breadcrumbs="breadcrumbs" style="overflow-x: scroll;">
+      <AppLayout :breadcrumbs="breadcrumbs">
         <v-row class="pt-6 px-5 align-center ma-1">
-            <v-col cols="5">
+            <v-col cols="12" md="5">
                 <v-label>Mes</v-label>
                 <v-select :items="allowedDates.months" variant="outlined" v-model="filterData.month">
                     <template v-slot:item="{ props, item }">
@@ -15,62 +15,62 @@
                     </template>
                 </v-select>
             </v-col>
-            <v-col cols="4">
+             <v-col cols="12" md="4">
                 <v-label>Año</v-label>
                 <v-select :items="allowedDates.years" variant="outlined" v-model="filterData.year"></v-select>
             </v-col>
-            <v-col cols="3">
+            <v-col cols="12" md="3">
                 <v-btn class="pb-4 pt-5 h-100 w-100" :loading="queryData.loading" @click="submit()" style="background-color: #2aa134; color: white;">
                     Buscar</v-btn>
             </v-col>
         </v-row>
-
         <v-divider thickness="3"></v-divider>
-
-        <table class="px-2 mx-4 mb-4">
-            <thead>
-                <tr>
-                    <th class="text-center text-xs pa-2">Fecha</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Cliente</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Rif</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Tipo documento</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Maquina fiscal</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Primera y ultima factura</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Factura afectada</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Comprobante retención</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Total compras</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Compras internas no gravadas</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Base imponible Alicuota adicional</th>
-                    <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Base imponible Alicuota reducida</th>
-                    <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
-                    <th class="text-center text-xs pa-2 cellTitle">Retencion IVA soportada</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow">
-                    <td class="text-center cellInnerField text-xs">{{ item.fecha }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.cliente_descripcion }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.cliente_rif }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.tipo_documento }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.maquina_fiscal }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.numero_factura }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.comprobante_retencion }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber( item.total_ventas) }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.base_imponible_alic_contribuyente) }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.porcentaje_iva_contribuyente }}%</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.impuesto_iva) }}</td>
-                    <td class="text-center cellInnerField text-xs">{{ item.retencion_iva_soportada }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive px-2 mx-4 mb-4">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-center text-xs pa-2">Fecha</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Cliente</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Rif</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Tipo documento</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Maquina fiscal</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Primera y ultima factura</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Factura afectada</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Comprobante retención</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Total compras</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Compras internas no gravadas</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Base imponible Alicuota adicional</th>
+                        <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Base imponible Alicuota reducida</th>
+                        <th class="text-center text-xs pa-2 cellTitle">% IVA</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Impuesto IVA</th>
+                        <th class="text-center text-xs pa-2 cellTitle">Retencion IVA soportada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in queryData.items" :key="item.entry_id" class="cellRow">
+                        <td class="text-center cellInnerField text-xs">{{ item.fecha }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.cliente_descripcion }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.cliente_rif }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.tipo_documento }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.maquina_fiscal }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.primera_factura }} - {{ item.ultima_factura }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.numero_factura }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.comprobante_retencion }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber( item.total_ventas) }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber( item.total_ventas_no_gravadas) }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.base_imponible_alic_contribuyente) }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.porcentaje_iva_contribuyente }}%</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.impuesto_iva) }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.base_imponible_alic_no_contribuyente)}}</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.porcentaje_iva_no_contribuyente) }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ formatedNumber(item.impuesto_iva) }}</td>
+                        <td class="text-center cellInnerField text-xs">{{ item.retencion_iva_soportada }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </AppLayout>
 </template>
 
@@ -149,13 +149,15 @@ const submit = async () => {
 
 </script>
 <style scoped>
+.table-responsive {
+    overflow-x: auto;
+    border: solid #616161 3px;
+    border-radius: 10px;
+}
+
 table {
+    width: 100%;
     border-collapse:separate;
-    border:solid #616161 3px;
-    border-radius:10px;
-    display: block;
-    overflow-x:auto;
-    overflow-y: scroll;
     white-space: normal;
 }
 
