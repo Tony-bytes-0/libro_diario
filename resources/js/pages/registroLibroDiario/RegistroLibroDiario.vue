@@ -1031,11 +1031,6 @@ function resetDocumentType() {
 };
 
 function resetElements() {
-    formData.value.client.rif = '';
-    formData.value.client.id = '';
-    formData.value.client.descripcion = ''
-    formData.value.registerDate = '';
-    formData.value.registerPeriodDate = '';
     formData.value.maquina_fiscal = '';
     formData.value.primera_factura = '';
     formData.value.ultima_factura = '';
