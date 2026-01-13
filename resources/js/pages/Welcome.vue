@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { dashboard, login, register } from '@/routes';
 import { Head, Link } from '@inertiajs/vue3';
+import { useAppearance } from '@/composables/useAppearance';
 
 withDefaults(
     defineProps<{
@@ -10,6 +11,8 @@ withDefaults(
         canRegister: true,
     },
 );
+
+useAppearance();
 </script>
 
 <template>

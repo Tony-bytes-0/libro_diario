@@ -11,12 +11,15 @@ import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { useAppearance } from '@/composables/useAppearance';
 
 defineProps<{
     status?: string;
     canResetPassword: boolean;
     canRegister: boolean;
 }>();
+
+useAppearance();
 </script>
 
 <template>
@@ -28,7 +31,7 @@ defineProps<{
             {{ status }}
         </div>
 
-        <Form v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }"
+        <Form variant="inset" v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }"
             class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
@@ -62,13 +65,13 @@ defineProps<{
                     Iniciar sesión
                 </Button>
             </div>
-            <div
+            <!--div
                 class="text-center text-sm text-muted-foreground"
                 v-if="canRegister"
             >
                 ¿No tiene una cuenta?
                 <TextLink :href="register()" :tabindex="5">Registrese</TextLink>
-            </div>
+            </div-->
         </Form>
     </AuthBase>
 </template>

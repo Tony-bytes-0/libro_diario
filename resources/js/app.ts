@@ -40,7 +40,7 @@ createInertiaApp({
             .use(plugin)
             .use(vuetify)
             .use(createRulesPlugin({
-                
+
             }, vuetify.locale))
             .mount(el);
     },
