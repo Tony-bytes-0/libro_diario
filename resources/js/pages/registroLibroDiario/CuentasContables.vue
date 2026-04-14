@@ -20,7 +20,7 @@
         </v-col>
         <v-col cols="3">
             <v-label>Monto</v-label>
-            <v-text-field variant="outlined" type="number" v-model.number="montoContable" autocomplete="off">
+            <v-text-field variant="outlined" v-model.number="montoContable" autocomplete="off">
             </v-text-field>
         </v-col>
         <v-col cols="1" class="flex justify-center">
