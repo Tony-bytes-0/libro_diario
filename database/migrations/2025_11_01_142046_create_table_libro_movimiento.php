@@ -23,7 +23,7 @@ return new class extends Migration
         Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
             $table->date('fecha')->nullable();
-            $table->foreignId('cliente_id')->nullable()->constrained();
+            $table->foreignId('cliente_id')->references('id')->on('clientes');
             $table->foreignId('libro_movimiento_id')->nullable()->constrained();
             $table->string('tipo_documento')->nullable();
             $table->string('maquina_fiscal')->nullable();
