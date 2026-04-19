@@ -26,4 +26,8 @@ export default defineConfig({
         tailwindcss(),
         vuetify({ autoImport: true }),
     ],
+        server: {
+        https: true,
+        host: '0.0.0.0',
+    },
 });
