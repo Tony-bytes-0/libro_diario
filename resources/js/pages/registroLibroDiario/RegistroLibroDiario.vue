@@ -760,7 +760,7 @@
                 </v-row>
                 <v-col cols="2" offset="10" @click="registerDisabled ? '': submit()">
                     <v-btn :disabled="registerDisabled" type="submit"
-                        style="background-color: #2aa134; padding: 25px; display: flex; justify-content: center; color: rgb(236, 236, 236); font-size: medium;">
+                        style="background-color: #2aa134; display: flex; justify-content: center; color: rgb(236, 236, 236);">
                         Registrar
                     </v-btn>
                 </v-col>

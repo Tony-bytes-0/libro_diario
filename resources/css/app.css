@@ -4,10 +4,6 @@
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
-.v-input--density-default {
-    --v-input-control-height: 38px;
-    --v-input-padding-top: 10px;
-}
 @custom-variant dark (&:is(.dark *));
 
 @custom-variant grey (&:is(.grey *));

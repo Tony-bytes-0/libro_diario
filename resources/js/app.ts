@@ -23,6 +23,9 @@ const vuetify = createVuetify({
             // Esto aplica a todos los componentes que soporten la prop density
             density: 'compact',
             },
+            VBtn: {
+                density: 'default',
+            }
         },
         icons: {
             defaultSet: 'md',
