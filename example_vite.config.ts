@@ -25,5 +25,9 @@ export default defineConfig({
         }),
         tailwindcss(),
         vuetify({ autoImport: true }),
-    ]
+    ],// borre esto en local xq no me funciona
+        server: {
+        https: true,
+        host: '0.0.0.0',
+    },
 });

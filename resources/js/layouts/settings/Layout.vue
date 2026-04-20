@@ -24,11 +24,11 @@ const sidebarNavItems: NavItem[] = [
         title: 'Two-Factor Auth',
         href: show(),
     },
-    */
     {
         title: 'Temas',
         href: editAppearance(),
     },
+    */
 ];
 
 const currentPath = typeof window !== undefined ? window.location.pathname : '';
