@@ -16,15 +16,21 @@ import { createRulesPlugin } from 'vuetify/labs/rules'
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 const vuetify = createVuetify({
-  components,
-  directives,
-  icons: {
-    defaultSet: 'md',
-    aliases,
-    sets: {
-      md,
+    components,
+        directives,
+        defaults: {
+        global: {
+            // Esto aplica a todos los componentes que soporten la prop density
+            density: 'compact',
+            },
+        },
+        icons: {
+            defaultSet: 'md',
+        aliases,
+        sets: {
+            md,
+        },
     },
-  },
 })
 
 
