@@ -18,7 +18,6 @@ const modelValue = useVModel(props, 'modelValue', emits, {
   defaultValue: props.defaultValue,
 })
 </script>
-
 <template>
   <input
     v-model="modelValue"

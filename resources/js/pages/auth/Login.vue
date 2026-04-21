@@ -35,7 +35,7 @@ useAppearance();
             class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="email">Correo electronico</Label>
+                    <v-label>Correo electronico</v-label>
                     <Input id="email" type="email" name="email" required autofocus :tabindex="1" autocomplete="email"
                         placeholder="correo@ejemplo.com" />
                     <InputError :message="errors.email" />
@@ -43,7 +43,7 @@ useAppearance();
 
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
-                        <Label for="password">Contraseña</Label>
+                        <v-label>Contraseña</v-label>
 <!--                         <TextLink v-if="canResetPassword" :href="request()" class="text-sm" :tabindex="5">
                             Forgot password?
                         </TextLink> -->
