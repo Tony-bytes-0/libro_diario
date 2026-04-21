@@ -6,6 +6,22 @@ import { renderToString } from 'vue/server-renderer';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+// 🔥 NUEVO: Forzar HTTPS en producción
+const isProduction = process.env.APP_ENV === 'production';
+const appUrl = process.env.APP_URL || 'http://localhost';
+
+if (isProduction) {
+    // Forzar que las URLs generadas en SSR usen HTTPS
+    process.env.VITE_APP_URL = appUrl.replace('http://', 'https://');
+
+    // Configurar el protocolo para Node.js
+    (globalThis as any).location  = {
+        protocol: 'https:',
+        host: new URL(appUrl).host,
+        href: appUrl
+    };
+}
+
 createServer(
     (page) =>
         createInertiaApp({
