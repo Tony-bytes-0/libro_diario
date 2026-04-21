@@ -1,37 +1,37 @@
 <template>
-    <v-row v-if="props.show" class="w-full align-center">
-        <v-col cols="5">
-            <v-label>Cuenta contable</v-label>
-            <v-autocomplete variant="outlined" autocomplete="off" :items="availableAccounts" v-model="selected" return-object
-                item-title="descripcion" item-subtitle="codigo" key="id">
-                <template v-slot:item="{ props, item }">
-                    <v-list-item
-                    v-bind="props"
-                    :title="item.raw.descripcion"
-                    :subtitle="item.raw.codigo"
-                    ></v-list-item>
-                </template>
-            </v-autocomplete>
-        </v-col>
-        <v-col cols="3">
-            <v-label>Tipo</v-label>
-            <v-select variant="outlined" :items="['debe', 'haber']" v-model="accType">
-            </v-select>
-        </v-col>
-        <v-col cols="3">
-            <v-label>Monto</v-label>
-            <v-text-field variant="outlined" v-model.number="montoContable" autocomplete="off">
-            </v-text-field>
-        </v-col>
-        <v-col cols="1" class="flex justify-center">
-            <v-btn class="boton_registrar" @click="addToList()" :disabled="accType !== '' && montoContable !== 0 ? false : true">+</v-btn>
-        </v-col>
-    </v-row>
+    <v-form>
+        <v-row v-if="props.show" class="w-full align-center">
+            <v-col cols="5">
+                <v-label>Cuenta contable</v-label>
+                <v-autocomplete variant="outlined" autocomplete="off" :items="availableAccounts" v-model="selected"
+                    return-object item-title="descripcion" item-subtitle="codigo" key="id">
+                    <template v-slot:item="{ props, item }">
+                        <v-list-item v-bind="props" :title="item.raw.descripcion"
+                            :subtitle="item.raw.codigo"></v-list-item>
+                    </template>
+                </v-autocomplete>
+            </v-col>
+            <v-col cols="3">
+                <v-label>Tipo</v-label>
+                <v-select variant="outlined" :items="['debe', 'haber']" v-model="accType">
+                </v-select>
+            </v-col>
+            <v-col cols="3">
+                <v-label>Monto</v-label>
+                <v-text-field variant="outlined" v-model.number="montoContable" autocomplete="off">
+                </v-text-field>
+            </v-col>
+            <v-col cols="1" class="flex justify-center">
+                <v-btn class="boton_registrar" type="submit" @click="addToList()"
+                    :disabled="accType !== '' && montoContable !== 0 ? false : true">+</v-btn>
+            </v-col>
+        </v-row>
+    </v-form>
 
     <v-divider class="border-opacity-100 mx-1" thickness="2">Cuentas Seleccionadas</v-divider>
 
-    <v-row class="w-full justify-center mt-2" v-if="props.selectedList.length > 0">
-        <table class=" mb-4">
+    <v-row class="mt-2" v-if="props.selectedList.length > 0">
+        <table class=" mb-4 w-full">
             <thead>
                 <tr>
                     <th class="text-center text-md pa-2 cellTitle">ID</th>
@@ -47,7 +47,7 @@
                     <td class="text-center cellInnerField px-10 text-md">{{ item.codigo }}</td>
                     <td class="text-center cellInnerField px-10 text-md">{{ item.descripcion }}</td>
                     <td class="text-center cellInnerField px-10 text-md">{{ item.tipo }}</td>
-                    <td class="text-center cellInnerField px-10 text-md">{{ item.monto }}</td>
+                    <td class="text-center cellInnerField px-10 text-md">{{ formatedNumber(item.monto) }}</td>
                     <td class="cellIcons px-10 ">
                         <div class="icon-wrapper" @click="deleteFromList(item.id)" style="cursor: pointer;">
                             <component :is="Trash" style="cursor: pointer; " />
@@ -57,15 +57,29 @@
             </tbody>
         </table>
     </v-row>
+
+    <v-row v-if="selectedList.length > 0" >
+        <v-col cols="3" >
+            <v-label>Total debe: {{ formatedNumber(computedTotals.debe) }}</v-label>
+        </v-col>
+        <v-col cols="3">
+            <v-label>Total haber: {{ formatedNumber(computedTotals.haber) }}</v-label>
+        </v-col>
+    </v-row>
+
+    <v-row>
+
+    </v-row>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue';
 import { Trash } from 'lucide-vue-next';
+import { formatedNumber } from '@/helpers';
 
 const selected = ref({
     id: "",
-    codigo:"",
+    codigo: "",
     descripcion: "",
     tipo: "",
     monto: ''
@@ -78,6 +92,21 @@ const props = defineProps(['list', 'isLoading', 'show', 'selectedList']);
 
 const emit = defineEmits(['selectCuentaContable', 'deselectCuentaContable']);
 
+const computedTotals = computed(() => {
+    let selectedList = props.selectedList
+    let debe, haber = 0
+    props.selectedList.forEach(x => {
+        if(x.tipo == 'debe'){
+            debe =+ x.monto
+        }
+        if(x.tipo == 'haber'){
+            haber =+ x.monto
+        }
+    });
+return {debe: debe, haber: haber};
+    
+})
+
 const availableAccounts = computed(() => {
     const currentList = props.list || [];
     const currentSelected = props.selectedList || [];
@@ -89,8 +118,6 @@ const addToList = () => {
     //para añadir un item, comprobar que ambos valores tengan datos
     const sharedValue = { ...selected.value };
     const amount = Number(montoContable.value);
-    console.log(typeof amount);
-    console.log(sharedValue);
     const accountType = accType.value
     if (sharedValue.tipo !== '' && accountType !== '' && amount !== 0) {
         sharedValue.tipo = accountType;
@@ -102,7 +129,7 @@ const addToList = () => {
 
 const deleteFromList = (item) => {
     console.log('Eliminar item ID: ', item);
-    emit('deselectCuentaContable', item)
+    emit('deselectCuentaContable', item);
 }
 
 const resetForm = () => {
@@ -116,6 +143,7 @@ const resetForm = () => {
     accType.value = '';
     montoContable.value = '';
 }
+
 </script>
 <style>
 .boton_registrar {
@@ -128,25 +156,27 @@ const resetForm = () => {
 }
 
 table {
-    border-collapse:separate;
-    border-radius:10px;
-    overflow-x:auto;
+    border-collapse: separate;
+    border-radius: 10px;
+    overflow-x: auto;
 }
 
 th {
     border-top: none;
 }
 
-td:first-child, th:first-child {
-     border-left: none;
+td:first-child,
+th:first-child {
+    border-left: none;
 }
 
-.cellRow{
+.cellRow {
     border-style: solid;
     border-color: #616161;
     border-width: 3px;
 }
-.cellInnerField{
-    padding:6px;
+
+.cellInnerField {
+    padding: 6px;
 }
 </style>

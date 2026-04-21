@@ -736,7 +736,7 @@
                 </v-expand-transition>
                 <v-divider class="border-opacity-100 mx-3 mb-4" thickness="2"></v-divider>
                 <v-row class="mb-4 px-3">
-                    <v-col cols="9">
+                    <v-col cols="12">
                         <CuentasContables
                         :show="cuentasContables.show"
                         :isLoading="cuentasContables.isLoading"
@@ -745,17 +745,6 @@
                         @selectCuentaContable="selectCuentaContable"
                         @deselectCuentaContable="deselectCuentaContable"
                         />
-                    </v-col>
-
-                    <v-col cols="3" class="flex flex-column align-center justify-center ">
-                            <div><u>Balance de registro</u>: <br></div>
-                            <div class="text-h4">{{ formData.documentType.name === 'Retención de IVA' ? formData.retencion_iva_soportada : formData.total_ventas }} Bs.</div>
-                            <br>
-                            <div><u>Balance en cuentas</u>: <br></div>
-                            <div class="text-h4">{{accountsBalance}} Bs.</div>
-                            <br>
-                            <div><u>Estado del balance</u>:<br></div>
-                            <div class="text-h4" style="text-shadow: 0.5px 1px grey;" :style="balanceState === 'Balanceado' ? 'color: green' : balanceState === 'Sin Datos' ? 'color:grey' : 'color:red'">{{ balanceState }}</div>
                     </v-col>
                 </v-row>
                 <v-col cols="2" offset="10" @click="registerDisabled ? '': submit()">
