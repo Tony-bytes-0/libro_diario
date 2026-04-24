@@ -12,7 +12,7 @@ import { aliases, md } from 'vuetify/iconsets/md';
 import { createRulesPlugin } from 'vuetify/labs/rules';
 import 'vuetify/styles';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Libro Diario';
 
 const customDark = {
     dark: true,
