@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
+//Registro, login, default o por defecto al no encontrar una ruta (manejar el error)
 Route::get('/', function () {
+    return Inertia::render('Dashboard', ['canRegister' => Features::enabled(Features::registration()),]);
+})->name('home');
+Route::get('/registro', function () {
     return Inertia::render('Dashboard', ['canRegister' => Features::enabled(Features::registration()),]);
 })->name('home');
 
@@ -45,4 +49,4 @@ Route::get('administrar/usuarios/Usuarios', function () {
 })->middleware(['auth', 'verified'])->name('adminUsers');
 
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

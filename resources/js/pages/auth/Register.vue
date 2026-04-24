@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
-import { login } from '@/routes';
-import { store } from '@/routes/register';
+
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 </script>
@@ -14,9 +13,9 @@ import { LoaderCircle } from 'lucide-vue-next';
 <template>
     <AuthBase title="Crear una cuenta" description="Introduzca sus datos para comenzar">
 
-        <Head title="Register" />
+        <Head title="Registro" />
 
-        <Form v-bind="store.form()" :reset-on-success="['password', 'password_confirmation']"
+        <Form action="/registro" method="post" :reset-on-success="['password', 'password_confirmation']"
             v-slot="{ errors, processing }" class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
@@ -56,7 +55,7 @@ import { LoaderCircle } from 'lucide-vue-next';
 
             <div class="text-center text-sm text-muted-foreground">
                 ¿Ya tienes una cuenta?
-                <TextLink :href="'/home'" class="underline underline-offset-4" :tabindex="6">Inicia sesión</TextLink>
+                <TextLink href="/login" class="underline underline-offset-4" :tabindex="6">Inicia sesión</TextLink>
             </div>
         </Form>
     </AuthBase>
