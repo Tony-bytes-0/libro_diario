@@ -1,31 +1,27 @@
-<script setup lang="ts">
+<script setup>
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useInitials } from '@/composables/useInitials';
-import type { User } from '@/types';
-import { computed } from 'vue';
 
-interface Props {
-    user: User;
-    showEmail?: boolean;
+const props = defineProps(['user']);
+
+function getInitials(fullName) {
+    if (!fullName) return '';
+
+    const names = fullName.trim().split(' ');
+
+    if (names.length === 0) return '';
+    if (names.length === 1) return names[0].charAt(0).toUpperCase();
+
+    return `${names[0].charAt(0)}${names[names.length - 1].charAt(0)}`.toUpperCase();
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    showEmail: false,
-});
-
-const { getInitials } = useInitials();
-
-// Compute whether we should show the avatar image
-const showAvatar = computed(
-    () => props.user.avatar && props.user.avatar !== '',
-);
 </script>
 
 <template>
     <Avatar class="h-8 w-8 overflow-hidden rounded-lg">
-        <AvatarImage v-if="showAvatar" :src="user.avatar!" :alt="user.name" />
+        <AvatarImage v-if="showAvatar" :src="props.user.avatar" :alt="props.user.name" />
         <AvatarFallback class="rounded-lg text-black dark:text-white">
-            {{ getInitials(user.name) }}
+            <!-- {{ getInitials(props.user.name ? props.user.name : '') }} -->
+            colocar iniciales
         </AvatarFallback>
     </Avatar>
 
@@ -33,6 +29,6 @@ const showAvatar = computed(
         <span class="truncate font-medium">{{ user.name }}</span>
         <span v-if="showEmail" class="truncate text-xs text-muted-foreground">{{
             user.email
-        }}</span>
+            }}</span>
     </div>
 </template>

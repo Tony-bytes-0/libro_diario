@@ -16,7 +16,7 @@ import { useAppearance } from '@/composables/useAppearance';
 defineProps<{
     status?: string;
     canResetPassword: boolean;
-    canRegister: boolean;
+    canRegister: true;
 }>();
 
 useAppearance();
@@ -44,7 +44,7 @@ useAppearance();
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <v-label>Contraseña</v-label>
-<!--                         <TextLink v-if="canResetPassword" :href="request()" class="text-sm" :tabindex="5">
+                        <!--                         <TextLink v-if="canResetPassword" :href="request()" class="text-sm" :tabindex="5">
                             Forgot password?
                         </TextLink> -->
                     </div>
@@ -65,13 +65,10 @@ useAppearance();
                     Iniciar sesión
                 </Button>
             </div>
-            <!--div
-                class="text-center text-sm text-muted-foreground"
-                v-if="canRegister"
-            >
+            <div class="text-center text-sm text-muted-foreground" v-if="canRegister">
                 ¿No tiene una cuenta?
-                <TextLink :href="register()" :tabindex="5">Registrese</TextLink>
-            </div-->
+                <TextLink :href="register()" :tabindex="5">Registrarse</TextLink>
+            </div>
         </Form>
     </AuthBase>
 </template>
