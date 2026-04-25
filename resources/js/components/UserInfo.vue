@@ -18,7 +18,7 @@ function getInitials(fullName) {
 
 <template>
     <Avatar class="h-8 w-8 overflow-hidden rounded-lg">
-        <AvatarImage v-if="showAvatar" :src="props.user.avatar" :alt="props.user.name" />
+        <AvatarImage :src="props.user.avatar" :alt="props.user.name" />
         <AvatarFallback class="rounded-lg text-black dark:text-white">
             <!-- {{ getInitials(props.user.name ? props.user.name : '') }} -->
             colocar iniciales
@@ -27,8 +27,8 @@ function getInitials(fullName) {
 
     <div class="grid flex-1 text-left text-sm leading-tight">
         <span class="truncate font-medium">{{ user.name }}</span>
-        <span v-if="showEmail" class="truncate text-xs text-muted-foreground">{{
+        <!-- <span v-if="showEmail" class="truncate text-xs text-muted-foreground">{{
             user.email
-            }}</span>
+            }}</span> -->
     </div>
 </template>

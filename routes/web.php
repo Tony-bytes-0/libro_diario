@@ -22,26 +22,26 @@ Route::get('libro-diario/registrar', function () {
 })->middleware(['auth', 'verified']);
 
 //reportes  
-Route::get('reportes/libro-ventas/LibroVentas', function () {
-    return Inertia::render('reportes/libro-ventas/LibroVentas');
+Route::get('reportes/libro-ventas', function () {
+    return Inertia::render('reportes/libro_ventas/LibroVentas');
 })->middleware(['auth', 'verified']);
 
-Route::get('reportes/libro-compras/LibroCompras', function () {
-    return Inertia::render('reportes/libro-compras/LibroCompras');
+Route::get('reportes/libro-compras', function () {
+    return Inertia::render('reportes/libro_compras/LibroCompras');
 })->middleware(['auth', 'verified']);
 
 //administrar
-Route::get('administrar/clientes/Clientes', function () {
+Route::get('administrar/clientes', function () {
     return Inertia::render('administrar/clientes/Clientes');
 })->middleware(['auth', 'verified']);
 
 ///administrar/cuentas_contables
-Route::get('administrar/cuentas_contables/CuentasContables', function () {
+Route::get('administrar/cuentas_contables', function () {
     return Inertia::render('administrar/cuentas_contables/CuentasContables');
 })->middleware(['auth', 'verified']);
 
 //Administrar Usuarios
-Route::get('administrar/usuarios/Usuarios', function () {
+Route::get('administrar/usuarios', function () {
     return Inertia::render('administrar/usuarios/Usuarios');
 })->middleware(['auth', 'verified']);
 

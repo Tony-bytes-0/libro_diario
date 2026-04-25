@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import AppLogo from '@/components/AppLogo.vue';
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
@@ -32,17 +32,15 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
 import { dashboard, registroLibroDiario, viewCreateClients, viewLibroCompras, viewLibroVentas, createCuentasContables } from '@/routes';
-import type { BreadcrumbItem, NavItem } from '@/types';
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
 import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse } from 'lucide-vue-next';
 import { computed } from 'vue';
 
-interface Props {
-    breadcrumbs?: BreadcrumbItem[];
-}
-
-const props = withDefaults(defineProps<Props>(), {
-    breadcrumbs: () => [],
+const props = defineProps({
+    breadcrumbs: {
+        type: Array,
+        default: () => [],
+    },
 });
 
 const page = usePage();
@@ -60,7 +58,7 @@ const activeItemStyles = computed(
             : '',
 );
 
-const mainNavItems: NavItem[] = [
+const mainNavItems = [
     {
         title: 'Dashboard',
         href: dashboard(),
@@ -151,7 +149,7 @@ const mainNavItems: NavItem[] = [
                                         {{ item.title }}
                                     </Link>
                                 </nav>
-                                <div class="flex flex-col space-y-4">
+<!--                                 <div class="flex flex-col space-y-4">
                                     <a
                                         v-for="item in rightNavItems"
                                         :key="item.title"
@@ -167,7 +165,7 @@ const mainNavItems: NavItem[] = [
                                         />
                                         <span>{{ item.title }}</span>
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </SheetContent>
                     </Sheet>
@@ -223,7 +221,7 @@ const mainNavItems: NavItem[] = [
                                 class="size-5 opacity-80 group-hover:opacity-100"
                             />
                         </Button>
-
+<!-- 
                         <div class="hidden space-x-1 lg:flex">
                             <template
                                 v-for="item in rightNavItems"
@@ -259,7 +257,7 @@ const mainNavItems: NavItem[] = [
                                     </Tooltip>
                                 </TooltipProvider>
                             </template>
-                        </div>
+                        </div> -->
                     </div>
 
                     <DropdownMenu>
@@ -272,11 +270,10 @@ const mainNavItems: NavItem[] = [
                                 <Avatar
                                     class="size-8 overflow-hidden rounded-full"
                                 >
-                                    <AvatarImage
-                                        v-if="auth.user.avatar"
+<!--                                     <AvatarImage
                                         :src="auth.user.avatar"
                                         :alt="auth.user.name"
-                                    />
+                                    /> -->
                                     <AvatarFallback
                                         class="rounded-lg bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white"
                                     >
@@ -285,7 +282,7 @@ const mainNavItems: NavItem[] = [
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" class="w-56">
+                        <DropdownMenuContent class="w-56">
                             <UserMenuContent :user="auth.user" />
                         </DropdownMenuContent>
                     </DropdownMenu>

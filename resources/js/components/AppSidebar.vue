@@ -23,34 +23,34 @@ const mainNavItems = [
     },
     {
         title: 'Registrar',
-        href: 'libro-diario/registrar',
+        href: '/libro-diario/registrar',
         icon: Pencil,
-    },/* 
+    }, 
     {
         title: 'Reporte Libro Ventas',
-        href: viewLibroVentas(),
+        href: '/reportes/libro-ventas',
         icon: BookOpenCheck,
     },
     {
         title: 'Reporte Libro Compras',
-        href: viewLibroCompras(),
+        href: '/reportes/libro-compras',
         icon: BookOpenCheck,
     },
     {
         title: 'Administrar Clientes',
-        href: viewCreateClients(),
+        href: '/administrar/clientes',
         icon: UserSearch,
     },
     {
         title: 'Cuentas contables',
-        href: createCuentasContables(),
+        href: '/administrar/cuentas_contables',
         icon: ListCollapse,
     },
     {
         title: 'Administrar Usuarios',
-        href: adminUsers(),
+        href: '/administrar/usuarios',
         icon: ListCollapse,
-    }, */
+    }, 
 ];
 
 /*const footerNavItems: NavItem[] = [
