@@ -10,43 +10,40 @@ use Laravel\Fortify\Features;
 //Registro, login, default o por defecto al no encontrar una ruta (manejar el error)
 Route::get('/', function () {
     return Inertia::render('Dashboard', ['canRegister' => Features::enabled(Features::registration()),]);
-})->name('home');
-Route::get('/registro', function () {
-    return Inertia::render('Dashboard', ['canRegister' => Features::enabled(Features::registration()),]);
-})->name('home');
+});
 
-Route::get('dashboard', function () {
+Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified']);
 
 //registros
-Route::get('libro-diario/registro', function () {
+Route::get('libro-diario/registrar', function () {
     return Inertia::render('registroLibroDiario/RegistroLibroDiario');
-})->middleware(['auth', 'verified'])->name('registroLibroDiario');
+})->middleware(['auth', 'verified']);
 
-//reportes
-Route::get('reportes/libro_ventas/LibroVentas', function () {
-    return Inertia::render('reportes/libro_ventas/LibroVentas');
-})->middleware(['auth', 'verified'])->name('viewLibroVentas');
+//reportes  
+Route::get('reportes/libro-ventas/LibroVentas', function () {
+    return Inertia::render('reportes/libro-ventas/LibroVentas');
+})->middleware(['auth', 'verified']);
 
-Route::get('reportes/libro_compras/LibroCompras', function () {
-    return Inertia::render('reportes/libro_compras/LibroCompras');
-})->middleware(['auth', 'verified'])->name('viewLibroCompras');
+Route::get('reportes/libro-compras/LibroCompras', function () {
+    return Inertia::render('reportes/libro-compras/LibroCompras');
+})->middleware(['auth', 'verified']);
 
 //administrar
 Route::get('administrar/clientes/Clientes', function () {
     return Inertia::render('administrar/clientes/Clientes');
-})->middleware(['auth', 'verified'])->name('viewCreateClients');
+})->middleware(['auth', 'verified']);
 
 ///administrar/cuentas_contables
 Route::get('administrar/cuentas_contables/CuentasContables', function () {
     return Inertia::render('administrar/cuentas_contables/CuentasContables');
-})->middleware(['auth', 'verified'])->name('createCuentasContables');
+})->middleware(['auth', 'verified']);
 
 //Administrar Usuarios
 Route::get('administrar/usuarios/Usuarios', function () {
     return Inertia::render('administrar/usuarios/Usuarios');
-})->middleware(['auth', 'verified'])->name('adminUsers');
+})->middleware(['auth', 'verified']);
 
 
 require __DIR__ . '/settings.php';

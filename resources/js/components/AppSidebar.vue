@@ -23,7 +23,7 @@ const mainNavItems = [
     },
     {
         title: 'Registrar',
-        href: 'libro-diario/registro',
+        href: 'libro-diario/registrar',
         icon: Pencil,
     },/* 
     {
@@ -82,7 +82,7 @@ const mainNavItems = [
         </SidebarHeader>
 
         <SidebarContent class="pa-3">
-            <NavMain:items="mainNavItems" />
+            <NavMain :items="mainNavItems" />
         </SidebarContent>
 
         <SidebarFooter>
