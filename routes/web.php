@@ -20,7 +20,7 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //registros
-Route::get('registroLibroDiario/RegistroLibroDiario', function () {
+Route::get('libro-diario/registro', function () {
     return Inertia::render('registroLibroDiario/RegistroLibroDiario');
 })->middleware(['auth', 'verified'])->name('registroLibroDiario');
 

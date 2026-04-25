@@ -773,8 +773,6 @@
 
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
-import { registroLibroDiario } from '@/routes';
-//import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { computed, ref, onMounted } from 'vue';
@@ -994,7 +992,7 @@ function format(date) {
 const breadcrumbs = [
     {
         title: 'Registrar',
-        href: registroLibroDiario().url,
+        href: 'libro-diario/registro',
     },
 ];
 
