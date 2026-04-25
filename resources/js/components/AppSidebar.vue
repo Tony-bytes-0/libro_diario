@@ -43,7 +43,7 @@ const mainNavItems = [
     },
     {
         title: 'Cuentas contables',
-        href: '/administrar/cuentas_contables',
+        href: '/administrar/cuentas-contables',
         icon: ListCollapse,
     },
     {

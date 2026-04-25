@@ -23,11 +23,11 @@ Route::get('libro-diario/registrar', function () {
 
 //reportes  
 Route::get('reportes/libro-ventas', function () {
-    return Inertia::render('reportes/libro_ventas/LibroVentas');
+    return Inertia::render('reportes/libro-ventas/LibroVentas');
 })->middleware(['auth', 'verified']);
 
 Route::get('reportes/libro-compras', function () {
-    return Inertia::render('reportes/libro_compras/LibroCompras');
+    return Inertia::render('reportes/libro-compras/LibroCompras');
 })->middleware(['auth', 'verified']);
 
 //administrar
@@ -36,8 +36,8 @@ Route::get('administrar/clientes', function () {
 })->middleware(['auth', 'verified']);
 
 ///administrar/cuentas_contables
-Route::get('administrar/cuentas_contables', function () {
-    return Inertia::render('administrar/cuentas_contables/CuentasContables');
+Route::get('administrar/cuentas-contables', function () {
+    return Inertia::render('administrar/cuentas-contables/CuentasContables');
 })->middleware(['auth', 'verified']);
 
 //Administrar Usuarios

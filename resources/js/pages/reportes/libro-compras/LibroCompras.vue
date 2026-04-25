@@ -80,12 +80,11 @@ import { Head } from '@inertiajs/vue3';
 import axios from 'axios';
 import { ref } from 'vue';
 import {formatedNumber, staticError} from '@/helpers'
-import {viewLibroCompras} from '@/routes';
 
 const breadcrumbs = [
     {
         title: 'Libro de compras',
-        href: viewLibroCompras().url,
+        href: '/reportes/libro-compras',
     },
 ];
 

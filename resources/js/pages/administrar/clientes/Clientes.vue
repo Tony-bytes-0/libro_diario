@@ -48,12 +48,11 @@ import { fastMsg, staticError } from '@/helpers';
 import AppLayout from '@/layouts/AppLayout.vue';
 import axios from 'axios';
 import { ref } from 'vue';
-import {viewCreateClients} from '@/routes';
 
 const breadcrumbs = [
     {
         title: 'Administrar Clientes',
-        href: viewCreateClients().url,
+        href: '/administrar/clientes',
     },
 ];
 
