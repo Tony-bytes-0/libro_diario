@@ -15,7 +15,7 @@ import { LoaderCircle } from 'lucide-vue-next';
 
         <Head title="Registro" />
 
-        <Form action="/registro" method="post" :reset-on-success="['password', 'password_confirmation']"
+        <Form action="/register" method="post" :reset-on-success="['password', 'password_confirmation']"
             v-slot="{ errors, processing }" class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">

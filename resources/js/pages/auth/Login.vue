@@ -6,17 +6,10 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
-import { register } from '@/routes';
-import { store } from '@/routes/login';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 import { useAppearance } from '@/composables/useAppearance';
 
-defineProps<{
-    status?: string;
-    canResetPassword: boolean;
-    canRegister: true;
-}>();
 
 useAppearance();
 </script>
@@ -26,11 +19,7 @@ useAppearance();
 
         <Head title="Log in" />
 
-        <div v-if="status" class="mb-4 text-center text-sm font-medium text-green-600">
-            {{ status }}
-        </div>
-
-        <Form variant="inset" v-bind="store.form()" :reset-on-success="['password']" v-slot="{ errors, processing }"
+        <Form action="/login" method="post" :reset-on-success="['password']" v-slot="{ errors, processing }"
             class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
@@ -64,9 +53,9 @@ useAppearance();
                     Iniciar sesión
                 </Button>
             </div>
-            <div class="text-center text-sm text-muted-foreground" v-if="canRegister">
+            <div class="text-center text-sm text-muted-foreground">
                 ¿No tiene una cuenta?
-                <TextLink :href="register()" :tabindex="5">Registrarse</TextLink>
+                <TextLink href="/register" :tabindex="5">Registrarse</TextLink>
             </div>
         </Form>
     </AuthBase>

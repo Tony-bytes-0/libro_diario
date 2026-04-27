@@ -43,14 +43,6 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-        @php
-    // Debug completo
-    error_log('=== INERTIA DEBUG ===');
-    error_log('Full $page array: ' . print_r($page, true));
-    error_log('Component: ' . ($page['component'] ?? 'NULL'));
-    error_log('Component from view: ' . ($component ?? 'not set'));
-@endphp
-
         @vite(['resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
         @inertiaHead
     </head>

@@ -12,6 +12,11 @@ Route::get('/', function () {
     return Inertia::render('Dashboard', ['canRegister' => Features::enabled(Features::registration()),]);
 });
 
+Route::get('/login', function () {
+    return Inertia::render('auth/Login');
+});
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified']);

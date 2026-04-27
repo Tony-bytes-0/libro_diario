@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import UserInfo from '@/components/UserInfo.vue';
 import {
     DropdownMenuGroup,
@@ -6,47 +6,53 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import { Link, router } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { LogOut, Settings } from 'lucide-vue-next';
 
-interface Props {
-    user: User;
-}
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true,
+    },
+});
 
 const handleLogout = () => {
-    router.flushAll();
-    window.location.reload();
+    router.post('/logout', {}, {
+        onSuccess: () => {
+            router.visit('/login');
+        },
+    });
 };
 
-defineProps<Props>();
+const goToSettings = () => {
+    router.visit('/settings/profile');
+};
 </script>
 
 <template>
     <DropdownMenuLabel class="p-0 font-normal">
         <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <UserInfo :user="user" :show-email="true" />
+            <UserInfo :user="props.user" :show-email="true" />
         </div>
     </DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuGroup>
         <DropdownMenuItem :as-child="true">
-            <Link class="block w-full" :href="edit()" prefetch as="button">
-                <Settings class="mr-2 h-4 w-4" />
+            <button class="flex w-full items-center gap-2 px-2 py-1.5 text-sm" @click="goToSettings">
+                <Settings class="h-4 w-4" />
                 Configuración
-            </Link>
+            </button>
         </DropdownMenuItem>
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
     <DropdownMenuItem :as-child="true">
-        <Link
-            class="block w-full"
-            :href="logout()"
-            @click="handleLogout"
-            as="button"
+        <button
+            class="flex w-full items-center gap-2 px-2 py-1.5 text-sm"
             data-test="logout-button"
+            @click="handleLogout"
         >
-            <LogOut class="mr-2 h-4 w-4" />
+            <LogOut class="h-4 w-4" />
             Salir
-        </Link>
+        </button>
     </DropdownMenuItem>
 </template>
