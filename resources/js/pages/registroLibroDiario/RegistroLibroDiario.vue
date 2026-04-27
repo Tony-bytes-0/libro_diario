@@ -60,12 +60,12 @@
                             <v-col cols="3">
                                 <v-label>Total Vental (Con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label> Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="4">
@@ -136,12 +136,12 @@
                             <v-col cols="4">
                                 <v-label>Total Ventas (con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="4">
                                 <v-label>Total Ventas No Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -158,7 +158,7 @@
                                         <v-col cols="4">
                                             <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
                                             <v-text-field variant="outlined"
-                                                :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                                :rules="[rules.number('Este campo utiliza numeros')]" 
                                                 v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
                                         </v-col>
                                         <v-col cols="4">
@@ -212,12 +212,12 @@
                             <v-col cols="2">
                                 <v-label>Total Ventas (con I.V.A)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -235,7 +235,7 @@
                                             <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -273,7 +273,7 @@
                                             <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -324,12 +324,12 @@
                             <v-col cols="2">
                                 <v-label>Total Ventas (con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -347,7 +347,7 @@
                                             <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -385,7 +385,7 @@
                                             <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -432,12 +432,12 @@
                             <v-col cols="3">
                                 <v-label>Total Ventas (con I.V.A)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -454,7 +454,7 @@
                                         <v-col cols="4">
                                             <v-label>Base Imponible Alicuota</v-label>
                                             <v-text-field variant="outlined"
-                                                :rules="[rules.number('Este campo utiliza numeros')]" type="number"
+                                                :rules="[rules.number('Este campo utiliza numeros')]" 
                                                 v-model="formData.base_imponible_alic_contribuyente"></v-text-field>
                                         </v-col>
                                         <v-col cols="4">
@@ -525,12 +525,12 @@
                             <v-col cols="2">
                                 <v-label>Total Ventas (con I.V.A)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -548,7 +548,7 @@
                                             <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -586,7 +586,7 @@
                                             <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -637,12 +637,12 @@
                             <v-col cols="2">
                                 <v-label>Total Ventas (con I.V.A.)</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas"></v-text-field>
+                                     v-model.number="formData.total_ventas"></v-text-field>
                             </v-col>
                             <v-col cols="3">
                                 <v-label>Total Ventas no Agravadas</v-label>
                                 <v-text-field variant="outlined" :rules="[rules.number('Este campo utiliza numeros')]"
-                                    type="number" v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
+                                     v-model.number="formData.total_ventas_no_gravadas"></v-text-field>
                             </v-col>
                             <v-divider class="border-opacity-100 mx-3" thickness="2"></v-divider>
                             <v-col cols="12">
@@ -660,7 +660,7 @@
                                             <v-label>Base Imponible Alic (Gen - Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -698,7 +698,7 @@
                                             <v-label>Base Imponible Alic (Gen - No Contrib.)</v-label>
                                             <v-text-field variant="outlined"
                                                 v-model="formData.base_imponible_alic_no_contribuyente"
-                                                type="number"></v-text-field>
+                                                ></v-text-field>
                                         </v-col>
                                         <v-col cols="2">
                                             <v-label>% I.V.A.</v-label>
@@ -796,8 +796,6 @@ const accountsBalance = computed(() => {
     const i = formData.value.cuentas_contables.length;
     for (let index = 0; index < i; index++) {
         valoresMonto.value = formData.value.cuentas_contables[index].monto + valoresMonto.value;
-        console.log('total ventas', formData.value.total_ventas, typeof formData.value.total_ventas);
-        console.log('valoresMonto', valoresMonto.value, typeof valoresMonto.value);
     }
     return valoresMonto.value;
 });
@@ -1240,12 +1238,13 @@ async function submit() {
 
 const registerDisabled = computed(() => {
     //bypass para pruebas
+    /*
     if ((formData.value.documentType.value !== '') && (formData.value.registerDate !== '') && (formData.value.bookType !== '') && (formData.value.client.id !== '') && (balanceState.value === 'Balanceado')) {
         return false;
     } else {
         return true;
     }
-
+*/
 });
 
 

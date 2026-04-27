@@ -1,5 +1,4 @@
-<script setup >
-//import NavFooter from '@/components/NavFooter.vue';
+<script setup>
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import {
@@ -12,68 +11,70 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/vue3';
-import { /*BookOpen, Folder,*/ LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse } from 'lucide-vue-next';
+import { LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse, Users } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems = [
+const navGroups = [
     {
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
     },
     {
-        title: 'Registrar',
-        href: '/libro-diario/registrar',
+        title: 'Registro',
         icon: Pencil,
-    }, 
+        items: [
+            {
+                title: 'Libro Diario',
+                href: '/libro-diario/registrar',
+            },
+        ],
+    },
     {
-        title: 'Reporte Libro Ventas',
-        href: '/reportes/libro-ventas',
+        title: 'Reportes',
         icon: BookOpenCheck,
+        items: [
+            {
+                title: 'Libro de Ventas',
+                href: '/reportes/libro-ventas',
+            },
+            {
+                title: 'Libro de Compras',
+                href: '/reportes/libro-compras',
+            },
+        ],
     },
     {
-        title: 'Reporte Libro Compras',
-        href: '/reportes/libro-compras',
-        icon: BookOpenCheck,
-    },
-    {
-        title: 'Administrar Clientes',
-        href: '/administrar/clientes',
-        icon: UserSearch,
-    },
-    {
-        title: 'Cuentas contables',
-        href: '/administrar/cuentas-contables',
+        title: 'Administrar',
         icon: ListCollapse,
+        items: [
+            {
+                title: 'Clientes',
+                href: '/administrar/clientes',
+                icon: UserSearch,
+            },
+            {
+                title: 'Cuentas Contables',
+                href: '/administrar/cuentas-contables',
+                icon: ListCollapse,
+            },
+            {
+                title: 'Usuarios',
+                href: '/administrar/usuarios',
+                icon: Users,
+            },
+        ],
     },
-    {
-        title: 'Administrar Usuarios',
-        href: '/administrar/usuarios',
-        icon: ListCollapse,
-    }, 
 ];
-
-/*const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-    href: 'https://github.com/laravel/vue-starter-kit',
-    icon: Folder,
-    },
-    {
-        title: 'Documentation',
-    href: 'https://laravel.com/docs/starter-kits#vue',
-    icon: BookOpen,
-    },
-    ];*/
 </script>
 
-    <template>
-        <Sidebar collapsible="icon" variant="inset" class="pr-2 pb-3">
-            <SidebarHeader class="pa-4">
-                <SidebarMenu>
-                    <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" as-child>
-                            <Link href="/dashboard">
+<template>
+    <Sidebar collapsible="icon" variant="inset" class="pr-2 pb-3">
+        <SidebarHeader class="pa-4">
+            <SidebarMenu>
+                <SidebarMenuItem>
+                    <SidebarMenuButton size="lg" as-child>
+                        <Link href="/dashboard">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
@@ -82,13 +83,12 @@ const mainNavItems = [
         </SidebarHeader>
 
         <SidebarContent class="pa-3">
-            <NavMain :items="mainNavItems" />
+            <NavMain :items="navGroups" />
         </SidebarContent>
 
         <SidebarFooter>
-            <!--NavFooter :items="footerNavItems" /-->
             <NavUser class="pa-4" />
         </SidebarFooter>
     </Sidebar>
     <slot />
-</template >
+</template>
