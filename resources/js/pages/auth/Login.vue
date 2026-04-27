@@ -32,9 +32,9 @@ useAppearance();
                 <div class="grid gap-2">
                     <div class="flex items-center justify-between">
                         <v-label>Contraseña</v-label>
-                        <!--                         <TextLink v-if="canResetPassword" :href="request()" class="text-sm" :tabindex="5">
-                            Forgot password?
-                        </TextLink> -->
+                        <TextLink href="/forgot-password" class="text-sm" :tabindex="5">
+                            ¿Olvidaste tu contraseña?
+                        </TextLink>
                     </div>
                     <Input id="password" type="password" name="password" required :tabindex="2"
                         autocomplete="current-password" placeholder="Contraseña" />

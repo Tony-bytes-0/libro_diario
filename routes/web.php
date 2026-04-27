@@ -10,11 +10,11 @@ use Laravel\Fortify\Features;
 //Registro, login, default o por defecto al no encontrar una ruta (manejar el error)
 Route::get('/', function () {
     return Inertia::render('Dashboard', ['canRegister' => Features::enabled(Features::registration()),]);
-});
+})->name('dashboard');
 
 Route::get('/login', function () {
     return Inertia::render('auth/Login');
-});
+})->name('login');
 
 
 Route::get('/dashboard', function () {
