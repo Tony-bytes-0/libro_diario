@@ -20,9 +20,7 @@ return new class extends Migration
             $table->string('tipo')->nullable();
         });
 
-        Schema::table('movimientos', function (Blueprint $table) {
-            $table->foreignId('cuenta_contable_id')->nullable()->constrained('cuentas_contables');
-        });
+
     }
 
     /**

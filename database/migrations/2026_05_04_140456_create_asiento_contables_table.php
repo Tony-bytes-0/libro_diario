@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('movimiento_cuentas_contables', function (Blueprint $table) {
+        Schema::create('asientos_contables', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('movimiento_id')->constrained();
-            $table->foreignId('cuentas_contables_id')->constrained();
+            $table->date('fecha');
+            $table->string('descripcion');
+            $table->morphs('documento'); // Crea documento_id y documento_type
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('movimiento_cuentas_contables');
+        Schema::dropIfExists('asientos_contables');
     }
 };
