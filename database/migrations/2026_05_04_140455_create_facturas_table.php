@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
+            $table->enum('tipo', ['venta', 'compra'])->default('venta');
             $table->date('fecha');
             $table->foreignId('cliente_id')->constrained('clientes');
             $table->string('numero_factura');

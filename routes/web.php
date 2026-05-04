@@ -6,6 +6,7 @@ use App\Http\Controllers\ReportesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\FacturaController;
 
 //Registro, login, default o por defecto al no encontrar una ruta (manejar el error)
 Route::get('/', function () {
@@ -22,9 +23,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified']);
 
 //registros
+
+
 Route::get('libro-diario/registrar', function () {
     return Inertia::render('registroLibroDiario/RegistroLibroDiario');
 })->middleware(['auth', 'verified']);
+
+Route::get('facturas/registrar', [FacturaController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('facturas/registrar', [FacturaController::class, 'store'])->middleware(['auth', 'verified']);
 
 //reportes  
 Route::get('reportes/libro-ventas', function () {

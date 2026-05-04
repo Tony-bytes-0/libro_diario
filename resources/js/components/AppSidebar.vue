@@ -8,10 +8,10 @@ import {
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
-    SidebarMenuItem,
+    SidebarMenuItem
 } from '@/components/ui/sidebar';
 import { Link } from '@inertiajs/vue3';
-import { LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse, Users } from 'lucide-vue-next';
+import { LayoutGrid, Pencil, BookOpenCheck, UserSearch, ListCollapse, Users, FileText } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const navGroups = [
@@ -27,6 +27,20 @@ const navGroups = [
             {
                 title: 'Libro Diario',
                 href: '/libro-diario/registrar',
+            },
+        ],
+    },
+    {
+        title: 'Facturas',
+        icon: FileText,
+        items: [
+            {
+                title: 'Registrar',
+                href: '/facturas/registrar',
+            },
+            {
+                title: 'Consultar',
+                href: '/facturas/consultar',
             },
         ],
     },
@@ -90,5 +104,4 @@ const navGroups = [
             <NavUser class="pa-4" />
         </SidebarFooter>
     </Sidebar>
-    <slot />
 </template>
